@@ -32,27 +32,25 @@ var _httpClient = func(url string) (result []byte, err error) {
 
 // API is the entrance point for interacting with the IB API
 type API interface {
-	Entry(entrytype string, params url.Values) (Collection, error)
-	Article(contentID int, params url.Values) (Article, error)
-	Video(contentID int, params url.Values) (Video, error)
-	Search(query string, params url.Values) (SearchResult, error)
+	Entry(channel string, entrytype string, params url.Values) (Collection, error)
+	Article(channel string, contentID int, params url.Values) (Article, error)
+	Video(channel string, contentID int, params url.Values) (Video, error)
+	Search(channel string, query string, params url.Values) (SearchResult, error)
 }
 
 // NewAPI constructs an API object for the given channel
-func NewAPI(channel string) API {
+func NewAPI() API {
 	return &api{
-		channel:    channel,
 		httpClient: _httpClient,
 	}
 }
 
 type api struct {
-	channel    string
 	httpClient httpClient
 }
 
-func (api *api) Entry(entrytype string, params url.Values) (coll Collection, err error) {
-	uri := strings.Replace(deliveryURL, "{channel}", api.channel, 1)
+func (api *api) Entry(channel string, entrytype string, params url.Values) (coll Collection, err error) {
+	uri := strings.Replace(deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "entry", 1)
 	uri += "/" + entrytype
 
@@ -69,8 +67,8 @@ func (api *api) Entry(entrytype string, params url.Values) (coll Collection, err
 	return coll, err
 }
 
-func (api *api) Article(contentID int, params url.Values) (article Article, err error) {
-	uri := strings.Replace(deliveryURL, "{channel}", api.channel, 1)
+func (api *api) Article(channel string, contentID int, params url.Values) (article Article, err error) {
+	uri := strings.Replace(deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "content", 1)
 	uri += "/" + strconv.Itoa(contentID)
 
@@ -93,8 +91,8 @@ func (api *api) Article(contentID int, params url.Values) (article Article, err 
 	return article, err
 }
 
-func (api *api) Video(contentID int, params url.Values) (video Video, err error) {
-	uri := strings.Replace(deliveryURL, "{channel}", api.channel, 1)
+func (api *api) Video(channel string, contentID int, params url.Values) (video Video, err error) {
+	uri := strings.Replace(deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "content", 1)
 	uri += "/" + strconv.Itoa(contentID)
 
@@ -117,8 +115,8 @@ func (api *api) Video(contentID int, params url.Values) (video Video, err error)
 	return video, err
 }
 
-func (api *api) Search(query string, params url.Values) (result SearchResult, err error) {
-	uri := strings.Replace(deliveryURL, "{channel}", api.channel, 1)
+func (api *api) Search(channel string, query string, params url.Values) (result SearchResult, err error) {
+	uri := strings.Replace(deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "search", 1)
 
 	if params == nil {
