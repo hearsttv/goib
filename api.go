@@ -1,4 +1,4 @@
-package ib
+package goib
 
 import (
 	"encoding/json"

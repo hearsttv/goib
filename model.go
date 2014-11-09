@@ -1,4 +1,4 @@
-package ib
+package goib
 
 // ItemType is the type of content encapsulated by the object
 type ItemType string
@@ -19,13 +19,12 @@ type Item struct {
 	TeaserImage     string   `json:"teaser_image"`
 	ContentID       int      `json:"content_id"`
 	Type            ItemType `json:"type"`
-	PublicationDate int      `json:"publication_date"`
+	PublicationDate int64    `json:"publication_date"`
 }
 
 // Collection represents a collection of IB Items and metadata about those items
 type Collection struct {
 	Type        string `json:"type"`
-	Hash        string `json:"hash"`
 	ContentID   int    `json:"content_id"`
 	TeaserTitle string `json:"teaser_title"`
 	Name        string `json:"collection_name"`
@@ -37,20 +36,17 @@ type Collection struct {
 // Article represents an IB article
 type Article struct {
 	Item
-	Hash            string `json:"hash"`
-	Title           string `json:"title"`
-	Text            string `json:"article_text"`
-	Author          string `json:"author"`
-	PublicationDate int64  `json:"publication_date"`
+	Title  string `json:"title"`
+	Text   string `json:"article_text"`
+	Author string `json:"author"`
 }
 
 // Video represents an IB video
 type Video struct {
 	Item
-	Title           string        `json:"title"`
-	Flavors         []VideoFlavor `json:"flavors"`
-	TeaserImage     string        `json:"teaser_image"`
-	PublicationDate int64         `json:"publication_date"`
+	Title       string        `json:"title"`
+	Flavors     []VideoFlavor `json:"flavors"`
+	TeaserImage string        `json:"teaser_image"`
 }
 
 // VideoFlavor represents a flavor (i.e. resolution) of an IB Video
