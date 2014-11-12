@@ -44,9 +44,8 @@ type Article struct {
 // Video represents an IB video
 type Video struct {
 	Item
-	Title       string        `json:"title"`
-	Flavors     []VideoFlavor `json:"flavors"`
-	TeaserImage string        `json:"teaser_image"`
+	Title   string        `json:"title"`
+	Flavors []VideoFlavor `json:"flavors"`
 }
 
 // VideoFlavor represents a flavor (i.e. resolution) of an IB Video
