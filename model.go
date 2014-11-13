@@ -12,6 +12,10 @@ const (
 	CollectionType ItemType = "COLLECTION"
 	// SearchType item type
 	SearchType ItemType = "SEARCH"
+	// ImageType item type
+	ImageType ItemType = "IMAGE"
+	// GalleryType item type
+	GalleryType ItemType = "GALLERY"
 )
 
 // Receiver captures a type-agnostic representation of an API response as a
@@ -36,6 +40,10 @@ type Receiver struct {
 	StartIndex      int           `json:"start_index"`
 	TotalCount      int           `json:"total_count"`
 	Keywords        string        `json:"keywords"`
+	AltText         string        `json:"alt_text"`
+	Caption         string        `json:"caption"`
+	URLs            []ImageURL    `json:"urls"`
+	Media           []Receiver    `json:"media"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -92,4 +100,33 @@ type SearchResult struct {
 	TotalCount int           `json:"total_count"`
 	Keywords   string        `json:"keywords"`
 	Items      []interface{} `json:"items"`
+}
+
+// Image represents an IB image content piece
+type Image struct {
+	Item
+	AltText  string     `json:"alt_text"`
+	Caption  string     `json:"caption"`
+	Author   string     `json:"author"`
+	Title    string     `json:"title"`
+	Keywords string     `json:"keywords"`
+	URLs     []ImageURL `json:"urls"`
+}
+
+// ImageURL is a URL flavor for an image
+type ImageURL struct {
+	Version string `json:"version"`
+	Height  int    `json:"height"`
+	Width   int    `json:"width"`
+	URL     string `json:"url"`
+	Mime    string `json:"mime"`
+}
+
+// Gallery represents an image gallery
+type Gallery struct {
+	Item
+	Keywords string        `json:"keywords"`
+	Title    string        `json:"title"`
+	Media    []interface{} `json:"media"`
+	Items    []interface{} `json:"items"`
 }

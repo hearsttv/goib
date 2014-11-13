@@ -1,6 +1,6 @@
 package goib
 
-var multitieredCollectionJson = `
+var multitieredCollectionJSON = `
 {
   "type" : "COLLECTION",
   "hash" : "v4ba39z",
@@ -311,5 +311,836 @@ var multitieredCollectionJson = `
     "collection.teaser.image.showCopyright" : "true"
   } ],
   "view_type" : "rotating"
+}
+`
+var articleJSON = `
+{
+  "type" : "ARTICLE",
+  "hash" : "hs5eauz",
+  "content_id" : 9137538,
+  "content_name" : "George Washington chicken nugget for sale",
+  "navigation_context" : [ "IB News and Content -  Parent", "Shared Content", "IBNC", "News" ],
+  "analytics_category" : "home",
+  "advertising_category" : "homepage",
+  "title" : "George Washington chicken nugget fetches $8,100",
+  "valid_from" : 2700000,
+  "valid_to" : 4105144800,
+  "editorial_comment" : null,
+  "period" : "",
+  "keywords" : "",
+  "url" : "http://www.channel4000.com/news/George-Washington-chicken-nugget-fetches-8-100/9137538",
+  "canonical_url" : "",
+  "teaser_title" : "George Washington chicken nugget fetches $8,100",
+  "teaser_text" : "<p>A chicken nugget said to look just like George Washington fetches $8,100 on eBay.</p>",
+  "teaser_image" : "http://www.channel4000.com/image/view/-/9137532/highRes/2/-/maxh/225/maxw/300/-/cl0ajhz/-/George-Washington-chicken-nugget-jpg.jpg",
+  "media" : [ {
+    "type" : "IMAGE",
+    "hash" : "hs5eb1z",
+    "content_id" : 9137532,
+    "publication_date" : 1330357264,
+    "teaser_title" : "George Washington chicken nugget",
+    "teaser_text" : null,
+    "teaser_image" : "http://www.channel4000.com/image/view/-/9137532/highRes/2/-/maxh/225/maxw/300/-/cl0ajhz/-/George-Washington-chicken-nugget-jpg.jpg"
+  } ],
+  "author_objects" : [ ],
+  "author" : "",
+  "categories" : [ {
+    "title" : "",
+    "hierarchy" : "/Master Parent/News - Parent/National Odd News Headlines",
+    "path" : "/Shared Content/IB News And Content/_EDITOR RESOURCES/IB Editorial Publishing Categories/News/National Odd News Headlines",
+    "id" : "13350",
+    "hash" : "t3yqp9"
+  } ],
+  "creation_date" : 1330357128,
+  "copyright_objects" : [ {
+    "name" : "Copyright: Internet Broadcasting 2012",
+    "text" : "<p class=\"align--right\"><em>Distributed by Internet Broadcasting. This material may not be published, broadcast, rewritten or redistributed.</em></p>"
+  } ],
+  "copyright" : "",
+  "publication_date" : 1331089641,
+  "struct" : [ {
+  } ],
+  "subheadline" : "Proceeds from presidential poultry to help send kids to camp",
+  "article_text" : "<p>A Nebraska woman has sold a chicken nugget that she says looks just like George Washington, the country's first president, for $8,100 on eBay.</p><p>Bidding on the presidential poultry ended at 11:30 a.m. Monday, the Sioux City Journal reported.</p><p>Rebekah Speight claims she found the patriotic chicken bit three years ago while treating her children to \"99-cent McNugget Tuesday\" at a local McDonald's.</p><p>Speight said she almost trashed it, but then noticed the distinguished forefather gazing up at her, according to the Huffington Post.</p><p>\"I looked down at the McNugget and just started laughing,\" she told the Sioux City Journal. \"I saw this portrait of George Washington staring back at me.\"</p><p>The nugget has sat in Speight's freezer for three years, only emerging for show-and-tell with house guests until recently, when George \"McNugget\" Washington was \"called to a higher purpose,\" Speight wrote in the eBay listing.</p><p>She listed the nugget on eBay as a way to raise money for children at the Sioux City Family Worship Center who will attend summer camp later this year. The church is trying to raise $15,000 to send 50 children to the camp, the Sioux City Journal reported.</p>",
+  "related_media" : [ {
+    "type" : "COLLECTION",
+    "hash" : "h5mexoz",
+    "content_id" : 4785836,
+    "publication_date" : 1321647946,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : null,
+    "view_type" : null
+  } ],
+  "author_location" : ""
+}
+`
+
+var videoJSON = `
+{
+	"type" : "VIDEO",
+	"hash" : "c4ym6r",
+	"content_id" : 1402356,
+	"title" : "Advertisers Ready For NFL Kickoff",
+	"subheadline" : "",
+	"teaser_title" : "Advertisers Ready For NFL Kickoff",
+	"teaser_text" : "<p>Advertisers are gearing up for the NFL season as big name corporations shell out big bucks.\n</p>",
+	"teaser_image" : null,
+	"media" : [ ],
+	"show_ads" : true,
+	"caption" : null,
+	"keywords" : "",
+	"categories" : [ ],
+	"copyright_objects" : [ ],
+	"valid_from" : 2700000,
+	"valid_to" : 4105144800,
+	"creation_date" : 1315336037,
+	"publication_date" : 1315336195,
+	"editorial_comment" : null,
+	"copyright" : "",
+	"external_id" : "kaltura:0_063kr47w",
+	"url" : "http://www.channel4000.com/Advertisers-Ready-For-NFL-Kickoff/1402356",
+	"flavors" : [ {
+		"video_type" : "flv",
+		"url" : "http://kv.channel4000.com/p/557781/sp/55778100/download/entry_id/0_063kr47w/flavor/0_nqacuglv",
+		"bitrate" : 456,
+		"duration" : 78,
+		"file_size" : 4925,
+		"codec" : "vp6",
+		"width" : 576,
+		"height" : 324,
+		"tags" : "web,source"
+	} ],
+	"m3u8" : "http://kv.channel4000.com/p/557781/sp/55778100/playManifest/entryId/0_063kr47w/format/applehttp/protocol/http/a.m3u8?deliveryCode=130835",
+	"navigation_context" : [ "IB News and Content -  Parent", "Shared Content" ],
+	"analytics_category" : "home",
+	"advertising_category" : "homepage",
+	"canonical_url" : "",
+	"struct" : [ {
+	} ]
+}
+`
+var entryJSON = `
+{
+	"type" : "COLLECTION",
+	"hash" : "1rhetx",
+	"content_id" : 24208900,
+	"teaser_title" : "Most Popular Stories",
+	"teaser_image" : null,
+	"collection_name" : "Most Popular Articles",
+	"total_count" : 10,
+	"start_index" : 0,
+	"items" : [ {
+		"type" : "ARTICLE",
+		"hash" : "5o6xx5",
+		"content_id" : 29461466,
+		"teaser_title" : "1 pilot dead in Virgin's spaceship failure",
+		"teaser_text" : "<p>The first sign there was a problem Friday with Virgin Galactic's SpaceShipTwo came at about 45,000 feet, just two minutes after the spaceplane separated from the jet-powered aircraft that carried it aloft, officials said. </p><p>It wasn't something overt wi...</p>",
+		"teaser_image" : "http://www.channel4000.com/image/view/-/29467198/highRes/2/-/maxh/225/maxw/300/-/fr2cvoz/-/Map-of-SpacecraftTwo-crash-jpg.jpg",
+		"publication_date" : 1414811176
+	}, {
+		"type" : "ARTICLE",
+		"hash" : "5njs3q",
+		"content_id" : 29450770,
+		"teaser_title" : "Judge rejects Ebola quarantine for Maine nurse",
+		"teaser_text" : "<p>A Maine judge on Friday ruled in favor of a nurse who defied a quarantine in a tense standoff with state authorities, saying local health officials failed to prove the need for a stricter order enforcing an Ebola quarantine. </p><p>District Court Chief Judg...</p>",
+		"teaser_image" : "http://www.channel4000.com/image/view/-/29461910/highRes/2/-/maxh/225/maxw/300/-/wiithv/-/Kaci-Hickox--10-31-2014-jpg.jpg",
+		"publication_date" : 1414795992
+	}, {
+		"type" : "ARTICLE",
+		"hash" : "5njssp",
+		"content_id" : 29450846,
+		"teaser_title" : "Frein search ends, life resumes",
+		"teaser_text" : "<p>Whew.</p><p>After 48 days of living with helicopters, heavily armed police officers, the rumors and constant questions -- where is he? -- the people of northeast Pennsylvania can finally relax.</p><p>The manhunt for Eric Matthew Frein, accused of killing a Pennsyl...</p>",
+		"teaser_image" : "http://www.channel4000.com/image/view/-/29454620/highRes/2/-/maxh/225/maxw/300/-/itdjp1z/-/Eric-Frein-booking-photo-jpg.jpg",
+		"publication_date" : 1414796929
+	}, {
+		"type" : "ARTICLE",
+		"hash" : "5np9ii",
+		"content_id" : 29458378,
+		"teaser_title" : "Ax attack on D.C. cop prompts warnings",
+		"teaser_text" : "<p>An officer with Washington's Metropolitan Police Department came under an unprovoked attack Friday from a man wielding an ax, police said.</p>",
+		"teaser_image" : "http://www.channel4000.com/image/view/-/29461414/highRes/2/-/maxh/225/maxw/300/-/ls58h1/-/Ax-attack-on-cop-car-jpg.jpg",
+		"publication_date" : 1414779219
+	}, {
+		"type" : "ARTICLE",
+		"hash" : "5o7k2l",
+		"content_id" : 29462042,
+		"teaser_title" : "Chelsea Handler's topless photo fight",
+		"teaser_text" : "<p>Comedian Chelsea Handler often aims to spark controversy, and one of her latest Instagram snapshots is no exception.</p>",
+		"teaser_image" : "http://www.channel4000.com/image/view/-/29466856/highRes/2/-/maxh/225/maxw/300/-/n1x6saz/-/Chelsea-Handler-jpg.jpg",
+		"publication_date" : 1414795750
+	}, {
+		"type" : "ARTICLE",
+		"hash" : "5n3o2a",
+		"content_id" : 29448178,
+		"teaser_title" : "Sistine Chapel gets AC, lights makeover",
+		"teaser_text" : "<p>High above the altar in the Vatican's Sistine Chapel, Michelangelo's masterpiece fresco is being seen in a new light..</p>",
+		"teaser_image" : "http://www.channel4000.com/image/view/-/18497606/highRes/2/-/maxh/225/maxw/300/-/52jdj0/-/Sistine-chapel-jpg.jpg",
+		"publication_date" : 1414744143
+	}, {
+		"type" : "ARTICLE",
+		"hash" : "5ort91",
+		"content_id" : 29470548,
+		"teaser_title" : "3rd victim dies from Washington school shooting",
+		"teaser_text" : "<p>A third victim of last week's shooting at a Washington state high school has died, according to the hospital that treated victims.</p>",
+		"teaser_image" : "http://www.channel4000.com/image/view/-/29326448/highRes/2/-/maxh/225/maxw/300/-/qbrmbu/-/Two-girls-after-Washington-school-shooting-jpg.jpg",
+		"publication_date" : 1414808689
+	}, {
+		"type" : "ARTICLE",
+		"hash" : "53v2bn",
+		"content_id" : 29341084,
+		"teaser_title" : "6 things you should know about Diwali",
+		"teaser_text" : "<p>The Hindu holiday of Diwali is India's biggest and brightest national holiday. But Indians around the world come together to celebrate the festival of lights.</p>",
+		"teaser_image" : "http://www.channel4000.com/image/view/-/29345500/highRes/2/-/maxh/225/maxw/300/-/wxf17lz/-/Diwali-jpg.jpg",
+		"publication_date" : 1414316709
+	}, {
+		"type" : "ARTICLE",
+		"hash" : "5mxald",
+		"content_id" : 29440908,
+		"teaser_title" : "NASCAR Driver Capsules, Oct. 30",
+		"teaser_text" : "<p class=\"sdi-news-teaser\">Capsules for the eight drivers remaining in the Chase for the Sprint Cup.</p>",
+		"teaser_image" : "http://www.channel4000.com/image/view/-/85086/highRes/3/-/maxh/225/maxw/300/-/vn05e2/-/Racing-Generic.jpg",
+		"publication_date" : 1414701807
+	}, {
+		"type" : "ARTICLE",
+		"hash" : "5o8gkh",
+		"content_id" : 29463998,
+		"teaser_title" : "Cubs fire Renteria, open door to Maddon",
+		"teaser_text" : "<p>The Chicago Cubs fired manager Rick Renteria on Friday, paving the way for the team to sign Joe Maddon.</p>",
+		"teaser_image" : "http://www.channel4000.com/image/view/-/29322228/highRes/2/-/maxh/225/maxw/300/-/q5j0a9/-/Joe-Maddon--Tampa-Bay-Rays-manager-jpg.jpg",
+		"publication_date" : 1414788360
+	} ],
+	"navigation_context" : [ "Home" ],
+	"analytics_category" : "home",
+	"advertising_category" : "homepage",
+	"canonical_url" : "http://www.channel4000.com/24207306",
+	"settings" : [ {
+		"collection.limit" : "7"
+	} ],
+	"view_type" : "headlineStack",
+	"struct" : [ {
+	} ]
+}
+`
+
+var searchJSON = `
+{
+	"type" : "SEARCH",
+	"start_index" : 0,
+	"total_count" : 4058,
+	"keywords" : "nfl",
+	"items" : [ {
+		"type" : "COLLECTION",
+		"hash" : "n3r8xa",
+		"content_id" : 17901062,
+		"teaser_title" : "NFL",
+		"teaser_text" : null,
+		"teaser_image" : null,
+		"publication_date" : 1356539088
+	}, {
+		"type" : "COLLECTION",
+		"hash" : "u9g7hnz",
+		"content_id" : 22566490,
+		"teaser_title" : "NFL",
+		"teaser_text" : null,
+		"teaser_image" : null,
+		"publication_date" : 1382468080
+	}, {
+		"type" : "COLLECTION",
+		"hash" : "ajqinnz",
+		"content_id" : 15971136,
+		"teaser_title" : "NFL",
+		"teaser_text" : null,
+		"teaser_image" : null,
+		"publication_date" : 1306891331
+	}, {
+		"type" : "COLLECTION",
+		"hash" : "l1r7ut",
+		"content_id" : 17571626,
+		"teaser_title" : "NFL",
+		"teaser_text" : null,
+		"teaser_image" : null,
+		"publication_date" : 1313595682
+	}, {
+		"type" : "COLLECTION",
+		"hash" : "rye1fyz",
+		"content_id" : 19392694,
+		"teaser_title" : "NFL",
+		"teaser_text" : null,
+		"teaser_image" : null,
+		"publication_date" : 1306891331
+	}, {
+		"type" : "COLLECTION",
+		"hash" : "yi5ttg",
+		"content_id" : 7929310,
+		"teaser_title" : "",
+		"teaser_text" : null,
+		"teaser_image" : null,
+		"publication_date" : 1391443420
+	}, {
+		"type" : "COLLECTION",
+		"hash" : "wyfo88z",
+		"content_id" : 3979018,
+		"teaser_title" : "NFL Headlines",
+		"teaser_text" : null,
+		"teaser_image" : null,
+		"publication_date" : 1319812007
+	}, {
+		"type" : "COLLECTION",
+		"hash" : "1ynlik",
+		"content_id" : 16182166,
+		"teaser_title" : "NFL Headlines",
+		"teaser_text" : null,
+		"teaser_image" : null,
+		"publication_date" : 1345295190
+	}, {
+		"type" : "IMAGE",
+		"hash" : "t8emgg",
+		"content_id" : 89020,
+		"teaser_title" : "NFL logo",
+		"teaser_text" : null,
+		"teaser_image" : "http://www.channel4000.com/image/view/-/89020/highRes/3/-/maxh/225/maxw/300/-/rrhyhrz/-/NFL-Logo-jpg.jpg",
+		"publication_date" : 1306260580
+	}, {
+		"type" : "IMAGE",
+		"hash" : "30g59g",
+		"content_id" : 132498,
+		"teaser_title" : "NFL logo",
+		"teaser_text" : null,
+		"teaser_image" : "http://www.channel4000.com/image/view/-/132498/highRes/1/-/maxh/225/maxw/300/-/78n1rbz/-/NFL-Logo-jpg.jpg",
+		"publication_date" : 1306260580
+	} ]
+}
+`
+
+var galleryJSON = `
+{
+  "type" : "GALLERY",
+  "hash" : "4maxs5",
+  "content_id" : 29283428,
+  "content_name" : "Most unique jobs in each state",
+  "navigation_context" : [ "Hearst Shared Content Parent", "Money Clickers" ],
+  "analytics_category" : "home",
+  "advertising_category" : "homepage",
+  "title" : null,
+  "valid_from" : 2700000,
+  "valid_to" : 4105144800,
+  "editorial_comment" : null,
+  "period" : "",
+  "keywords" : "jobs, state, career, profession, unique, economy, region, geography, people",
+  "url" : null,
+  "canonical_url" : "http://prewww.htvshared.com/Money-Clickers/-/8761662/29283428/-/eynisv/-/index.html",
+  "teaser_title" : "Most unique jobs in each state",
+  "teaser_text" : "<p>Each state has specific jobs that are most unique to that location and people. Find out which job is most unique to your state in this newly released study from CareerBuilder.</p>",
+  "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283344/highRes/1/-/maxh/225/maxw/300/-/oxwh3qz/-/uniquejobs-mw-jpg.jpg",
+  "media" : [ {
+    "type" : "IMAGE",
+    "hash" : "4max2c",
+    "content_id" : 29283344,
+    "publication_date" : 1414005996,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283344/highRes/1/-/maxh/225/maxw/300/-/oxwh3qz/-/uniquejobs-mw-jpg.jpg"
+  } ],
+  "author_objects" : [ ],
+  "author" : "",
+  "categories" : [ {
+    "title" : "",
+    "hierarchy" : "/Hearst Clickers Category",
+    "path" : "/Clients/Hearst/_Shared/Editorial/_Categories/Hearst Clickers Category",
+    "id" : "8361626",
+    "hash" : "xjo93yz"
+  }, {
+    "title" : "Money Clickers",
+    "hierarchy" : "/Money Clickers",
+    "path" : "/Clients/Hearst/_Shared/Editorial/_Categories/Money Clickers",
+    "id" : "8761634",
+    "hash" : "vddb56z"
+  }, {
+    "title" : "News Clickers",
+    "hierarchy" : "/News Clickers",
+    "path" : "/Clients/Hearst/_Shared/Editorial/_Categories/News Clickers",
+    "id" : "8761614",
+    "hash" : "vddb6xz"
+  } ],
+  "creation_date" : 1414009612,
+  "copyright_objects" : [ ],
+  "copyright" : "",
+  "publication_date" : 1414009612,
+  "struct" : [ {
+  } ],
+  "subheadline" : "",
+  "items" : [ {
+    "type" : "IMAGE",
+    "hash" : "4max2e",
+    "content_id" : 29283346,
+    "publication_date" : 1414009648,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283346/highRes/3/-/maxh/225/maxw/300/-/3joos1z/-/uniquejobs-title-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max2a",
+    "content_id" : 29283342,
+    "publication_date" : 1414009636,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283342/highRes/3/-/maxh/225/maxw/300/-/u9rdyez/-/uniquejobs-intro-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4maw94",
+    "content_id" : 29283238,
+    "publication_date" : 1414007031,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283238/highRes/3/-/maxh/225/maxw/300/-/7ue3j0/-/Alabama-tire-worker-public-domain-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4maw9t",
+    "content_id" : 29283242,
+    "publication_date" : 1414007122,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283242/highRes/3/-/maxh/225/maxw/300/-/badtex/-/Alaska-Crab-fishing-boat-publicdomain-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4maw9x",
+    "content_id" : 29283246,
+    "publication_date" : 1414007154,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283246/highRes/3/-/maxh/225/maxw/300/-/130gilb/-/Arizona-Verschiedene-LEDs-wiki-Afrank99-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawa0",
+    "content_id" : 29283248,
+    "publication_date" : 1414007203,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283248/highRes/3/-/maxh/225/maxw/300/-/ue3rjbz/-/Arkandsas-food-process-wiki-Mattes-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawap",
+    "content_id" : 29283252,
+    "publication_date" : 1414007233,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283252/highRes/3/-/maxh/225/maxw/300/-/qy41ndz/-/California-actors-flickr-Eva-Rinaldi-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawar",
+    "content_id" : 29283254,
+    "publication_date" : 1414007328,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283254/highRes/3/-/maxh/225/maxw/300/-/dlk72oz/-/Colorado-space-publicdomain-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawav",
+    "content_id" : 29283258,
+    "publication_date" : 1414007352,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283258/highRes/3/-/maxh/225/maxw/300/-/d3hh3o/-/Connecticut-actuaries-flickr-Alan-Cleaver-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawbj",
+    "content_id" : 29283260,
+    "publication_date" : 1414007377,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283260/highRes/3/-/maxh/225/maxw/300/-/35xddx/-/DC-capitol-public-domain-JPG.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawbl",
+    "content_id" : 29283262,
+    "publication_date" : 1414007396,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283262/highRes/3/-/maxh/225/maxw/300/-/gih7ym/-/Delaware-chemist-public-domain-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawbn",
+    "content_id" : 29283264,
+    "publication_date" : 1414007417,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283264/highRes/3/-/maxh/225/maxw/300/-/tv12kb/-/Florida-motorboat-wiki-WPPilot-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawbp",
+    "content_id" : 29283266,
+    "publication_date" : 1414007468,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283266/highRes/3/-/maxh/225/maxw/300/-/13ij8kbz/-/Georgia-textile-wiki-Edal-Anton-Lefterov-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawbr",
+    "content_id" : 29283268,
+    "publication_date" : 1414007491,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283268/highRes/3/-/maxh/225/maxw/300/-/p60dymz/-/hawaii-tour-guide-wiki-Dcoetzee-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawcf",
+    "content_id" : 29283270,
+    "publication_date" : 1414007520,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283270/highRes/3/-/maxh/225/maxw/300/-/103jhodz/-/Idaho-forest-public-domain-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawch",
+    "content_id" : 29283272,
+    "publication_date" : 1414007640,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283272/highRes/3/-/maxh/225/maxw/300/-/lq0n3oz/-/Illionois-correspondence-clerks-public-domain-JPG.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawcj",
+    "content_id" : 29283274,
+    "publication_date" : 1414007679,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283274/highRes/3/-/maxh/225/maxw/300/-/8dgsi0z/-/Indiana-Boilermaker---Alfred-T-Palmer-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawcl",
+    "content_id" : 29283276,
+    "publication_date" : 1414007758,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283276/highRes/3/-/maxh/225/maxw/300/-/4y212o/-/Iowa-soilscience-wiki-public-domain-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawcn",
+    "content_id" : 29283278,
+    "publication_date" : 1414007794,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283278/highRes/3/-/maxh/225/maxw/300/-/ibkund/-/Kansas-referee-wiki-Rick-Dikeman-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawdb",
+    "content_id" : 29283280,
+    "publication_date" : 1414007819,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283280/highRes/3/-/maxh/225/maxw/300/-/8e1qxm/-/Kentucky-minerhat-flickr-b3d--jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawdd",
+    "content_id" : 29283282,
+    "publication_date" : 1414007846,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283282/highRes/3/-/maxh/225/maxw/300/-/lqkljb/-/Louisiana-captains-wiki-Herv--Cozanet-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawdf",
+    "content_id" : 29283284,
+    "publication_date" : 1414007872,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283284/highRes/3/-/maxh/225/maxw/300/-/1044g50/-/Maine-fisherman-public-domain-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawdh",
+    "content_id" : 29283286,
+    "publication_date" : 1414007937,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283286/highRes/3/-/maxh/225/maxw/300/-/xafu0mz/-/Maryland-subway-wiki-publicdomain-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawdj",
+    "content_id" : 29283288,
+    "publication_date" : 1414007961,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283288/highRes/3/-/maxh/225/maxw/300/-/jww0exz/-/Massachusetts-psychiatry-tech-wiki-Ranveig-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawe7",
+    "content_id" : 29283290,
+    "publication_date" : 1414007981,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283290/highRes/3/-/maxh/225/maxw/300/-/tug44oz/-/Michigan-model-maker-wiki-Fourdee-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4maweb",
+    "content_id" : 29283294,
+    "publication_date" : 1414008019,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283294/highRes/3/-/maxh/225/maxw/300/-/35dexbz/-/Minnesota-meat-packer-wiki-Viki-izer-JPG.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawed",
+    "content_id" : 29283296,
+    "publication_date" : 1414008267,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283296/highRes/3/-/maxh/225/maxw/300/-/a75emd/-/Mississippi-coilwinder-wiki-Pengo-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawxo",
+    "content_id" : 29283300,
+    "publication_date" : 1414008291,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283300/highRes/3/-/maxh/225/maxw/300/-/rnl51u/-/Missouri-tobacco-wiki-publicdomain-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawxq",
+    "content_id" : 29283302,
+    "publication_date" : 1414008318,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283302/highRes/3/-/maxh/225/maxw/300/-/15py63rz/-/Montana-forest-wiki-public-domain-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawxs",
+    "content_id" : 29283304,
+    "publication_date" : 1414008348,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283304/highRes/3/-/maxh/225/maxw/300/-/rdfbi3z/-/Nebraska-meat-cutter-flickr-dottorpeni-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawxu",
+    "content_id" : 29283306,
+    "publication_date" : 1414008373,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283306/highRes/3/-/maxh/225/maxw/300/-/e0vgwez/-/nevada-slots-flickr-Jeff-Kubina-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawxw",
+    "content_id" : 29283308,
+    "publication_date" : 1414008391,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283308/highRes/3/-/maxh/225/maxw/300/-/ncmbpz/-/New-Hamp--metal-worker-public-domain-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawym",
+    "content_id" : 29283312,
+    "publication_date" : 1414008419,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283312/highRes/3/-/maxh/225/maxw/300/-/2qm3j8/-/New-Jers-biochemist-flickr-Smithsonian-Institution-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawyo",
+    "content_id" : 29283314,
+    "publication_date" : 1414008445,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283314/highRes/3/-/maxh/225/maxw/300/-/g45x4w/-/New-Mex-wellhead-wiki-HartmannValves-JPG.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawyq",
+    "content_id" : 29283316,
+    "publication_date" : 1414008462,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283316/highRes/3/-/maxh/225/maxw/300/-/tgorpl/-/New-York-fashion-designers-publicdomain-JPG.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4mawys",
+    "content_id" : 29283318,
+    "publication_date" : 1414008490,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283318/highRes/3/-/maxh/225/maxw/300/-/13wuif1z/-/NorthCarolina-textilewinding-flickr-darkday-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max0g",
+    "content_id" : 29283320,
+    "publication_date" : 1414008511,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283320/highRes/3/-/maxh/225/maxw/300/-/wvoilj/-/NorthDakota-derrick-flickr-mvferguson2000-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max0i",
+    "content_id" : 29283322,
+    "publication_date" : 1414008533,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283322/highRes/3/-/maxh/225/maxw/300/-/10hurj3z/-/Ohio-RollingMachine-wiki-Cjp24-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max0k",
+    "content_id" : 29283324,
+    "publication_date" : 1414008560,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283324/highRes/3/-/maxh/225/maxw/300/-/m5bwxez/-/Oklahoma-WellheadPumper-wiki-Sanjay-ach-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max0m",
+    "content_id" : 29283326,
+    "publication_date" : 1414008586,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283326/highRes/3/-/maxh/225/maxw/300/-/8rs3cpz/-/Oregon-loggingworkers-flickr-fir0002-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max0o",
+    "content_id" : 29283328,
+    "publication_date" : 1414008614,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283328/highRes/3/-/maxh/225/maxw/300/-/4jpq7y/-/Pennsylvania-SurveyResearcher-flickr-Jtneill-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max1e",
+    "content_id" : 29283332,
+    "publication_date" : 1414008782,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283332/highRes/3/-/maxh/225/maxw/300/-/7yph3w/-/RhodeIsland-Librarian-wiki-CSImming-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max1g",
+    "content_id" : 29283334,
+    "publication_date" : 1414008811,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283334/highRes/3/-/maxh/225/maxw/300/-/lc9bol/-/SouthCarolina-textileknitting-wiki-Greifer-JPG.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max1i",
+    "content_id" : 29283336,
+    "publication_date" : 1414008966,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283336/highRes/3/-/maxh/225/maxw/300/-/yos6aa/-/SouthDakota-farmers-flickr-R-DV-RS-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max1k",
+    "content_id" : 29283338,
+    "publication_date" : 1414008998,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283338/highRes/3/-/maxh/225/maxw/300/-/xor4ucz/-/Tennessee-conveyor-wiki-Thomas-Philippi-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max28",
+    "content_id" : 29283340,
+    "publication_date" : 1414009047,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283340/highRes/3/-/maxh/225/maxw/300/-/134rw68/-/Texas-petroleumengineers-wiki-FlickrLickr-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max2g",
+    "content_id" : 29283348,
+    "publication_date" : 1414009192,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283348/highRes/3/-/maxh/225/maxw/300/-/9rt4rn/-/Utah-foresttechnician-wiki-AlbertHerring-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max34",
+    "content_id" : 29283350,
+    "publication_date" : 1414009224,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283350/highRes/3/-/maxh/225/maxw/300/-/4oxw3z/-/Vermont-highway-wiki-Haljackey-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max36",
+    "content_id" : 29283352,
+    "publication_date" : 1414009356,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283352/highRes/3/-/maxh/225/maxw/300/-/d7sunl/-/Virginia-LegalSupport-Flickr-David-Shankbone-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4max38",
+    "content_id" : 29283354,
+    "publication_date" : 1414009384,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283354/highRes/3/-/maxh/225/maxw/300/-/qkcp9a/-/Wasington-aircraftstructure-wiki-Meutia-Chaerani-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4maw8x",
+    "content_id" : 29283232,
+    "publication_date" : 1414009418,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283232/highRes/3/-/maxh/225/maxw/300/-/w77f82z/-/West-Virginia-Roof-bolter--mining--Flickr-Kecko--jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4maw90",
+    "content_id" : 29283234,
+    "publication_date" : 1414009436,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283234/highRes/3/-/maxh/225/maxw/300/-/itnkmdz/-/Wisconsin-Foundry-mold---coremakers-jpg.jpg"
+  }, {
+    "type" : "IMAGE",
+    "hash" : "4maw92",
+    "content_id" : 29283236,
+    "publication_date" : 1414009457,
+    "teaser_title" : "",
+    "teaser_text" : null,
+    "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283236/highRes/3/-/maxh/225/maxw/300/-/5h4q1oz/-/Wyoming-Rotary-drill-operator--Flickr-Mark-Hunter--JPG.jpg"
+  } ]
+}
+`
+var imageJSON = `
+{
+  "type" : "IMAGE",
+  "hash" : "4max2c",
+  "content_id" : 29283344,
+  "content_name" : "uniquejobs_mw.jpg",
+  "navigation_context" : [ "Hearst Shared Content Parent", "Money Clickers" ],
+  "analytics_category" : "home",
+  "advertising_category" : "homepage",
+  "title" : null,
+  "valid_from" : 2700000,
+  "valid_to" : 4105144800,
+  "editorial_comment" : null,
+  "period" : "",
+  "keywords" : "",
+  "url" : null,
+  "canonical_url" : "",
+  "teaser_title" : "",
+  "teaser_text" : null,
+  "teaser_image" : "http://prewww.htvshared.com/image/view/-/29283344/highRes/1/-/maxh/225/maxw/300/-/oxwh3qz/-/uniquejobs-mw-jpg.jpg",
+  "author_objects" : [ ],
+  "author" : "",
+  "categories" : [ ],
+  "creation_date" : 1414005996,
+  "copyright_objects" : [ ],
+  "copyright" : "",
+  "publication_date" : 1414005996,
+  "struct" : [ {
+  } ],
+  "alt_text" : "",
+  "caption" : null,
+  "urls" : [ {
+    "version" : "original",
+    "height" : 252,
+    "width" : 378,
+    "url" : "http://prewww.htvshared.com/image/view/-/29283344/highRes/1/-/maxh/252/maxw/378/-/ylcashz/-/uniquejobs-mw-jpg.jpg",
+    "mime" : "image/jpeg"
+  }, {
+    "version" : "DEFAULT",
+    "height" : 200,
+    "width" : 300,
+    "url" : "http://prewww.htvshared.com/image/view/-/29283344/highRes/1/-/maxh/200/maxw/300/-/jlbsrez/-/uniquejobs-mw-jpg.jpg",
+    "mime" : "image/jpeg"
+  } ]
 }
 `

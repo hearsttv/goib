@@ -18,18 +18,6 @@ var log = l5g.Logger(l5g.LogAll)
 
 type httpClient func(url string) ([]byte, error)
 
-var _httpClient = func(url string) (result []byte, err error) {
-	resp, err := http.Get(url)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	result, err = ioutil.ReadAll(resp.Body)
-	log.Debug("IB API: %s : HTTP Status: %s, Success: %t", url, resp.Status, (err == nil))
-	return result, err
-}
-
 // API is the entrance point for interacting with the IB API
 type API interface {
 	Entry(channel string, entrytype string, params url.Values) (interface{}, error)
@@ -42,16 +30,16 @@ type API interface {
 // NewAPI constructs an API object for the given channel
 func NewAPI() API {
 	return &api{
-		httpClient: _httpClient,
+		deliveryURL: deliveryURL,
 	}
 }
 
 type api struct {
-	httpClient httpClient
+	deliveryURL string
 }
 
 func (api *api) Entry(channel string, entrytype string, params url.Values) (entry interface{}, err error) {
-	uri := strings.Replace(deliveryURL, "{channel}", channel, 1)
+	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "entry", 1)
 	uri += "/" + entrytype
 
@@ -59,7 +47,7 @@ func (api *api) Entry(channel string, entrytype string, params url.Values) (entr
 		uri += "?" + params.Encode()
 	}
 
-	bytes, err := api.httpClient(uri)
+	bytes, err := doGet(uri)
 	if err != nil {
 		return entry, err
 	}
@@ -68,7 +56,7 @@ func (api *api) Entry(channel string, entrytype string, params url.Values) (entr
 }
 
 func (api *api) Article(channel string, contentID int, params url.Values) (article Article, err error) {
-	uri := strings.Replace(deliveryURL, "{channel}", channel, 1)
+	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "content", 1)
 	uri += "/" + strconv.Itoa(contentID)
 
@@ -76,7 +64,7 @@ func (api *api) Article(channel string, contentID int, params url.Values) (artic
 		uri += "?" + params.Encode()
 	}
 
-	bytes, err := api.httpClient(uri)
+	bytes, err := doGet(uri)
 	if err != nil {
 		return article, err
 	}
@@ -94,7 +82,7 @@ func (api *api) Article(channel string, contentID int, params url.Values) (artic
 }
 
 func (api *api) Video(channel string, contentID int, params url.Values) (video Video, err error) {
-	uri := strings.Replace(deliveryURL, "{channel}", channel, 1)
+	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "content", 1)
 	uri += "/" + strconv.Itoa(contentID)
 
@@ -102,7 +90,7 @@ func (api *api) Video(channel string, contentID int, params url.Values) (video V
 		uri += "?" + params.Encode()
 	}
 
-	bytes, err := api.httpClient(uri)
+	bytes, err := doGet(uri)
 	if err != nil {
 		return video, err
 	}
@@ -120,7 +108,7 @@ func (api *api) Video(channel string, contentID int, params url.Values) (video V
 }
 
 func (api *api) Search(channel string, query string, params url.Values) (s SearchResult, err error) {
-	uri := strings.Replace(deliveryURL, "{channel}", channel, 1)
+	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "search", 1)
 
 	if params == nil {
@@ -129,7 +117,7 @@ func (api *api) Search(channel string, query string, params url.Values) (s Searc
 	params.Set("q", query)
 	uri += "?" + params.Encode()
 
-	bytes, err := api.httpClient(uri)
+	bytes, err := doGet(uri)
 	if err != nil {
 		return s, err
 	}
@@ -147,7 +135,7 @@ func (api *api) Search(channel string, query string, params url.Values) (s Searc
 }
 
 func (api *api) Content(channel string, contentID int, params url.Values) (interface{}, error) {
-	uri := strings.Replace(deliveryURL, "{channel}", channel, 1)
+	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "content", 1)
 	uri += "/" + strconv.Itoa(contentID)
 
@@ -155,12 +143,24 @@ func (api *api) Content(channel string, contentID int, params url.Values) (inter
 		uri += "?" + params.Encode()
 	}
 
-	bytes, err := api.httpClient(uri)
+	bytes, err := doGet(uri)
 	if err != nil {
 		return nil, err
 	}
 
 	return unmarshalResponse(bytes)
+}
+
+func doGet(url string) (result []byte, err error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	result, err = ioutil.ReadAll(resp.Body)
+	log.Debug("IB API: %s : HTTP Status: %s, Success: %t", url, resp.Status, (err == nil))
+	return result, err
 }
 
 func unmarshalResponse(bytes []byte) (interface{}, error) {
@@ -183,6 +183,10 @@ func unmarshalReceiver(r Receiver) (interface{}, error) {
 		return unmarshalCollection(r), nil
 	case SearchType:
 		return unmarshalSearch(r), nil
+	case ImageType:
+		return unmarshalImage(r), nil
+	case GalleryType:
+		return unmarshalGallery(r), nil
 	default:
 		return nil, fmt.Errorf("unknonwn response type: %s", r.Type)
 	}
@@ -209,6 +213,45 @@ func unmarshalVideo(r Receiver) (v Video) {
 	v.Flavors = r.Flavors
 
 	return v
+}
+
+func unmarshalImage(r Receiver) (i Image) {
+	i.ContentID = r.ContentID
+	i.TeaserTitle = r.TeaserTitle
+	i.TeaserText = r.TeaserText
+	i.TeaserImage = r.TeaserImage
+	i.Title = r.Title
+	i.Caption = r.Caption
+	i.Author = r.Author
+	i.URLs = r.URLs
+
+	return i
+}
+
+func unmarshalGallery(r Receiver) (g Gallery) {
+	g.ContentID = r.ContentID
+	g.TeaserTitle = r.TeaserTitle
+	g.TeaserText = r.TeaserText
+	g.TeaserImage = r.TeaserImage
+	g.Title = r.Title
+	for _, rInner := range r.Media {
+		item, err := unmarshalReceiver(rInner)
+		if err != nil {
+			log.Warn("error unmarshalling sub-object: %v", err)
+		} else {
+			g.Media = append(g.Media, item)
+		}
+	}
+	for _, rInner := range r.Items {
+		item, err := unmarshalReceiver(rInner)
+		if err != nil {
+			log.Warn("error unmarshalling sub-object: %v", err)
+		} else {
+			g.Items = append(g.Items, item)
+		}
+	}
+
+	return g
 }
 
 func unmarshalCollection(r Receiver) (c Collection) {
