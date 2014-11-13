@@ -23,6 +23,7 @@ type API interface {
 	Entry(channel string, entrytype string, params url.Values) (interface{}, error)
 	Article(channel string, contentID int, params url.Values) (Article, error)
 	Video(channel string, contentID int, params url.Values) (Video, error)
+	Image(channel string, contentID int, params url.Values) (Image, error)
 	Search(channel string, query string, params url.Values) (SearchResult, error)
 	Content(channel string, contentID int, params url.Values) (interface{}, error)
 }
@@ -104,6 +105,20 @@ func (api *api) Video(channel string, contentID int, params url.Values) (video V
 		return iface.(Video), nil
 	default:
 		return video, fmt.Errorf("invalid object type returned when getting video: %v", t)
+	}
+}
+
+func (api *api) Image(channel string, contentID int, params url.Values) (image Image, err error) {
+	content, err := api.Content(channel, contentID, params)
+	if err != nil {
+		return image, err
+	}
+
+	switch t := content.(type) {
+	case Image:
+		return content.(Image), nil
+	default:
+		return image, fmt.Errorf("invalid object type returned when getting image: %v", t)
 	}
 }
 
