@@ -10,27 +10,52 @@ const (
 	VideoType ItemType = "VIDEO"
 	// CollectionType item type
 	CollectionType ItemType = "COLLECTION"
+	// SearchType item type
+	SearchType ItemType = "SEARCH"
 )
 
-// Item is the base type of all items
+// Receiver captures a type-agnostic representation of an API response as a
+// step in processing a response. Its fields are a superset of all content fields,
+// so any type can be captured and derived from this struct.
+// This object should not be used outside of the IB API classes. It is exposed
+// only to facilitate JSON unmarshalling.
+type Receiver struct {
+	Type            ItemType      `json:"type"`
+	ContentID       int           `json:"content_id"`
+	ContentName     string        `json:"content_name"`
+	CollectionName  string        `json:"collection_name"`
+	Items           []Receiver    `json:"items"`
+	TeaserTitle     string        `json:"teaser_title"`
+	TeaserText      string        `json:"teaser_text"`
+	TeaserImage     string        `json:"teaser_image"`
+	PublicationDate int64         `json:"publication_date"`
+	Title           string        `json:"title"`
+	Text            string        `json:"article_text"`
+	Author          string        `json:"author"`
+	Flavors         []VideoFlavor `json:"flavors"`
+	StartIndex      int           `json:"start_index"`
+	TotalCount      int           `json:"total_count"`
+	Keywords        string        `json:"keywords"`
+}
+
+// Item is the base type of all items. It is not used outside the IB package, as
+// we return full objects, partially populated
 type Item struct {
-	TeaserTitle     string   `json:"teaser_title"`
-	TeaserText      string   `json:"teaser_text"`
-	TeaserImage     string   `json:"teaser_image"`
-	ContentID       int      `json:"content_id"`
-	Type            ItemType `json:"type"`
-	PublicationDate int64    `json:"publication_date"`
+	TeaserTitle     string `json:"teaser_title"`
+	TeaserText      string `json:"teaser_text"`
+	TeaserImage     string `json:"teaser_image"`
+	ContentID       int    `json:"content_id"`
+	PublicationDate int64  `json:"publication_date"`
 }
 
 // Collection represents a collection of IB Items and metadata about those items
 type Collection struct {
-	Type        string `json:"type"`
-	ContentID   int    `json:"content_id"`
-	TeaserTitle string `json:"teaser_title"`
-	Name        string `json:"collection_name"`
-	TotalCount  int    `json:"total_count"`
-	StartIndex  int    `json:"start_index"`
-	Items       []Item `json:"items"`
+	ContentID      int           `json:"content_id"`
+	TeaserTitle    string        `json:"teaser_title"`
+	CollectionName string        `json:"collection_name"`
+	TotalCount     int           `json:"total_count"`
+	StartIndex     int           `json:"start_index"`
+	Items          []interface{} `json:"items"`
 }
 
 // Article represents an IB article
@@ -62,9 +87,9 @@ type VideoFlavor struct {
 
 // SearchResult represents the results of an API search
 type SearchResult struct {
-	Type       ItemType `json:"type"`
-	StartIndex int      `json:"start_index"`
-	TotalCount int      `json:"total_count"`
-	Keywords   string   `json:"keywords"`
-	Items      []Item   `json:"items"`
+	Type       ItemType      `json:"type"`
+	StartIndex int           `json:"start_index"`
+	TotalCount int           `json:"total_count"`
+	Keywords   string        `json:"keywords"`
+	Items      []interface{} `json:"items"`
 }

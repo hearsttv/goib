@@ -2,6 +2,10 @@ package goib
 
 import "testing"
 
+func TestContentShouldCaptureContentIDAndType(t *testing.T) {
+
+}
+
 func TestEntryApi(t *testing.T) {
 	a := NewAPI("ibsys-c4k")
 
