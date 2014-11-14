@@ -41,6 +41,14 @@ func (m *API) Image(channel string, contentID int, params url.Values) (goib.Imag
 
 	return r0, r1
 }
+func (m *API) Gallery(channel string, contentID int, params url.Values) (goib.Gallery, error) {
+	ret := m.Called(channel, contentID, params)
+
+	r0 := ret.Get(0).(goib.Gallery)
+	r1 := ret.Error(1)
+
+	return r0, r1
+}
 func (m *API) Search(channel string, query string, params url.Values) (goib.SearchResult, error) {
 	ret := m.Called(channel, query, params)
 

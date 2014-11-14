@@ -166,7 +166,7 @@ func setupServerAndAPI(cannedResponse string) (*httptest.Server, API) {
 
 func setupServerAndAPIWithHTTPStatus(cannedResponse string, status int) (*httptest.Server, API) {
 	testSvr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "text/html")
+		w.Header().Set("Content-Type", "floopy/yowza")
 		w.WriteHeader(500)
 		fmt.Fprintln(w, cannedResponse)
 	}))

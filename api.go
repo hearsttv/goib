@@ -58,52 +58,28 @@ func (api *api) Entry(channel string, entrytype string, params url.Values) (entr
 }
 
 func (api *api) Article(channel string, contentID int, params url.Values) (article Article, err error) {
-	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
-	uri = strings.Replace(uri, "{service}", "content", 1)
-	uri += "/" + strconv.Itoa(contentID)
-
-	if len(params) > 0 {
-		uri += "?" + params.Encode()
-	}
-
-	bytes, err := doGet(uri)
+	content, err := api.Content(channel, contentID, params)
 	if err != nil {
 		return article, err
 	}
 
-	iface, err := unmarshalResponse(bytes)
-	if err != nil {
-		return article, err
-	}
-	switch t := iface.(type) {
+	switch t := content.(type) {
 	case Article:
-		return iface.(Article), nil
+		return content.(Article), nil
 	default:
-		return article, fmt.Errorf("invalid object type returned when getting video: %v", t)
+		return article, fmt.Errorf("invalid object type returned when getting article: %v", t)
 	}
 }
 
 func (api *api) Video(channel string, contentID int, params url.Values) (video Video, err error) {
-	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
-	uri = strings.Replace(uri, "{service}", "content", 1)
-	uri += "/" + strconv.Itoa(contentID)
-
-	if len(params) > 0 {
-		uri += "?" + params.Encode()
-	}
-
-	bytes, err := doGet(uri)
+	content, err := api.Content(channel, contentID, params)
 	if err != nil {
 		return video, err
 	}
 
-	iface, err := unmarshalResponse(bytes)
-	if err != nil {
-		return video, err
-	}
-	switch t := iface.(type) {
+	switch t := content.(type) {
 	case Video:
-		return iface.(Video), nil
+		return content.(Video), nil
 	default:
 		return video, fmt.Errorf("invalid object type returned when getting video: %v", t)
 	}
