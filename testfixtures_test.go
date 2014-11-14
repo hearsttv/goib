@@ -1144,3 +1144,8 @@ var imageJSON = `
   } ]
 }
 `
+var emptyJSON = ""
+
+var missingCloseBracketJSON = `{"foo":"bar", `
+
+var badResponseHTML = `<html><head><title>Error</title></head><body>You have dun bad</body></html>`

@@ -9,8 +9,39 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestContentShouldCaptureContentIDAndType(t *testing.T) {
+func TestShouldFailGracefullyOnEmptyResponse(t *testing.T) {
+	svr, a := setupServerAndAPI(emptyJSON)
+	defer svr.Close()
 
+	assertGracefulFailOnAllAPIMethods(t, a)
+}
+
+func TestShouldFailGracefullyOnMalformedResponse(t *testing.T) {
+	svr, a := setupServerAndAPI(missingCloseBracketJSON)
+	defer svr.Close()
+
+	assertGracefulFailOnAllAPIMethods(t, a)
+}
+
+func TestShouldFailGracefullyOnHTMLResponse(t *testing.T) {
+	svr, a := setupServerAndAPI(badResponseHTML)
+	defer svr.Close()
+
+	assertGracefulFailOnAllAPIMethods(t, a)
+}
+
+func TestShouldFailGracefullyOn500Response(t *testing.T) {
+	svr, a := setupServerAndAPIWithHTTPStatus(badResponseHTML, 500)
+	defer svr.Close()
+
+	assertGracefulFailOnAllAPIMethods(t, a)
+}
+
+func TestShouldFailGracefullyOn404Response(t *testing.T) {
+	svr, a := setupServerAndAPIWithHTTPStatus(badResponseHTML, 404)
+	defer svr.Close()
+
+	assertGracefulFailOnAllAPIMethods(t, a)
 }
 
 func TestEntryApi(t *testing.T) {
@@ -131,4 +162,37 @@ func setupServerAndAPI(cannedResponse string) (*httptest.Server, API) {
 	a.deliveryURL = testSvr.URL
 
 	return testSvr, a
+}
+
+func setupServerAndAPIWithHTTPStatus(cannedResponse string, status int) (*httptest.Server, API) {
+	testSvr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html")
+		w.WriteHeader(500)
+		fmt.Fprintln(w, cannedResponse)
+	}))
+
+	a := NewAPI().(*api)
+	a.deliveryURL = testSvr.URL
+
+	return testSvr, a
+}
+
+func assertGracefulFailOnAllAPIMethods(t *testing.T, a API) {
+	_, err := a.Entry("someKrazyChannel", "someKookyKollection", nil)
+	assert.NotNil(t, err, "error should not be nil")
+
+	_, err = a.Content("someKrazyChannel", 12345, nil)
+	assert.NotNil(t, err, "error should not be nil")
+
+	_, err = a.Article("someKrazyChannel", 12345, nil)
+	assert.NotNil(t, err, "error should not be nil")
+
+	_, err = a.Video("someKrazyChannel", 12345, nil)
+	assert.NotNil(t, err, "error should not be nil")
+
+	_, err = a.Image("someKrazyChannel", 12345, nil)
+	assert.NotNil(t, err, "error should not be nil")
+
+	_, err = a.Gallery("someKrazyChannel", 12345, nil)
+	assert.NotNil(t, err, "error should not be nil")
 }

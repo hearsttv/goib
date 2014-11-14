@@ -49,11 +49,12 @@ type Receiver struct {
 // Item is the base type of all items. It is not used outside the IB package, as
 // we return full objects, partially populated
 type Item struct {
-	TeaserTitle     string `json:"teaser_title"`
-	TeaserText      string `json:"teaser_text"`
-	TeaserImage     string `json:"teaser_image"`
-	ContentID       int    `json:"content_id"`
-	PublicationDate int64  `json:"publication_date"`
+	Type            ItemType `json:"type"`
+	TeaserTitle     string   `json:"teaser_title"`
+	TeaserText      string   `json:"teaser_text"`
+	TeaserImage     string   `json:"teaser_image"`
+	ContentID       int      `json:"content_id"`
+	PublicationDate int64    `json:"publication_date"`
 }
 
 // Collection represents a collection of IB Items and metadata about those items

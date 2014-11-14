@@ -83,3 +83,41 @@ func TestExtractMediaShouldRecurseIntoSubcollections(t *testing.T) {
 	assert.Equal(t, image, result[2], "image should be thrid element")
 	assert.Equal(t, gallery, result[3], "gallery should be fourth element")
 }
+
+func TestIteratorShouldReturnOnceIfRootIsMedia(t *testing.T) {
+	article := Article{}
+	var i = 0
+	for node := range Iterator(article) {
+		assert.Equal(t, 0, i, "should only loop once")
+		assert.Equal(t, article, node.Media, "should have gotten article back out")
+		assert.Nil(t, node.ParentCollection, "parent should be nil")
+		i++
+	}
+
+	video := Video{}
+	i = 0
+	for node := range Iterator(video) {
+		assert.Equal(t, 0, i, "should only loop once")
+		assert.Equal(t, video, node.Media, "should have gotten video back out")
+		assert.Nil(t, node.ParentCollection, "parent should be nil")
+		i++
+	}
+
+	image := Image{}
+	i = 0
+	for node := range Iterator(image) {
+		assert.Equal(t, 0, i, "should only loop once")
+		assert.Equal(t, image, node.Media, "should have gotten image back out")
+		assert.Nil(t, node.ParentCollection, "parent should be nil")
+		i++
+	}
+
+	gallery := Gallery{}
+	i = 0
+	for node := range Iterator(gallery) {
+		assert.Equal(t, 0, i, "should only loop once")
+		assert.Equal(t, gallery, node.Media, "should have gotten gallery back out")
+		assert.Nil(t, node.ParentCollection, "parent should be nil")
+		i++
+	}
+}
