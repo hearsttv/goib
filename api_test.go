@@ -53,7 +53,7 @@ func TestEntryApi(t *testing.T) {
 		t.Errorf("error getting entry: %v", err)
 	}
 
-	collection := response.(Collection)
+	collection := response.(*Collection)
 	if len(collection.Items) == 0 {
 		t.Errorf("zero items returned from entry")
 	}
@@ -116,11 +116,11 @@ func TestContentApiShouldParseCollectionsOfCollections(t *testing.T) {
 		t.Errorf("error getting collection: %v", err)
 	}
 
-	collection := response.(Collection)
+	collection := response.(*Collection)
 	if len(collection.Items) == 0 {
 		t.Errorf("zero items returned from entry")
 	}
-	innerCollection := collection.Items[0].(Collection)
+	innerCollection := collection.Items[0].(*Collection)
 	assert.Equal(t, 8, len(innerCollection.Items), "first inner collection should have 8 items but only has %d", len(innerCollection.Items))
 }
 
@@ -133,7 +133,7 @@ func TestContentAPIShouldParseImageType(t *testing.T) {
 		t.Errorf("error getting image: %v", err)
 	}
 
-	img := response.(Image)
+	img := response.(*Image)
 	assert.Equal(t, 29283344, img.ContentID, "expected COID 29283344 but got %d", img.ContentID)
 }
 
@@ -146,7 +146,7 @@ func TestContentAPIShouldParseGalleryType(t *testing.T) {
 		t.Errorf("error getting gallery: %v", err)
 	}
 
-	g := response.(Gallery)
+	g := response.(*Gallery)
 	assert.Equal(t, 29283428, g.ContentID, "expected COID 29283428 but got %d", g.ContentID)
 
 	assert.Equal(t, 53, len(g.Items), "expected 50 image items in gallery but got %d", len(g.Items))

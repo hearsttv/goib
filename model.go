@@ -48,38 +48,82 @@ type Receiver struct {
 
 // Item is the base type of all items. It is not used outside the IB package, as
 // we return full objects, partially populated
-type Item struct {
-	Type            ItemType `json:"type"`
-	TeaserTitle     string   `json:"teaser_title"`
-	TeaserText      string   `json:"teaser_text"`
-	TeaserImage     string   `json:"teaser_image"`
-	ContentID       int      `json:"content_id"`
-	PublicationDate int64    `json:"publication_date"`
+type Item interface {
+	GetType() ItemType
+	GetContentID() int
+	GetTeaserTitle() string
 }
 
 // Collection represents a collection of IB Items and metadata about those items
 type Collection struct {
-	ContentID      int           `json:"content_id"`
-	TeaserTitle    string        `json:"teaser_title"`
-	CollectionName string        `json:"collection_name"`
-	TotalCount     int           `json:"total_count"`
-	StartIndex     int           `json:"start_index"`
-	Items          []interface{} `json:"items"`
+	ContentID      int    `json:"content_id"`
+	TeaserTitle    string `json:"teaser_title"`
+	TeaserText     string `json:"teaser_text"`
+	TeaserImage    string `json:"teaser_image"`
+	CollectionName string `json:"collection_name"`
+	TotalCount     int    `json:"total_count"`
+	StartIndex     int    `json:"start_index"`
+	Keywords       string `json:"keywords"` // populated only in search results
+	Items          []Item `json:"items"`
+}
+
+func (c *Collection) GetType() ItemType {
+	return CollectionType
+}
+
+func (c *Collection) GetContentID() int {
+	return c.ContentID
+}
+
+func (c *Collection) GetTeaserTitle() string {
+	return c.TeaserTitle
 }
 
 // Article represents an IB article
 type Article struct {
-	Item
-	Title  string `json:"title"`
-	Text   string `json:"article_text"`
-	Author string `json:"author"`
+	ContentID       int    `json:"content_id"`
+	TeaserTitle     string `json:"teaser_title"`
+	TeaserText      string `json:"teaser_text"`
+	TeaserImage     string `json:"teaser_image"`
+	PublicationDate int64  `json:"publication_date"`
+	Title           string `json:"title"`
+	Text            string `json:"article_text"`
+	Author          string `json:"author"`
+}
+
+func (a *Article) GetType() ItemType {
+	return ArticleType
+}
+
+func (a *Article) GetContentID() int {
+	return a.ContentID
+}
+
+func (a *Article) GetTeaserTitle() string {
+	return a.TeaserTitle
 }
 
 // Video represents an IB video
 type Video struct {
-	Item
-	Title   string        `json:"title"`
-	Flavors []VideoFlavor `json:"flavors"`
+	ContentID       int           `json:"content_id"`
+	TeaserTitle     string        `json:"teaser_title"`
+	TeaserText      string        `json:"teaser_text"`
+	TeaserImage     string        `json:"teaser_image"`
+	PublicationDate int64         `json:"publication_date"`
+	Title           string        `json:"title"`
+	Flavors         []VideoFlavor `json:"flavors"`
+}
+
+func (v *Video) GetType() ItemType {
+	return VideoType
+}
+
+func (v *Video) GetContentID() int {
+	return v.ContentID
+}
+
+func (v *Video) GetTeaserTitle() string {
+	return v.TeaserTitle
 }
 
 // VideoFlavor represents a flavor (i.e. resolution) of an IB Video
@@ -94,24 +138,31 @@ type VideoFlavor struct {
 	Height   int    `json:"height"`
 }
 
-// SearchResult represents the results of an API search
-type SearchResult struct {
-	Type       ItemType      `json:"type"`
-	StartIndex int           `json:"start_index"`
-	TotalCount int           `json:"total_count"`
-	Keywords   string        `json:"keywords"`
-	Items      []interface{} `json:"items"`
-}
-
 // Image represents an IB image content piece
 type Image struct {
-	Item
-	AltText  string     `json:"alt_text"`
-	Caption  string     `json:"caption"`
-	Author   string     `json:"author"`
-	Title    string     `json:"title"`
-	Keywords string     `json:"keywords"`
-	URLs     []ImageURL `json:"urls"`
+	ContentID       int        `json:"content_id"`
+	TeaserTitle     string     `json:"teaser_title"`
+	TeaserText      string     `json:"teaser_text"`
+	TeaserImage     string     `json:"teaser_image"`
+	PublicationDate int64      `json:"publication_date"`
+	AltText         string     `json:"alt_text"`
+	Caption         string     `json:"caption"`
+	Author          string     `json:"author"`
+	Title           string     `json:"title"`
+	Keywords        string     `json:"keywords"`
+	URLs            []ImageURL `json:"urls"`
+}
+
+func (i *Image) GetType() ItemType {
+	return ImageType
+}
+
+func (i *Image) GetContentID() int {
+	return i.ContentID
+}
+
+func (i *Image) GetTeaserTitle() string {
+	return i.TeaserTitle
 }
 
 // ImageURL is a URL flavor for an image
@@ -125,9 +176,25 @@ type ImageURL struct {
 
 // Gallery represents an image gallery
 type Gallery struct {
-	Item
-	Keywords string        `json:"keywords"`
-	Title    string        `json:"title"`
-	Media    []interface{} `json:"media"`
-	Items    []interface{} `json:"items"`
+	ContentID       int           `json:"content_id"`
+	TeaserTitle     string        `json:"teaser_title"`
+	TeaserText      string        `json:"teaser_text"`
+	TeaserImage     string        `json:"teaser_image"`
+	PublicationDate int64         `json:"publication_date"`
+	Keywords        string        `json:"keywords"`
+	Title           string        `json:"title"`
+	Media           []interface{} `json:"media"`
+	Items           []interface{} `json:"items"`
+}
+
+func (g *Gallery) GetType() ItemType {
+	return GalleryType
+}
+
+func (g *Gallery) GetContentID() int {
+	return g.ContentID
+}
+
+func (g *Gallery) GetTeaserTitle() string {
+	return g.TeaserTitle
 }

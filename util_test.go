@@ -7,19 +7,19 @@ import (
 )
 
 func TestExtractMediaShouldReturnInputIfItIsMedia(t *testing.T) {
-	article := Article{}
+	article := &Article{}
 	result := ExtractMedia(article)
 	assert.Equal(t, article, result[0], "article should be returned as single list item")
 
-	video := Video{}
+	video := &Video{}
 	result = ExtractMedia(video)
 	assert.Equal(t, video, result[0], "video should be returned as single list item")
 
-	image := Image{}
+	image := &Image{}
 	result = ExtractMedia(image)
 	assert.Equal(t, image, result[0], "image should be returned as single list item")
 
-	gallery := Gallery{}
+	gallery := &Gallery{}
 	result = ExtractMedia(gallery)
 	assert.Equal(t, gallery, result[0], "gallery should be returned as single list item")
 }
@@ -30,18 +30,18 @@ func TestNilOrEmptyCollectionReturnsEmptySlice(t *testing.T) {
 	assert.Equal(t, 0, len(result))
 
 	coll := Collection{}
-	result = ExtractMedia(coll)
+	result = ExtractMedia(&coll)
 	assert.NotNil(t, result)
 	assert.Equal(t, 0, len(result))
 }
 
 func TestExtractMediaShouldScanCollectionsAndPullOutMedia(t *testing.T) {
-	coll := Collection{}
-	article := Article{}
-	video := Video{}
-	image := Image{}
-	gallery := Gallery{}
-	coll.Items = []interface{}{article, video, image, gallery}
+	coll := &Collection{}
+	article := &Article{}
+	video := &Video{}
+	image := &Image{}
+	gallery := &Gallery{}
+	coll.Items = []Item{article, video, image, gallery}
 
 	result := ExtractMedia(coll)
 	assert.Equal(t, article, result[0], "article should be first element")
@@ -51,12 +51,12 @@ func TestExtractMediaShouldScanCollectionsAndPullOutMedia(t *testing.T) {
 }
 
 func TestExtractMediaShouldScanSearchResultsForMedia(t *testing.T) {
-	sr := SearchResult{}
-	article := Article{}
-	video := Video{}
-	image := Image{}
-	gallery := Gallery{}
-	sr.Items = []interface{}{article, video, image, gallery}
+	sr := &Collection{}
+	article := &Article{}
+	video := &Video{}
+	image := &Image{}
+	gallery := &Gallery{}
+	sr.Items = []Item{article, video, image, gallery}
 
 	result := ExtractMedia(sr)
 	assert.Equal(t, article, result[0], "article should be first element")
@@ -66,16 +66,16 @@ func TestExtractMediaShouldScanSearchResultsForMedia(t *testing.T) {
 }
 
 func TestExtractMediaShouldRecurseIntoSubcollections(t *testing.T) {
-	coll := Collection{}
-	sr := SearchResult{}
-	subcoll := Collection{}
-	article := Article{}
-	video := Video{}
-	image := Image{}
-	gallery := Gallery{}
-	subcoll.Items = []interface{}{article, video}
-	sr.Items = []interface{}{image, gallery}
-	coll.Items = []interface{}{subcoll, sr}
+	coll := &Collection{}
+	sr := &Collection{}
+	subcoll := &Collection{}
+	article := &Article{}
+	video := &Video{}
+	image := &Image{}
+	gallery := &Gallery{}
+	subcoll.Items = []Item{article, video}
+	sr.Items = []Item{image, gallery}
+	coll.Items = []Item{subcoll, sr}
 
 	result := ExtractMedia(coll)
 	assert.Equal(t, article, result[0], "article should be first element")
@@ -85,36 +85,36 @@ func TestExtractMediaShouldRecurseIntoSubcollections(t *testing.T) {
 }
 
 func TestIteratorShouldReturnOnceIfRootIsMedia(t *testing.T) {
-	article := Article{}
+	article := &Article{}
 	var i = 0
-	for node := range Iterator(article) {
+	for node := range MediaIterator(article) {
 		assert.Equal(t, 0, i, "should only loop once")
 		assert.Equal(t, article, node.Media, "should have gotten article back out")
 		assert.Nil(t, node.ParentCollection, "parent should be nil")
 		i++
 	}
 
-	video := Video{}
+	video := &Video{}
 	i = 0
-	for node := range Iterator(video) {
+	for node := range MediaIterator(video) {
 		assert.Equal(t, 0, i, "should only loop once")
 		assert.Equal(t, video, node.Media, "should have gotten video back out")
 		assert.Nil(t, node.ParentCollection, "parent should be nil")
 		i++
 	}
 
-	image := Image{}
+	image := &Image{}
 	i = 0
-	for node := range Iterator(image) {
+	for node := range MediaIterator(image) {
 		assert.Equal(t, 0, i, "should only loop once")
 		assert.Equal(t, image, node.Media, "should have gotten image back out")
 		assert.Nil(t, node.ParentCollection, "parent should be nil")
 		i++
 	}
 
-	gallery := Gallery{}
+	gallery := &Gallery{}
 	i = 0
-	for node := range Iterator(gallery) {
+	for node := range MediaIterator(gallery) {
 		assert.Equal(t, 0, i, "should only loop once")
 		assert.Equal(t, gallery, node.Media, "should have gotten gallery back out")
 		assert.Nil(t, node.ParentCollection, "parent should be nil")

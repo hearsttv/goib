@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"strconv"
 	"strings"
+	"time"
 
 	l5g "github.com/neocortical/log5go"
 )
@@ -20,13 +21,13 @@ type httpClient func(url string) ([]byte, error)
 
 // API is the entrance point for interacting with the IB API
 type API interface {
-	Entry(channel string, entrytype string, params url.Values) (interface{}, error)
-	Article(channel string, contentID int, params url.Values) (Article, error)
-	Video(channel string, contentID int, params url.Values) (Video, error)
-	Image(channel string, contentID int, params url.Values) (Image, error)
-	Gallery(channel string, contentID int, params url.Values) (Gallery, error)
-	Search(channel string, query string, params url.Values) (SearchResult, error)
-	Content(channel string, contentID int, params url.Values) (interface{}, error)
+	Entry(channel string, entrytype string, params url.Values) (Item, error)
+	Article(channel string, contentID int, params url.Values) (*Article, error)
+	Video(channel string, contentID int, params url.Values) (*Video, error)
+	Image(channel string, contentID int, params url.Values) (*Image, error)
+	Gallery(channel string, contentID int, params url.Values) (*Gallery, error)
+	Search(channel string, query string, params url.Values) (*Collection, error)
+	Content(channel string, contentID int, params url.Values) (Item, error)
 }
 
 // NewAPI constructs an API object for the given channel
@@ -40,7 +41,7 @@ type api struct {
 	deliveryURL string
 }
 
-func (api *api) Entry(channel string, entrytype string, params url.Values) (entry interface{}, err error) {
+func (api *api) Entry(channel string, entrytype string, params url.Values) (entry Item, err error) {
 	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "entry", 1)
 	uri += "/" + entrytype
@@ -57,63 +58,59 @@ func (api *api) Entry(channel string, entrytype string, params url.Values) (entr
 	return unmarshalResponse(bytes)
 }
 
-func (api *api) Article(channel string, contentID int, params url.Values) (article Article, err error) {
+func (api *api) Article(channel string, contentID int, params url.Values) (article *Article, err error) {
 	content, err := api.Content(channel, contentID, params)
 	if err != nil {
-		return article, err
+		return nil, err
 	}
 
-	switch t := content.(type) {
-	case Article:
-		return content.(Article), nil
-	default:
-		return article, fmt.Errorf("invalid object type returned when getting article: %v", t)
+	if content.GetType() == ArticleType {
+		return content.(*Article), nil
 	}
+
+	return nil, fmt.Errorf("invalid object type returned when getting article: %s", content.GetType())
 }
 
-func (api *api) Video(channel string, contentID int, params url.Values) (video Video, err error) {
+func (api *api) Video(channel string, contentID int, params url.Values) (video *Video, err error) {
 	content, err := api.Content(channel, contentID, params)
 	if err != nil {
-		return video, err
+		return nil, err
 	}
 
-	switch t := content.(type) {
-	case Video:
-		return content.(Video), nil
-	default:
-		return video, fmt.Errorf("invalid object type returned when getting video: %v", t)
+	if content.GetType() == VideoType {
+		return content.(*Video), nil
 	}
+
+	return nil, fmt.Errorf("invalid object type returned when getting video: %s", content.GetType())
 }
 
-func (api *api) Image(channel string, contentID int, params url.Values) (image Image, err error) {
+func (api *api) Image(channel string, contentID int, params url.Values) (image *Image, err error) {
 	content, err := api.Content(channel, contentID, params)
 	if err != nil {
 		return image, err
 	}
 
-	switch t := content.(type) {
-	case Image:
-		return content.(Image), nil
-	default:
-		return image, fmt.Errorf("invalid object type returned when getting image: %v", t)
+	if content.GetType() == ImageType {
+		return content.(*Image), nil
 	}
+
+	return nil, fmt.Errorf("invalid object type returned when getting image: %s", content.GetType())
 }
 
-func (api *api) Gallery(channel string, contentID int, params url.Values) (gallery Gallery, err error) {
+func (api *api) Gallery(channel string, contentID int, params url.Values) (gallery *Gallery, err error) {
 	content, err := api.Content(channel, contentID, params)
 	if err != nil {
 		return gallery, err
 	}
 
-	switch t := content.(type) {
-	case Gallery:
-		return content.(Gallery), nil
-	default:
-		return gallery, fmt.Errorf("invalid object type returned when getting gallery: %v", t)
+	if content.GetType() == GalleryType {
+		return content.(*Gallery), nil
 	}
+
+	return nil, fmt.Errorf("invalid object type returned when getting gallery: %s", content.GetType())
 }
 
-func (api *api) Search(channel string, query string, params url.Values) (s SearchResult, err error) {
+func (api *api) Search(channel string, query string, params url.Values) (s *Collection, err error) {
 	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "search", 1)
 
@@ -128,19 +125,19 @@ func (api *api) Search(channel string, query string, params url.Values) (s Searc
 		return s, err
 	}
 
-	iface, err := unmarshalResponse(bytes)
+	r, err := unmarshalResponse(bytes)
 	if err != nil {
 		return s, err
 	}
-	switch t := iface.(type) {
-	case SearchResult:
-		return iface.(SearchResult), nil
-	default:
-		return s, fmt.Errorf("invalid object type returned by search: %v", t)
+
+	if r.GetType() == CollectionType {
+		return r.(*Collection), nil
 	}
+
+	return s, fmt.Errorf("invalid object type returned by search: %s", r.GetType())
 }
 
-func (api *api) Content(channel string, contentID int, params url.Values) (interface{}, error) {
+func (api *api) Content(channel string, contentID int, params url.Values) (Item, error) {
 	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "content", 1)
 	uri += "/" + strconv.Itoa(contentID)
@@ -169,17 +166,24 @@ func doGet(url string) (result []byte, err error) {
 	return result, err
 }
 
-func unmarshalResponse(bytes []byte) (interface{}, error) {
+func unmarshalResponse(bytes []byte) (Item, error) {
 	var r Receiver
+
+	start := time.Now()
 	err := json.Unmarshal(bytes, &r)
+	log.Debug("parsed to receiver in %v", time.Since(start))
 	if err != nil {
 		return nil, err
 	}
 
-	return unmarshalReceiver(r)
+	start = time.Now()
+	response, err := unmarshalReceiver(r)
+	log.Debug("parsed from receiver in %v", time.Since(start))
+
+	return response, err
 }
 
-func unmarshalReceiver(r Receiver) (interface{}, error) {
+func unmarshalReceiver(r Receiver) (Item, error) {
 	switch r.Type {
 	case ArticleType:
 		return unmarshalArticle(r), nil
@@ -198,7 +202,8 @@ func unmarshalReceiver(r Receiver) (interface{}, error) {
 	}
 }
 
-func unmarshalArticle(r Receiver) (a Article) {
+func unmarshalArticle(r Receiver) (a *Article) {
+	a = &Article{}
 	a.ContentID = r.ContentID
 	a.TeaserTitle = r.TeaserTitle
 	a.TeaserText = r.TeaserText
@@ -210,7 +215,8 @@ func unmarshalArticle(r Receiver) (a Article) {
 	return a
 }
 
-func unmarshalVideo(r Receiver) (v Video) {
+func unmarshalVideo(r Receiver) (v *Video) {
+	v = &Video{}
 	v.ContentID = r.ContentID
 	v.TeaserTitle = r.TeaserTitle
 	v.TeaserText = r.TeaserText
@@ -221,7 +227,8 @@ func unmarshalVideo(r Receiver) (v Video) {
 	return v
 }
 
-func unmarshalImage(r Receiver) (i Image) {
+func unmarshalImage(r Receiver) (i *Image) {
+	i = &Image{}
 	i.ContentID = r.ContentID
 	i.TeaserTitle = r.TeaserTitle
 	i.TeaserText = r.TeaserText
@@ -234,7 +241,8 @@ func unmarshalImage(r Receiver) (i Image) {
 	return i
 }
 
-func unmarshalGallery(r Receiver) (g Gallery) {
+func unmarshalGallery(r Receiver) (g *Gallery) {
+	g = &Gallery{}
 	g.ContentID = r.ContentID
 	g.TeaserTitle = r.TeaserTitle
 	g.TeaserText = r.TeaserText
@@ -260,7 +268,8 @@ func unmarshalGallery(r Receiver) (g Gallery) {
 	return g
 }
 
-func unmarshalCollection(r Receiver) (c Collection) {
+func unmarshalCollection(r Receiver) (c *Collection) {
+	c = &Collection{}
 	c.ContentID = r.ContentID
 	c.TeaserTitle = r.TeaserTitle
 	c.CollectionName = r.CollectionName
@@ -278,8 +287,8 @@ func unmarshalCollection(r Receiver) (c Collection) {
 	return c
 }
 
-func unmarshalSearch(r Receiver) (s SearchResult) {
-	s.Type = SearchType // TODO: unnecessary, remove
+func unmarshalSearch(r Receiver) (s *Collection) {
+	s = &Collection{}
 	s.Keywords = r.Keywords
 	s.TotalCount = r.TotalCount
 	s.StartIndex = r.StartIndex
