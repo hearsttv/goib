@@ -8,7 +8,6 @@ import (
 	"net/url"
 	"strconv"
 	"strings"
-	"time"
 
 	l5g "github.com/neocortical/log5go"
 )
@@ -169,16 +168,12 @@ func doGet(url string) (result []byte, err error) {
 func unmarshalResponse(bytes []byte) (Item, error) {
 	var r Receiver
 
-	start := time.Now()
 	err := json.Unmarshal(bytes, &r)
-	log.Debug("parsed to receiver in %v", time.Since(start))
 	if err != nil {
 		return nil, err
 	}
 
-	start = time.Now()
 	response, err := unmarshalReceiver(r)
-	log.Debug("parsed from receiver in %v", time.Since(start))
 
 	return response, err
 }
@@ -208,6 +203,7 @@ func unmarshalArticle(r Receiver) (a *Article) {
 	a.TeaserTitle = r.TeaserTitle
 	a.TeaserText = r.TeaserText
 	a.TeaserImage = r.TeaserImage
+	a.PublicationDate = r.PublicationDate
 	a.Title = r.Title
 	a.Text = r.Text
 	a.Author = r.Author
@@ -221,6 +217,7 @@ func unmarshalVideo(r Receiver) (v *Video) {
 	v.TeaserTitle = r.TeaserTitle
 	v.TeaserText = r.TeaserText
 	v.TeaserImage = r.TeaserImage
+	v.PublicationDate = r.PublicationDate
 	v.Title = r.Title
 	v.Flavors = r.Flavors
 
@@ -233,6 +230,7 @@ func unmarshalImage(r Receiver) (i *Image) {
 	i.TeaserTitle = r.TeaserTitle
 	i.TeaserText = r.TeaserText
 	i.TeaserImage = r.TeaserImage
+	i.PublicationDate = r.PublicationDate
 	i.Title = r.Title
 	i.Caption = r.Caption
 	i.Author = r.Author
@@ -247,6 +245,7 @@ func unmarshalGallery(r Receiver) (g *Gallery) {
 	g.TeaserTitle = r.TeaserTitle
 	g.TeaserText = r.TeaserText
 	g.TeaserImage = r.TeaserImage
+	g.PublicationDate = r.PublicationDate
 	g.Title = r.Title
 	for _, rInner := range r.Media {
 		item, err := unmarshalReceiver(rInner)
