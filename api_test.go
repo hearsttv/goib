@@ -59,38 +59,6 @@ func TestEntryApi(t *testing.T) {
 	}
 }
 
-func TestArticleApi(t *testing.T) {
-	svr, a := setupServerAndAPI(articleJSON)
-	defer svr.Close()
-
-	article, err := a.Article("someNuttyChannel", 9137538, nil)
-	if err != nil {
-		t.Errorf("error getting content: %v", err)
-	}
-	if article.ContentID != 9137538 {
-		t.Errorf("expected 9137538 type but got %d", article.ContentID)
-	}
-	if article.Title != "George Washington chicken nugget fetches $8,100" {
-		t.Errorf("expected 'George Washington chicken nugget fetches $8,100' but got %s", article.Title)
-	}
-}
-
-func TestVideoApi(t *testing.T) {
-	svr, a := setupServerAndAPI(videoJSON)
-	defer svr.Close()
-
-	video, err := a.Video("wkrp", 1402356, nil)
-	if err != nil {
-		t.Errorf("error getting content: %v", err)
-	}
-	if video.ContentID != 1402356 {
-		t.Errorf("expected 1402356 type but got %d", video.ContentID)
-	}
-	if video.Title != "Advertisers Ready For NFL Kickoff" {
-		t.Errorf("expected 'Advertisers Ready For NFL Kickoff' but got %s", video.Title)
-	}
-}
-
 func TestSearchApi(t *testing.T) {
 	svr, a := setupServerAndAPI(searchJSON)
 	defer svr.Close()
@@ -184,15 +152,6 @@ func assertGracefulFailOnAllAPIMethods(t *testing.T, a API) {
 	_, err = a.Content("someKrazyChannel", 12345, nil)
 	assert.NotNil(t, err, "error should not be nil")
 
-	_, err = a.Article("someKrazyChannel", 12345, nil)
-	assert.NotNil(t, err, "error should not be nil")
-
-	_, err = a.Video("someKrazyChannel", 12345, nil)
-	assert.NotNil(t, err, "error should not be nil")
-
-	_, err = a.Image("someKrazyChannel", 12345, nil)
-	assert.NotNil(t, err, "error should not be nil")
-
-	_, err = a.Gallery("someKrazyChannel", 12345, nil)
+	_, err = a.Search("someKrazyChannel", "kweery", nil)
 	assert.NotNil(t, err, "error should not be nil")
 }

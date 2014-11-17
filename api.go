@@ -21,10 +21,6 @@ type httpClient func(url string) ([]byte, error)
 // API is the entrance point for interacting with the IB API
 type API interface {
 	Entry(channel string, entrytype string, params url.Values) (Item, error)
-	Article(channel string, contentID int, params url.Values) (*Article, error)
-	Video(channel string, contentID int, params url.Values) (*Video, error)
-	Image(channel string, contentID int, params url.Values) (*Image, error)
-	Gallery(channel string, contentID int, params url.Values) (*Gallery, error)
 	Search(channel string, query string, params url.Values) (*Collection, error)
 	Content(channel string, contentID int, params url.Values) (Item, error)
 }
@@ -55,58 +51,6 @@ func (api *api) Entry(channel string, entrytype string, params url.Values) (entr
 	}
 
 	return unmarshalResponse(bytes)
-}
-
-func (api *api) Article(channel string, contentID int, params url.Values) (article *Article, err error) {
-	content, err := api.Content(channel, contentID, params)
-	if err != nil {
-		return nil, err
-	}
-
-	if content.GetType() == ArticleType {
-		return content.(*Article), nil
-	}
-
-	return nil, fmt.Errorf("invalid object type returned when getting article: %s", content.GetType())
-}
-
-func (api *api) Video(channel string, contentID int, params url.Values) (video *Video, err error) {
-	content, err := api.Content(channel, contentID, params)
-	if err != nil {
-		return nil, err
-	}
-
-	if content.GetType() == VideoType {
-		return content.(*Video), nil
-	}
-
-	return nil, fmt.Errorf("invalid object type returned when getting video: %s", content.GetType())
-}
-
-func (api *api) Image(channel string, contentID int, params url.Values) (image *Image, err error) {
-	content, err := api.Content(channel, contentID, params)
-	if err != nil {
-		return image, err
-	}
-
-	if content.GetType() == ImageType {
-		return content.(*Image), nil
-	}
-
-	return nil, fmt.Errorf("invalid object type returned when getting image: %s", content.GetType())
-}
-
-func (api *api) Gallery(channel string, contentID int, params url.Values) (gallery *Gallery, err error) {
-	content, err := api.Content(channel, contentID, params)
-	if err != nil {
-		return gallery, err
-	}
-
-	if content.GetType() == GalleryType {
-		return content.(*Gallery), nil
-	}
-
-	return nil, fmt.Errorf("invalid object type returned when getting gallery: %s", content.GetType())
 }
 
 func (api *api) Search(channel string, query string, params url.Values) (s *Collection, err error) {
