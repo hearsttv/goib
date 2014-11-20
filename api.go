@@ -23,6 +23,7 @@ type API interface {
 	Entry(channel string, entrytype string, params url.Values) (Item, error)
 	Search(channel string, query string, params url.Values) (*Collection, error)
 	Content(channel string, contentID int, params url.Values) (Item, error)
+	ContentMedia(channel string, contentID int, params url.Values) ([]Item, error)
 }
 
 // NewAPI constructs an API object for the given channel
@@ -97,6 +98,23 @@ func (api *api) Content(channel string, contentID int, params url.Values) (Item,
 	return unmarshalResponse(bytes)
 }
 
+func (api *api) ContentMedia(channel string, contentID int, params url.Values) ([]Item, error) {
+	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
+	uri = strings.Replace(uri, "{service}", "content", 1)
+	uri += "/" + strconv.Itoa(contentID) + "/media"
+
+	if len(params) > 0 {
+		uri += "?" + params.Encode()
+	}
+
+	bytes, err := doGet(uri)
+	if err != nil {
+		return nil, err
+	}
+
+	return unmarshalArrayResponse(bytes)
+}
+
 func doGet(url string) (result []byte, err error) {
 	resp, err := http.Get(url)
 	if err != nil {
@@ -120,6 +138,26 @@ func unmarshalResponse(bytes []byte) (Item, error) {
 	response, err := unmarshalReceiver(r)
 
 	return response, err
+}
+
+func unmarshalArrayResponse(bytes []byte) (result []Item, err error) {
+	var ra []Receiver
+
+	err = json.Unmarshal(bytes, &ra)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, r := range ra {
+		item, err := unmarshalReceiver(r)
+		if err != nil {
+			log.Warn("error unmarshalling item from array: %v", err)
+		} else {
+			result = append(result, item)
+		}
+	}
+
+	return result, err
 }
 
 func unmarshalReceiver(r Receiver) (Item, error) {
