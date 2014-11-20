@@ -216,6 +216,7 @@ func unmarshalCollection(r Receiver) (c *Collection) {
 	c.ContentID = r.ContentID
 	c.TeaserTitle = r.TeaserTitle
 	c.CollectionName = r.CollectionName
+	c.ContentName = r.ContentName
 	c.TotalCount = r.TotalCount
 	c.StartIndex = r.StartIndex
 	for _, rInner := range r.Items {

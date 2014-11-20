@@ -61,6 +61,7 @@ type Collection struct {
 	TeaserText     string `json:"teaser_text"`
 	TeaserImage    string `json:"teaser_image"`
 	CollectionName string `json:"collection_name"`
+	ContentName    string `json:"content_name"`
 	TotalCount     int    `json:"total_count"`
 	StartIndex     int    `json:"start_index"`
 	Keywords       string `json:"keywords"` // populated only in search results
