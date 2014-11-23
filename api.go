@@ -14,7 +14,7 @@ import (
 
 const deliveryURL = "http://ibsys-api.ib-prod.com/v2.0/delivery/{channel}/json/{service}"
 
-var log = l5g.Logger(l5g.LogAll)
+var log = l5g.GetAppLogger()
 
 type httpClient func(url string) ([]byte, error)
 
