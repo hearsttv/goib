@@ -34,7 +34,7 @@ func extractMediaRecursive(input Item, media *[]Item) {
 			extractMediaRecursive(item, media)
 		}
 	default:
-		log.Warn("unexpected type: %s", input.GetType())
+		Log.Warn("unexpected type: %s", input.GetType())
 		break
 	}
 
@@ -84,7 +84,7 @@ func iterateMediaRecursive(node Item, parent *Collection, ch chan *MediaNode) {
 		}
 
 	default:
-		log.Warn("unexpected type found during iteration: %s", node.GetType())
+		Log.Warn("unexpected type found during iteration: %s", node.GetType())
 		break
 	}
 

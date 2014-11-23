@@ -14,7 +14,7 @@ import (
 
 const deliveryURL = "http://ibsys-api.ib-prod.com/v2.0/delivery/{channel}/json/{service}"
 
-var log = l5g.GetAppLogger()
+var Log = l5g.Logger(l5g.LogAll)
 
 type httpClient func(url string) ([]byte, error)
 
@@ -123,7 +123,7 @@ func doGet(url string) (result []byte, err error) {
 	defer resp.Body.Close()
 
 	result, err = ioutil.ReadAll(resp.Body)
-	log.Debug("IB API: %s : HTTP Status: %s, Success: %t", url, resp.Status, (err == nil))
+	Log.Debug("IB API: %s : HTTP Status: %s, Success: %t", url, resp.Status, (err == nil))
 	return result, err
 }
 
@@ -151,7 +151,7 @@ func unmarshalArrayResponse(bytes []byte) (result []Item, err error) {
 	for _, r := range ra {
 		item, err := unmarshalReceiver(r)
 		if err != nil {
-			log.Warn("error unmarshalling item from array: %v", err)
+			Log.Warn("error unmarshalling item from array: %v", err)
 		} else {
 			result = append(result, item)
 		}
@@ -232,7 +232,7 @@ func unmarshalGallery(r Receiver) (g *Gallery) {
 	for _, rInner := range r.Media {
 		item, err := unmarshalReceiver(rInner)
 		if err != nil {
-			log.Warn("error unmarshalling sub-object: %v", err)
+			Log.Warn("error unmarshalling sub-object: %v", err)
 		} else {
 			g.Media = append(g.Media, item)
 		}
@@ -240,7 +240,7 @@ func unmarshalGallery(r Receiver) (g *Gallery) {
 	for _, rInner := range r.Items {
 		item, err := unmarshalReceiver(rInner)
 		if err != nil {
-			log.Warn("error unmarshalling sub-object: %v", err)
+			Log.Warn("error unmarshalling sub-object: %v", err)
 		} else {
 			g.Items = append(g.Items, item)
 		}
@@ -260,7 +260,7 @@ func unmarshalCollection(r Receiver) (c *Collection) {
 	for _, rInner := range r.Items {
 		item, err := unmarshalReceiver(rInner)
 		if err != nil {
-			log.Warn("error unmarshalling sub-object: %v", err)
+			Log.Warn("error unmarshalling sub-object: %v", err)
 		} else {
 			c.Items = append(c.Items, item)
 		}
@@ -277,7 +277,7 @@ func unmarshalSearch(r Receiver) (s *Collection) {
 	for _, rInner := range r.Items {
 		item, err := unmarshalReceiver(rInner)
 		if err != nil {
-			log.Warn("error unmarshalling sub-object: %v", err)
+			Log.Warn("error unmarshalling sub-object: %v", err)
 		} else {
 			s.Items = append(s.Items, item)
 		}
