@@ -188,7 +188,7 @@ func unmarshalArticle(r Receiver) (a *Article) {
 	a.PublicationDate = r.PublicationDate
 	a.Title = r.Title
 	a.Text = r.Text
-	a.Author = r.Author
+	a.Authors = r.AuthorObjects
 
 	return a
 }

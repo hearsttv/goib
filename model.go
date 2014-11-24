@@ -44,6 +44,7 @@ type Receiver struct {
 	Caption         string        `json:"caption"`
 	URLs            []ImageURL    `json:"urls"`
 	Media           []Receiver    `json:"media"`
+	AuthorObjects   []Author      `json:"author_objects"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -82,14 +83,14 @@ func (c *Collection) GetTeaserTitle() string {
 
 // Article represents an IB article
 type Article struct {
-	ContentID       int    `json:"content_id"`
-	TeaserTitle     string `json:"teaser_title"`
-	TeaserText      string `json:"teaser_text"`
-	TeaserImage     string `json:"teaser_image"`
-	PublicationDate int64  `json:"publication_date"`
-	Title           string `json:"title"`
-	Text            string `json:"article_text"`
-	Author          string `json:"author"`
+	ContentID       int      `json:"content_id"`
+	TeaserTitle     string   `json:"teaser_title"`
+	TeaserText      string   `json:"teaser_text"`
+	TeaserImage     string   `json:"teaser_image"`
+	PublicationDate int64    `json:"publication_date"`
+	Title           string   `json:"title"`
+	Text            string   `json:"article_text"`
+	Authors         []Author `json:"author_objects"`
 }
 
 func (a *Article) GetType() ItemType {
@@ -198,4 +199,10 @@ func (g *Gallery) GetContentID() int {
 
 func (g *Gallery) GetTeaserTitle() string {
 	return g.TeaserTitle
+}
+
+type Author struct {
+	FullName string `json:"full_name"`
+	Title    string `json:"title"`
+	Email    string `json:"email"`
 }
