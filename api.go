@@ -24,6 +24,7 @@ type API interface {
 	Search(channel string, query string, params url.Values) (*Collection, error)
 	Content(channel string, contentID int, params url.Values) (Item, error)
 	ContentMedia(channel string, contentID int, params url.Values) ([]Item, error)
+	ContentItems(channel string, contentID int, params url.Values) ([]Item, error)
 }
 
 // NewAPI constructs an API object for the given channel
@@ -102,6 +103,23 @@ func (api *api) ContentMedia(channel string, contentID int, params url.Values) (
 	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "content", 1)
 	uri += "/" + strconv.Itoa(contentID) + "/media"
+
+	if len(params) > 0 {
+		uri += "?" + params.Encode()
+	}
+
+	bytes, err := doGet(uri)
+	if err != nil {
+		return nil, err
+	}
+
+	return unmarshalArrayResponse(bytes)
+}
+
+func (api *api) ContentItems(channel string, contentID int, params url.Values) ([]Item, error) {
+	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
+	uri = strings.Replace(uri, "{service}", "content", 1)
+	uri += "/" + strconv.Itoa(contentID) + "/items"
 
 	if len(params) > 0 {
 		uri += "?" + params.Encode()
