@@ -16,6 +16,12 @@ const (
 	ImageType ItemType = "IMAGE"
 	// GalleryType item type
 	GalleryType ItemType = "GALLERY"
+	// MapType item type
+	MapType ItemType = "MAP"
+	// LivestreamType item type
+	LivestreamType = "LIVESTREAM"
+	// AudioType item type
+	AudioType = "AUDIO"
 )
 
 // Receiver captures a type-agnostic representation of an API response as a
@@ -205,4 +211,60 @@ type Author struct {
 	FullName string `json:"full_name"`
 	Title    string `json:"title"`
 	Email    string `json:"email"`
+}
+
+// Audio represents an audio clip
+// TODO: no idea what this looks like ATM
+type Audio struct {
+	ContentID   int    `json:"content_id"`
+	TeaserTitle string `json:"teaser_title"`
+}
+
+func (a *Audio) GetType() ItemType {
+	return AudioType
+}
+
+func (a *Audio) GetContentID() int {
+	return a.ContentID
+}
+
+func (a *Audio) GetTeaserTitle() string {
+	return a.TeaserTitle
+}
+
+// Livestream represents a live stream
+// TODO: no idea what this looks like ATM
+type Livestream struct {
+	ContentID   int    `json:"content_id"`
+	TeaserTitle string `json:"teaser_title"`
+}
+
+func (l *Livestream) GetType() ItemType {
+	return AudioType
+}
+
+func (l *Livestream) GetContentID() int {
+	return l.ContentID
+}
+
+func (l *Livestream) GetTeaserTitle() string {
+	return l.TeaserTitle
+}
+
+// Map represents a map
+type Map struct {
+	ContentID   int    `json:"content_id"`
+	TeaserTitle string `json:"teaser_title"`
+}
+
+func (m *Map) GetType() ItemType {
+	return AudioType
+}
+
+func (m *Map) GetContentID() int {
+	return m.ContentID
+}
+
+func (m *Map) GetTeaserTitle() string {
+	return m.TeaserTitle
 }
