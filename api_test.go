@@ -120,6 +120,19 @@ func TestContentAPIShouldParseGalleryType(t *testing.T) {
 	assert.Equal(t, 53, len(g.Items), "expected 50 image items in gallery but got %d", len(g.Items))
 }
 
+func TestShouldUnmarshallArticleMedia(t *testing.T) {
+	r := Receiver{
+		Type: ArticleType,
+		Media: []Receiver{
+			Receiver{Type: VideoType, ContentID: 123},
+			Receiver{Type: ImageType, ContentID: 456},
+		},
+	}
+
+	a := unmarshalArticle(r)
+	assert.Equal(t, 2, len(a.Media), "media should have two elements")
+}
+
 func setupServerAndAPI(cannedResponse string) (*httptest.Server, API) {
 	testSvr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/xml")

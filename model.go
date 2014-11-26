@@ -97,6 +97,7 @@ type Article struct {
 	Title           string   `json:"title"`
 	Text            string   `json:"article_text"`
 	Authors         []Author `json:"author_objects"`
+	Media           []Item   `json:"media"`
 }
 
 func (a *Article) GetType() ItemType {

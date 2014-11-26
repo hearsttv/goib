@@ -207,6 +207,14 @@ func unmarshalArticle(r Receiver) (a *Article) {
 	a.Title = r.Title
 	a.Text = r.Text
 	a.Authors = r.AuthorObjects
+	for _, rInner := range r.Media {
+		item, err := unmarshalReceiver(rInner)
+		if err != nil {
+			Log.Warn("error unmarshalling sub-object: %v", err)
+		} else {
+			a.Media = append(a.Media, item)
+		}
+	}
 
 	return a
 }
