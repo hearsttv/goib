@@ -41,3 +41,11 @@ func (m *API) ContentMedia(channel string, contentID int, params url.Values) ([]
 
 	return r0, r1
 }
+func (m *API) ContentItems(channel string, contentID int, params url.Values) ([]goib.Item, error) {
+	ret := m.Called(channel, contentID, params)
+
+	r0 := ret.Get(0).([]goib.Item)
+	r1 := ret.Error(1)
+
+	return r0, r1
+}
