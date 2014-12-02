@@ -1149,3 +1149,53 @@ var emptyJSON = ""
 var missingCloseBracketJSON = `{"foo":"bar", `
 
 var badResponseHTML = `<html><head><title>Error</title></head><body>You have dun bad</body></html>`
+
+var collectionWithSettingsJSON = `
+{
+  "type" : "COLLECTION",
+  "hash" : "6w4bv2",
+  "content_id" : 29656700,
+  "content_name" : "Indicator - Now+6",
+  "navigation_context" : [ "WESH Home" ],
+  "analytics_category" : "home",
+  "advertising_category" : "homepage",
+  "title" : null,
+  "valid_from" : 2700000,
+  "valid_to" : 4105144800,
+  "editorial_comment" : null,
+  "period" : "",
+  "keywords" : "",
+  "url" : "http://www.wesh.com/29656700",
+  "canonical_url" : "",
+  "teaser_title" : "",
+  "teaser_text" : null,
+  "teaser_image" : null,
+  "media" : [ ],
+  "author_objects" : [ ],
+  "author" : "",
+  "categories" : [ ],
+  "creation_date" : 1415721183,
+  "copyright_objects" : [ ],
+  "copyright" : "",
+  "publication_date" : 1415721183,
+  "collection_name" : "Indicator - Now+6",
+  "total_count" : 1,
+  "start_index" : 0,
+  "items" : [ {
+    "type" : "EXTERNAL_CONTENT",
+    "hash" : "6w4bvx",
+    "content_id" : 29656710,
+    "publication_date" : 1415721183,
+    "teaser_title" : "Hourly Forecast",
+    "teaser_text" : null,
+    "teaser_image" : null,
+    "transformer_type" : "HourlyForecast"
+  } ],
+  "settings" : [ {
+    "collection.WeatherIndicatorType" : "hourly",
+    "collection.WeatherIndicatorHour" : "5",
+    "collection.appViewMode" : "WeatherModuleIndicator"
+  } ],
+  "view_type" : null
+}
+`

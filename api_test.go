@@ -133,6 +133,18 @@ func TestShouldUnmarshallArticleMedia(t *testing.T) {
 	assert.Equal(t, 2, len(a.Media), "media should have two elements")
 }
 
+func TestShouldUnmarshallSettingsForCollection(t *testing.T) {
+	svr, a := setupServerAndAPI(collectionWithSettingsJSON)
+	defer svr.Close()
+
+	response, err := a.Content("someKrazyChannel", 12345, nil)
+	c := response.(*Collection)
+
+	assert.Nil(t, err, "err should be nil")
+	assert.Equal(t, 3, len(c.Settings), "should have found 3 setings")
+	assert.Equal(t, "hourly", c.Settings["collection.WeatherIndicatorType"], "should have 'hourly' for specific setting")
+}
+
 func setupServerAndAPI(cannedResponse string) (*httptest.Server, API) {
 	testSvr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/xml")

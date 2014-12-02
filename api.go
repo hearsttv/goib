@@ -291,6 +291,9 @@ func unmarshalCollection(r Receiver) (c *Collection) {
 			c.Items = append(c.Items, item)
 		}
 	}
+	if len(r.Settings) > 0 {
+		c.Settings = r.Settings[0]
+	}
 
 	return c
 }
