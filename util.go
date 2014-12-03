@@ -139,3 +139,11 @@ func GetSubcollections(root Item) (result []*Collection) {
 
 	return result
 }
+
+// GetSettings returns a map of settings if the the passed item is a collection
+func GetSettings(i Item) map[string]string {
+	if i.GetType() == CollectionType {
+		return i.(*Collection).Settings
+	}
+	return make(map[string]string)
+}
