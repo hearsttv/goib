@@ -243,6 +243,8 @@ func unmarshalImage(r Receiver) (i *Image) {
 	i.Caption = r.Caption
 	i.Author = r.Author
 	i.URLs = r.URLs
+	i.Copyright = r.Copyright
+	i.CopyrightObjects = r.CopyrightObjects
 
 	return i
 }

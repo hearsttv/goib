@@ -30,28 +30,30 @@ const (
 // This object should not be used outside of the IB API classes. It is exposed
 // only to facilitate JSON unmarshalling.
 type Receiver struct {
-	Type            ItemType            `json:"type"`
-	ContentID       int                 `json:"content_id"`
-	ContentName     string              `json:"content_name"`
-	CollectionName  string              `json:"collection_name"`
-	Items           []Receiver          `json:"items"`
-	TeaserTitle     string              `json:"teaser_title"`
-	TeaserText      string              `json:"teaser_text"`
-	TeaserImage     string              `json:"teaser_image"`
-	PublicationDate int64               `json:"publication_date"`
-	Title           string              `json:"title"`
-	Text            string              `json:"article_text"`
-	Author          string              `json:"author"`
-	Flavors         []VideoFlavor       `json:"flavors"`
-	StartIndex      int                 `json:"start_index"`
-	TotalCount      int                 `json:"total_count"`
-	Keywords        string              `json:"keywords"`
-	AltText         string              `json:"alt_text"`
-	Caption         string              `json:"caption"`
-	URLs            []ImageURL          `json:"urls"`
-	Media           []Receiver          `json:"media"`
-	AuthorObjects   []Author            `json:"author_objects"`
-	Settings        []map[string]string `json:"settings"`
+	Type             ItemType            `json:"type"`
+	ContentID        int                 `json:"content_id"`
+	ContentName      string              `json:"content_name"`
+	CollectionName   string              `json:"collection_name"`
+	Items            []Receiver          `json:"items"`
+	TeaserTitle      string              `json:"teaser_title"`
+	TeaserText       string              `json:"teaser_text"`
+	TeaserImage      string              `json:"teaser_image"`
+	PublicationDate  int64               `json:"publication_date"`
+	Title            string              `json:"title"`
+	Text             string              `json:"article_text"`
+	Author           string              `json:"author"`
+	Flavors          []VideoFlavor       `json:"flavors"`
+	StartIndex       int                 `json:"start_index"`
+	TotalCount       int                 `json:"total_count"`
+	Keywords         string              `json:"keywords"`
+	AltText          string              `json:"alt_text"`
+	Caption          string              `json:"caption"`
+	URLs             []ImageURL          `json:"urls"`
+	Media            []Receiver          `json:"media"`
+	AuthorObjects    []Author            `json:"author_objects"`
+	Settings         []map[string]string `json:"settings"`
+	Copyright        string              `json:"copyright"`
+	CopyrightObjects []CopyrightObject   `json:"copyright_objects"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -151,17 +153,19 @@ type VideoFlavor struct {
 
 // Image represents an IB image content piece
 type Image struct {
-	ContentID       int        `json:"content_id"`
-	TeaserTitle     string     `json:"teaser_title"`
-	TeaserText      string     `json:"teaser_text"`
-	TeaserImage     string     `json:"teaser_image"`
-	PublicationDate int64      `json:"publication_date"`
-	AltText         string     `json:"alt_text"`
-	Caption         string     `json:"caption"`
-	Author          string     `json:"author"`
-	Title           string     `json:"title"`
-	Keywords        string     `json:"keywords"`
-	URLs            []ImageURL `json:"urls"`
+	ContentID        int               `json:"content_id"`
+	TeaserTitle      string            `json:"teaser_title"`
+	TeaserText       string            `json:"teaser_text"`
+	TeaserImage      string            `json:"teaser_image"`
+	PublicationDate  int64             `json:"publication_date"`
+	AltText          string            `json:"alt_text"`
+	Caption          string            `json:"caption"`
+	Author           string            `json:"author"`
+	Title            string            `json:"title"`
+	Keywords         string            `json:"keywords"`
+	URLs             []ImageURL        `json:"urls"`
+	Copyright        string            `json:"copyright"`
+	CopyrightObjects []CopyrightObject `json:"copyright_objects"`
 }
 
 func (i *Image) GetType() ItemType {
@@ -270,4 +274,9 @@ func (m *Map) GetContentID() int {
 
 func (m *Map) GetTeaserTitle() string {
 	return m.TeaserTitle
+}
+
+type CopyrightObject struct {
+	Name string `json:"name"`
+	Text string `json:"text"`
 }
