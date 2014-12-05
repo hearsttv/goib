@@ -74,6 +74,8 @@ func iterateMediaRecursive(node Item, parent *Collection, ch chan *MediaNode) {
 		ch <- &MediaNode{node.(*Image), parent}
 	case GalleryType:
 		ch <- &MediaNode{node.(*Gallery), parent}
+	case ExternalType:
+		ch <- &MediaNode{node.(*ExternalContent), parent}
 	case CollectionType:
 		c := node.(*Collection)
 		if c.Items == nil || len(c.Items) == 0 {

@@ -192,6 +192,8 @@ func unmarshalReceiver(r Receiver) (Item, error) {
 		return unmarshalImage(r), nil
 	case GalleryType:
 		return unmarshalGallery(r), nil
+	case ExternalType:
+		return unmarshallExternalContent(r), nil
 	default:
 		return nil, fmt.Errorf("unknonwn response type: %s", r.Type)
 	}
@@ -315,4 +317,12 @@ func unmarshalSearch(r Receiver) (s *Collection) {
 	}
 
 	return s
+}
+
+func unmarshallExternalContent(r Receiver) (e *ExternalContent) {
+	e = &ExternalContent{}
+	e.ContentID = r.ContentID
+	e.TeaserTitle = r.TeaserTitle
+	e.ExternalContent = r.ExternalContent
+	return e
 }

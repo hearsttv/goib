@@ -22,6 +22,8 @@ const (
 	LivestreamType = "LIVESTREAM"
 	// AudioType item type
 	AudioType = "AUDIO"
+	// ExternalType external content item type
+	ExternalType = "EXTERNAL_CONTENT"
 )
 
 // Receiver captures a type-agnostic representation of an API response as a
@@ -54,6 +56,7 @@ type Receiver struct {
 	Settings         []map[string]string `json:"settings"`
 	Copyright        string              `json:"copyright"`
 	CopyrightObjects []CopyrightObject   `json:"copyright_objects"`
+	ExternalContent  string              `json:"external_content"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -265,7 +268,7 @@ type Map struct {
 }
 
 func (m *Map) GetType() ItemType {
-	return AudioType
+	return MapType
 }
 
 func (m *Map) GetContentID() int {
@@ -274,6 +277,25 @@ func (m *Map) GetContentID() int {
 
 func (m *Map) GetTeaserTitle() string {
 	return m.TeaserTitle
+}
+
+// ExternalContent represents an external content object
+type ExternalContent struct {
+	ContentID       int    `json:"content_id"`
+	TeaserTitle     string `json:"teaser_title"`
+	ExternalContent string `json:"external_content"`
+}
+
+func (e *ExternalContent) GetType() ItemType {
+	return ExternalType
+}
+
+func (e *ExternalContent) GetContentID() int {
+	return e.ContentID
+}
+
+func (e *ExternalContent) GetTeaserTitle() string {
+	return e.TeaserTitle
 }
 
 type CopyrightObject struct {
