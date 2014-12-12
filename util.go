@@ -1,5 +1,7 @@
 package goib
 
+import "strconv"
+
 // ExtractMedia recursively scans the supplied object for simple (displayable) media types
 // A simple media item will produce a list containing that item. Collections and SearchResults
 // are recursively scanned for inner media
@@ -148,4 +150,13 @@ func GetSettings(i Item) map[string]string {
 		return i.(*Collection).Settings
 	}
 	return make(map[string]string)
+}
+
+// SettingIsTrue returns true/false for the specified setting
+func SettingIsTrue(settings map[string]string, val string) bool {
+	result, err := strconv.ParseBool(settings[val])
+	if err != nil {
+		return false
+	}
+	return result
 }
