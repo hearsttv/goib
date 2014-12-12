@@ -42,6 +42,7 @@ type Receiver struct {
 	TeaserImage      string              `json:"teaser_image"`
 	PublicationDate  int64               `json:"publication_date"`
 	Title            string              `json:"title"`
+	Subheadline      string              `json:"subheadline"`
 	Text             string              `json:"article_text"`
 	Author           string              `json:"author"`
 	Flavors          []VideoFlavor       `json:"flavors"`
@@ -102,6 +103,7 @@ type Article struct {
 	TeaserImage     string   `json:"teaser_image"`
 	PublicationDate int64    `json:"publication_date"`
 	Title           string   `json:"title"`
+	Subheadline     string   `json:"subheadline"`
 	Text            string   `json:"article_text"`
 	Authors         []Author `json:"author_objects"`
 	Media           []Item   `json:"media"`
@@ -127,6 +129,7 @@ type Video struct {
 	TeaserImage     string        `json:"teaser_image"`
 	PublicationDate int64         `json:"publication_date"`
 	Title           string        `json:"title"`
+	Subheadline     string        `json:"subheadline"`
 	Flavors         []VideoFlavor `json:"flavors"`
 }
 
@@ -201,6 +204,7 @@ type Gallery struct {
 	PublicationDate int64         `json:"publication_date"`
 	Keywords        string        `json:"keywords"`
 	Title           string        `json:"title"`
+	Subheadline     string        `json:"subheadline"`
 	Media           []interface{} `json:"media"`
 	Items           []interface{} `json:"items"`
 }
