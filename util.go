@@ -145,11 +145,38 @@ func GetSubcollections(root Item) (result []*Collection) {
 }
 
 // GetSettings returns a map of settings if the the passed item is a collection
-func GetSettings(i Item) map[string]string {
+func GetSettings(i Item) (result map[string]string) {
 	if i.GetType() == CollectionType {
-		return i.(*Collection).Settings
+		result = i.(*Collection).Settings
 	}
-	return make(map[string]string)
+	if result == nil {
+		result = make(map[string]string)
+	}
+	return result
+}
+
+// GetBooleanSetting returns the explicit value of a setting by its key, or a default if not set
+func GetBooleanSetting(settings map[string]string, key string, dflt bool) bool {
+	if settings == nil {
+		return dflt
+	}
+	result, err := strconv.ParseBool(settings[key])
+	if err != nil {
+		return dflt
+	}
+	return result
+}
+
+// GetIntSetting returns the explicit value of a setting by its key, or a default if not set
+func GetIntSetting(settings map[string]string, key string, dflt int) int {
+	if settings == nil {
+		return dflt
+	}
+	result, err := strconv.Atoi(settings[key])
+	if err != nil {
+		return dflt
+	}
+	return result
 }
 
 // SettingIsTrue returns true/false for the specified setting
