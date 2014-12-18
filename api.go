@@ -202,7 +202,7 @@ func unmarshalReceiver(r Receiver) (Item, error) {
 func unmarshalArticle(r Receiver) (a *Article) {
 	a = &Article{}
 	a.ContentID = r.ContentID
-	a.TeaserTitle = r.TeaserTitle
+	a.TeaserTitle = getTeaserTitle(&r)
 	a.TeaserText = r.TeaserText
 	a.TeaserImage = r.TeaserImage
 	a.PublicationDate = r.PublicationDate
@@ -225,7 +225,7 @@ func unmarshalArticle(r Receiver) (a *Article) {
 func unmarshalVideo(r Receiver) (v *Video) {
 	v = &Video{}
 	v.ContentID = r.ContentID
-	v.TeaserTitle = r.TeaserTitle
+	v.TeaserTitle = getTeaserTitle(&r)
 	v.TeaserText = r.TeaserText
 	v.TeaserImage = r.TeaserImage
 	v.PublicationDate = r.PublicationDate
@@ -239,7 +239,7 @@ func unmarshalVideo(r Receiver) (v *Video) {
 func unmarshalImage(r Receiver) (i *Image) {
 	i = &Image{}
 	i.ContentID = r.ContentID
-	i.TeaserTitle = r.TeaserTitle
+	i.TeaserTitle = getTeaserTitle(&r)
 	i.TeaserText = r.TeaserText
 	i.TeaserImage = r.TeaserImage
 	i.PublicationDate = r.PublicationDate
@@ -256,7 +256,7 @@ func unmarshalImage(r Receiver) (i *Image) {
 func unmarshalGallery(r Receiver) (g *Gallery) {
 	g = &Gallery{}
 	g.ContentID = r.ContentID
-	g.TeaserTitle = r.TeaserTitle
+	g.TeaserTitle = getTeaserTitle(&r)
 	g.TeaserText = r.TeaserText
 	g.TeaserImage = r.TeaserImage
 	g.PublicationDate = r.PublicationDate
@@ -285,7 +285,7 @@ func unmarshalGallery(r Receiver) (g *Gallery) {
 func unmarshalCollection(r Receiver) (c *Collection) {
 	c = &Collection{}
 	c.ContentID = r.ContentID
-	c.TeaserTitle = r.TeaserTitle
+	c.TeaserTitle = getTeaserTitle(&r)
 	c.CollectionName = r.CollectionName
 	c.ContentName = r.ContentName
 	c.TotalCount = r.TotalCount
@@ -325,7 +325,15 @@ func unmarshalSearch(r Receiver) (s *Collection) {
 func unmarshallExternalContent(r Receiver) (e *ExternalContent) {
 	e = &ExternalContent{}
 	e.ContentID = r.ContentID
-	e.TeaserTitle = r.TeaserTitle
+	e.TeaserTitle = getTeaserTitle(&r)
 	e.ExternalContent = r.ExternalContent
 	return e
+}
+
+func getTeaserTitle(r *Receiver) (title string) {
+	title = r.TeaserTitle
+	if title == "" {
+		title = r.Title
+	}
+	return title
 }
