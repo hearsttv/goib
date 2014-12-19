@@ -178,12 +178,3 @@ func GetIntSetting(settings map[string]string, key string, dflt int) int {
 	}
 	return result
 }
-
-// SettingIsTrue returns true/false for the specified setting
-func SettingIsTrue(settings map[string]string, val string) bool {
-	result, err := strconv.ParseBool(settings[val])
-	if err != nil {
-		return false
-	}
-	return result
-}
