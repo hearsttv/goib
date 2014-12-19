@@ -1199,3 +1199,83 @@ var collectionWithSettingsJSON = `
   "view_type" : null
 }
 `
+
+var closingsCount = `
+{
+  "count" : {
+    "total" : 3,
+    "publication_date" : 1382554634
+  },
+  "type" : "CLOSINGS"
+}
+`
+
+var closingsClosed = `
+{
+  "closed_institutions" : [ {
+    "name" : "A L Holmes Elem-MIddle",
+    "publication_date" : 1382384571,
+    "city" : "Detroit",
+    "county" : "",
+    "state" : "MI",
+    "provider_id" : "urn:ibsys:institution:c4k:newsticker:1001"
+  }, {
+    "name" : "Abbot Elem",
+    "publication_date" : 1382384571,
+    "city" : "Ann Arbor",
+    "county" : "",
+    "state" : "MI",
+    "provider_id" : "urn:ibsys:institution:c4k:newsticker:3453"
+  }, {
+    "name" : "ABC/CET",
+    "publication_date" : 1382384572,
+    "city" : "Madison Heights",
+    "county" : "",
+    "state" : "MI",
+    "provider_id" : "urn:ibsys:institution:c4k:newsticker:1002"
+  }, {
+    "name" : "Wilkinson Middle",
+    "publication_date" : 1382384579,
+    "city" : "Madison Heights",
+    "county" : "",
+    "state" : "MI",
+    "provider_id" : "urn:ibsys:institution:c4k:newsticker:3754"
+  } ],
+  "type" : "CLOSINGS"
+}
+`
+
+var closingsAll = `
+{
+  "institutions" : [ {
+    "name" : "A L Holmes Elem-MIddle",
+    "publication_date" : 1382384571,
+    "city" : "Detroit",
+    "county" : "",
+    "state" : "MI",
+    "provider_id" : "urn:ibsys:institution:c4k:newsticker:1001"
+  }, {
+    "name" : "Abbot Elem",
+    "publication_date" : 1382384571,
+    "city" : "Ann Arbor",
+    "county" : "",
+    "state" : "MI",
+    "provider_id" : "urn:ibsys:institution:c4k:newsticker:3453"
+  }, {
+    "name" : "ABC/CET",
+    "publication_date" : 1382384572,
+    "city" : "Madison Heights",
+    "county" : "",
+    "state" : "MI",
+    "provider_id" : "urn:ibsys:institution:c4k:newsticker:1002"
+  }, {
+    "name" : "Wilkinson Middle",
+    "publication_date" : 1382384579,
+    "city" : "Madison Heights",
+    "county" : "",
+    "state" : "MI",
+    "provider_id" : "urn:ibsys:institution:c4k:newsticker:3754"
+  } ],
+  "type" : "CLOSINGS"
+}
+`

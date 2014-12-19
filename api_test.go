@@ -145,6 +145,36 @@ func TestShouldUnmarshallSettingsForCollection(t *testing.T) {
 	assert.Equal(t, "hourly", c.Settings["collection.WeatherIndicatorType"], "should have 'hourly' for specific setting")
 }
 
+func TestClosingsCount(t *testing.T) {
+	svr, a := setupServerAndAPI(closingsCount)
+	defer svr.Close()
+
+	closings, err := a.Closings("someKrazyChannel", ClosingsCount)
+
+	assert.Nil(t, err, "err should be nil")
+	assert.Equal(t, 3, closings.Count.Total, "should have found 3 closings")
+}
+
+func TestClosingsAll(t *testing.T) {
+	svr, a := setupServerAndAPI(closingsAll)
+	defer svr.Close()
+
+	closings, err := a.Closings("someKrazyChannel", ClosingsAll)
+
+	assert.Nil(t, err, "err should be nil")
+	assert.Equal(t, 4, len(closings.Institutions), "should have found 4 institutions")
+}
+
+func TestClosingsClosed(t *testing.T) {
+	svr, a := setupServerAndAPI(closingsClosed)
+	defer svr.Close()
+
+	closings, err := a.Closings("someKrazyChannel", ClosingsClosed)
+
+	assert.Nil(t, err, "err should be nil")
+	assert.Equal(t, 4, len(closings.ClosedInstitutions), "should have found 4 institutions")
+}
+
 func setupServerAndAPI(cannedResponse string) (*httptest.Server, API) {
 	testSvr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/xml")

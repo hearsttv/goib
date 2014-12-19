@@ -24,6 +24,17 @@ const (
 	AudioType = "AUDIO"
 	// ExternalType external content item type
 	ExternalType = "EXTERNAL_CONTENT"
+	// ClosingsType item type
+	ClosingsType = "CLOSINGS"
+)
+
+type ClosingsFilter string
+
+const (
+	ClosingsAll    ClosingsFilter = "all"
+	ClosingsClosed ClosingsFilter = "closed"
+	ClosingsCount  ClosingsFilter = "count"
+	ClosingsInst   ClosingsFilter = "institution"
 )
 
 // Receiver captures a type-agnostic representation of an API response as a
@@ -305,4 +316,24 @@ func (e *ExternalContent) GetTeaserTitle() string {
 type CopyrightObject struct {
 	Name string `json:"name"`
 	Text string `json:"text"`
+}
+
+type ClosingsResponse struct {
+	Count              ClsCount         `json:"count"`
+	Institutions       []ClsInstitution `json:"institutions"`
+	ClosedInstitutions []ClsInstitution `json:"closed_institutions"`
+}
+
+type ClsCount struct {
+	Total           int   `json:"total"`
+	PublicationDate int64 `json:"publication_date"`
+}
+
+type ClsInstitution struct {
+	Name            string `json:"name"`
+	PublicationDate int64  `json:"publication_date"`
+	City            string `json:"city"`
+	County          string `json:"county"`
+	State           string `json:"state"`
+	ProviderID      string `json:"provider_id"`
 }
