@@ -77,6 +77,8 @@ type Item interface {
 	GetType() ItemType
 	GetContentID() int
 	GetTeaserTitle() string
+	GetTeaserText() string
+	GetPublicationDate() int64
 }
 
 // Collection represents a collection of IB Items and metadata about those items
@@ -106,6 +108,14 @@ func (c *Collection) GetTeaserTitle() string {
 	return c.TeaserTitle
 }
 
+func (c *Collection) GetTeaserText() string {
+	return c.TeaserText
+}
+
+func (c *Collection) GetPublicationDate() int64 {
+	return 0 // collections do not have pub dates
+}
+
 // Article represents an IB article
 type Article struct {
 	ContentID       int      `json:"content_id"`
@@ -132,6 +142,14 @@ func (a *Article) GetTeaserTitle() string {
 	return a.TeaserTitle
 }
 
+func (a *Article) GetTeaserText() string {
+	return a.TeaserText
+}
+
+func (a *Article) GetPublicationDate() int64 {
+	return a.PublicationDate
+}
+
 // Video represents an IB video
 type Video struct {
 	ContentID       int           `json:"content_id"`
@@ -154,6 +172,14 @@ func (v *Video) GetContentID() int {
 
 func (v *Video) GetTeaserTitle() string {
 	return v.TeaserTitle
+}
+
+func (v *Video) GetTeaserText() string {
+	return v.TeaserText
+}
+
+func (v *Video) GetPublicationDate() int64 {
+	return v.PublicationDate
 }
 
 // VideoFlavor represents a flavor (i.e. resolution) of an IB Video
@@ -197,6 +223,14 @@ func (i *Image) GetTeaserTitle() string {
 	return i.TeaserTitle
 }
 
+func (i *Image) GetTeaserText() string {
+	return i.TeaserText
+}
+
+func (i *Image) GetPublicationDate() int64 {
+	return i.PublicationDate
+}
+
 // ImageURL is a URL flavor for an image
 type ImageURL struct {
 	Version string `json:"version"`
@@ -232,6 +266,14 @@ func (g *Gallery) GetTeaserTitle() string {
 	return g.TeaserTitle
 }
 
+func (g *Gallery) GetTeaserText() string {
+	return g.TeaserText
+}
+
+func (g *Gallery) GetPublicationDate() int64 {
+	return g.PublicationDate
+}
+
 type Author struct {
 	FullName string `json:"full_name"`
 	Title    string `json:"title"`
@@ -257,6 +299,14 @@ func (a *Audio) GetTeaserTitle() string {
 	return a.TeaserTitle
 }
 
+func (a *Audio) GetTeaserText() string {
+	return ""
+}
+
+func (a *Audio) GetPublicationDate() int64 {
+	return 0
+}
+
 // Livestream represents a live stream
 // TODO: no idea what this looks like ATM
 type Livestream struct {
@@ -274,6 +324,14 @@ func (l *Livestream) GetContentID() int {
 
 func (l *Livestream) GetTeaserTitle() string {
 	return l.TeaserTitle
+}
+
+func (l *Livestream) GetTeaserText() string {
+	return ""
+}
+
+func (l *Livestream) GetPublicationDate() int64 {
+	return 0
 }
 
 // Map represents a map
@@ -294,6 +352,14 @@ func (m *Map) GetTeaserTitle() string {
 	return m.TeaserTitle
 }
 
+func (m *Map) GetTeaserText() string {
+	return ""
+}
+
+func (m *Map) GetPublicationDate() int64 {
+	return 0
+}
+
 // ExternalContent represents an external content object
 type ExternalContent struct {
 	ContentID       int    `json:"content_id"`
@@ -311,6 +377,14 @@ func (e *ExternalContent) GetContentID() int {
 
 func (e *ExternalContent) GetTeaserTitle() string {
 	return e.TeaserTitle
+}
+
+func (e *ExternalContent) GetTeaserText() string {
+	return ""
+}
+
+func (e *ExternalContent) GetPublicationDate() int64 {
+	return 0
 }
 
 type CopyrightObject struct {
