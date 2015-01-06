@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -118,6 +119,20 @@ func TestContentAPIShouldParseGalleryType(t *testing.T) {
 	assert.Equal(t, 29283428, g.ContentID, "expected COID 29283428 but got %d", g.ContentID)
 
 	assert.Equal(t, 53, len(g.Items), "expected 50 image items in gallery but got %d", len(g.Items))
+}
+
+func TestContentAPIShouldParseHTMLContentType(t *testing.T) {
+	svr, a := setupServerAndAPI(htmlContent)
+	defer svr.Close()
+
+	response, err := a.Content("someKrazyChannel", 12345, nil)
+	if err != nil {
+		t.Errorf("error getting HTML: %v", err)
+	}
+
+	h := response.(*HTMLContent)
+	assert.Equal(t, 14277264, h.ContentID, "expected COID 14277264 but got %d", h.ContentID)
+	assert.True(t, strings.HasPrefix(h.Code, "\n\n<!-- Slideshow Widget"), "code field should be populated")
 }
 
 func TestShouldUnmarshallArticleMedia(t *testing.T) {

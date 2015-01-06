@@ -26,6 +26,8 @@ const (
 	ExternalType = "EXTERNAL_CONTENT"
 	// ClosingsType item type
 	ClosingsType = "CLOSINGS"
+	// HTMLType item type
+	HTMLType = "HTML"
 )
 
 type ClosingsFilter string
@@ -69,6 +71,7 @@ type Receiver struct {
 	Copyright        string              `json:"copyright"`
 	CopyrightObjects []CopyrightObject   `json:"copyright_objects"`
 	ExternalContent  string              `json:"external_content"`
+	Code             string              `json:"code"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -384,6 +387,32 @@ func (e *ExternalContent) GetTeaserText() string {
 }
 
 func (e *ExternalContent) GetPublicationDate() int64 {
+	return 0
+}
+
+// HTMLContent represents a content object that contains a raw HTML payload
+type HTMLContent struct {
+	ContentID int    `json:"content_id"`
+	Code      string `json:"code"`
+}
+
+func (h *HTMLContent) GetType() ItemType {
+	return HTMLType
+}
+
+func (h *HTMLContent) GetContentID() int {
+	return h.ContentID
+}
+
+func (h *HTMLContent) GetTeaserTitle() string {
+	return ""
+}
+
+func (h *HTMLContent) GetTeaserText() string {
+	return ""
+}
+
+func (h *HTMLContent) GetPublicationDate() int64 {
 	return 0
 }
 

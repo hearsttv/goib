@@ -1279,3 +1279,38 @@ var closingsAll = `
   "type" : "CLOSINGS"
 }
 `
+var htmlContent = `
+{
+  "type" : "HTML",
+  "hash" : "v4bd9sz",
+  "content_id" : 14277264,
+  "content_name" : "Breaking News u local Object",
+  "navigation_context" : [ "WESH Home", "u local" ],
+  "analytics_category" : "ulocal",
+  "advertising_category" : "ulocal",
+  "title" : null,
+  "valid_from" : 2700000,
+  "valid_to" : 4105144800,
+  "editorial_comment" : null,
+  "period" : "",
+  "keywords" : "",
+  "url" : "http://www.wesh.com/ulocal/14277264",
+  "canonical_url" : "http://www.wesh.com/ulocal/-/11787786/14277264/-/sfa4t3/-/index.html",
+  "teaser_title" : "",
+  "teaser_text" : null,
+  "teaser_image" : null,
+  "media" : [ ],
+  "author_objects" : [ ],
+  "author" : "",
+  "categories" : [ ],
+  "creation_date" : 1338314748,
+  "copyright_objects" : [ ],
+  "copyright" : "",
+  "publication_date" : 1407955223,
+  "struct" : [ {
+  } ],
+  "code" : "\n\n<!-- Slideshow Widget Powered by Filemobile -->\n\n\n\n<div data-widgetid=\"7333\" class=\"fmSlideshow\" data-groupid=\"91585\" data-channelid=\"25047\" data-collectionid=\"\" data-callfunction=\"ibsys_filemobile_rotateAd_newEmbed[]\" data-mediatitlelink=\"http://ulocal.wesh.com/mediadetail/\" data-userinfolink=\"http://ulocal.wesh.com/profile/\" data-width=\"\" ></div>\n\n\n\n<script src=\"//1147.filemobile.com/static/widgets/slideshow/slideshow_embed.min.js\" class=\"fmScript\" type=\"text/javascript\"></script>",
+  "external_url" : "",
+  "external_id" : ""
+}
+`
