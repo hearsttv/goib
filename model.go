@@ -245,16 +245,16 @@ type ImageURL struct {
 
 // Gallery represents an image gallery
 type Gallery struct {
-	ContentID       int           `json:"content_id"`
-	TeaserTitle     string        `json:"teaser_title"`
-	TeaserText      string        `json:"teaser_text"`
-	TeaserImage     string        `json:"teaser_image"`
-	PublicationDate int64         `json:"publication_date"`
-	Keywords        string        `json:"keywords"`
-	Title           string        `json:"title"`
-	Subheadline     string        `json:"subheadline"`
-	Media           []interface{} `json:"media"`
-	Items           []interface{} `json:"items"`
+	ContentID       int    `json:"content_id"`
+	TeaserTitle     string `json:"teaser_title"`
+	TeaserText      string `json:"teaser_text"`
+	TeaserImage     string `json:"teaser_image"`
+	PublicationDate int64  `json:"publication_date"`
+	Keywords        string `json:"keywords"`
+	Title           string `json:"title"`
+	Subheadline     string `json:"subheadline"`
+	Media           []Item `json:"media"`
+	Items           []Item `json:"items"`
 }
 
 func (g *Gallery) GetType() ItemType {
