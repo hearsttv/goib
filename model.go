@@ -74,6 +74,7 @@ type Receiver struct {
 	CopyrightObjects []CopyrightObject   `json:"copyright_objects"`
 	ExternalContent  string              `json:"external_content"`
 	Code             string              `json:"code"`
+	CanonicalURL     string              `json:"canonical_url"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -133,6 +134,7 @@ type Article struct {
 	Text            string   `json:"article_text"`
 	Authors         []Author `json:"author_objects"`
 	Media           []Item   `json:"media"`
+	CanonicalURL    string   `json:"canonical_url"`
 }
 
 func (a *Article) GetType() ItemType {
@@ -165,6 +167,7 @@ type Video struct {
 	Title           string        `json:"title"`
 	Subheadline     string        `json:"subheadline"`
 	Flavors         []VideoFlavor `json:"flavors"`
+	CanonicalURL    string        `json:"canonical_url"`
 }
 
 func (v *Video) GetType() ItemType {
@@ -214,6 +217,7 @@ type Image struct {
 	URLs             []ImageURL        `json:"urls"`
 	Copyright        string            `json:"copyright"`
 	CopyrightObjects []CopyrightObject `json:"copyright_objects"`
+	CanonicalURL     string            `json:"canonical_url"`
 }
 
 func (i *Image) GetType() ItemType {
@@ -257,6 +261,7 @@ type Gallery struct {
 	Subheadline     string `json:"subheadline"`
 	Media           []Item `json:"media"`
 	Items           []Item `json:"items"`
+	CanonicalURL    string `json:"canonical_url"`
 }
 
 func (g *Gallery) GetType() ItemType {
@@ -288,8 +293,9 @@ type Author struct {
 // Audio represents an audio clip
 // TODO: no idea what this looks like ATM
 type Audio struct {
-	ContentID   int    `json:"content_id"`
-	TeaserTitle string `json:"teaser_title"`
+	ContentID    int    `json:"content_id"`
+	TeaserTitle  string `json:"teaser_title"`
+	CanonicalURL string `json:"canonical_url"`
 }
 
 func (a *Audio) GetType() ItemType {
@@ -315,8 +321,9 @@ func (a *Audio) GetPublicationDate() int64 {
 // Livestream represents a live stream
 // TODO: no idea what this looks like ATM
 type Livestream struct {
-	ContentID   int    `json:"content_id"`
-	TeaserTitle string `json:"teaser_title"`
+	ContentID    int    `json:"content_id"`
+	TeaserTitle  string `json:"teaser_title"`
+	CanonicalURL string `json:"canonical_url"`
 }
 
 func (l *Livestream) GetType() ItemType {
@@ -341,8 +348,9 @@ func (l *Livestream) GetPublicationDate() int64 {
 
 // Map represents a map
 type Map struct {
-	ContentID   int    `json:"content_id"`
-	TeaserTitle string `json:"teaser_title"`
+	ContentID    int    `json:"content_id"`
+	TeaserTitle  string `json:"teaser_title"`
+	CanonicalURL string `json:"canonical_url"`
 }
 
 func (m *Map) GetType() ItemType {
