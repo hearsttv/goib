@@ -28,3 +28,17 @@ func (m *Item) GetTeaserTitle() string {
 
 	return r0
 }
+func (m *Item) GetTeaserText() string {
+	ret := m.Called()
+
+	r0 := ret.Get(0).(string)
+
+	return r0
+}
+func (m *Item) GetPublicationDate() int64 {
+	ret := m.Called()
+
+	r0 := ret.Get(0).(int64)
+
+	return r0
+}

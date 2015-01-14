@@ -26,8 +26,10 @@ const (
 	ExternalType = "EXTERNAL_CONTENT"
 	// ClosingsType item type
 	ClosingsType = "CLOSINGS"
-	// HTMLType item type
+	// HTMLType HTML item type
 	HTMLType = "HTML"
+	// SettingsType is someone's idiot idea of a joke
+	SettingsType = ""
 )
 
 type ClosingsFilter string
@@ -439,4 +441,30 @@ type ClsInstitution struct {
 	County          string `json:"county"`
 	State           string `json:"state"`
 	ProviderID      string `json:"provider_id"`
+}
+
+// Settings represents a collection of settings
+type Settings struct {
+	ContentID int               `json:"content_id"`
+	Settings  map[string]string `json:"settings"`
+}
+
+func (c *Settings) GetType() ItemType {
+	return SettingsType
+}
+
+func (c *Settings) GetContentID() int {
+	return c.ContentID
+}
+
+func (c *Settings) GetTeaserTitle() string {
+	return ""
+}
+
+func (c *Settings) GetTeaserText() string {
+	return ""
+}
+
+func (c *Settings) GetPublicationDate() int64 {
+	return 0 // collections do not have pub dates
 }

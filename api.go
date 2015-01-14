@@ -223,6 +223,8 @@ func unmarshalReceiver(r Receiver) (Item, error) {
 		return unmarshalExternalContent(r), nil
 	case HTMLType:
 		return unmarshalHTMLContent(r), nil
+	case SettingsType:
+		return unmarshalSettings(r), nil
 	default:
 		return nil, fmt.Errorf("unknonwn response type: %s", r.Type)
 	}
@@ -372,4 +374,14 @@ func getTeaserTitle(r *Receiver) (title string) {
 		title = r.Title
 	}
 	return title
+}
+
+func unmarshalSettings(r Receiver) (s *Settings) {
+	s = &Settings{}
+	s.ContentID = r.ContentID
+	if len(r.Settings) > 0 {
+		s.Settings = r.Settings[0]
+	}
+
+	return s
 }

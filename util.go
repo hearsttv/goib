@@ -148,6 +148,8 @@ func GetSubcollections(root Item) (result []*Collection) {
 func GetSettings(i Item) (result map[string]string) {
 	if i.GetType() == CollectionType {
 		result = i.(*Collection).Settings
+	} else if i.GetType() == SettingsType {
+		result = i.(*Settings).Settings
 	}
 	if result == nil {
 		result = make(map[string]string)
