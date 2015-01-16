@@ -1314,3 +1314,49 @@ var htmlContent = `
   "external_id" : ""
 }
 `
+
+var mapJSON = `
+{
+  "type" : "MAP",
+  "hash" : "olcih6z",
+  "content_id" : 19969494,
+  "content_name" : "La Crosse Avenue",
+  "navigation_context" : [ "WESH Home", "News", "Local News", "Orange County News" ],
+  "analytics_category" : "news",
+  "advertising_category" : "news",
+  "title" : null,
+  "valid_from" : 2700000,
+  "valid_to" : 4105144800,
+  "editorial_comment" : null,
+  "period" : "",
+  "keywords" : "",
+  "url" : "http://www.wesh.com/news/central-florida/orange-county/19969494",
+  "canonical_url" : "",
+  "teaser_title" : "La Crosse Avenue",
+  "teaser_text" : null,
+  "teaser_image" : null,
+  "media" : [ ],
+  "author_objects" : [ ],
+  "author" : "",
+  "categories" : [ ],
+  "creation_date" : 1367425940,
+  "copyright_objects" : [ ],
+  "copyright" : "",
+  "publication_date" : 1367425940,
+  "struct" : [ {
+    } ],
+    "subheadline" : "",
+    "map_key" : "ejlk",
+    "map_token" : "L7UG8nkGDcxwmabGqodNad/gsOXJln7a1DqwOMI9Hm0=",
+    "align" : "",
+    "static_map" : "http://www.mapquest.com/embed?icid=mqdist_mb_19969494&c=ejlk&maptype=map&zm=15&cr=28.571309999999993,-81.183589&projection=sm&showScale=false&format=static&width=350&height=310",
+    "static_height" : 310,
+    "static_width" : 350,
+    "interactive_map" : "http://www.mapquest.com/embed?icid=mqdist_mb_19969494&c=ejlk&maptype=map&zm=15&cr=28.571309999999993,-81.183589&projection=sm&showScale=false",
+    "interactive_height" : 360,
+    "interactive_width" : 640
+  }
+`
+var expectedMapTeaserTitle = "La Crosse Avenue"
+var expectedStaticMap = `http://www.mapquest.com/embed?icid=mqdist_mb_19969494&c=ejlk&maptype=map&zm=15&cr=28.571309999999993,-81.183589&projection=sm&showScale=false&format=static&width=350&height=310`
+var expectedInteractiveMap = `http://www.mapquest.com/embed?icid=mqdist_mb_19969494&c=ejlk&maptype=map&zm=15&cr=28.571309999999993,-81.183589&projection=sm&showScale=false`

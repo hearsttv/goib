@@ -76,6 +76,8 @@ type Receiver struct {
 	Code             string              `json:"code"`
 	CanonicalURL     string              `json:"canonical_url"`
 	URL              string              `json:"url"`
+	StaticMap        string              `json:"static_map"`
+	InteractiveMap   string              `json:"interactive_map"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -354,9 +356,10 @@ func (l *Livestream) GetPublicationDate() int64 {
 
 // Map represents a map
 type Map struct {
-	ContentID    int    `json:"content_id"`
-	TeaserTitle  string `json:"teaser_title"`
-	CanonicalURL string `json:"canonical_url"`
+	ContentID      int    `json:"content_id"`
+	TeaserTitle    string `json:"teaser_title"`
+	StaticMap      string `json:"static_map"`
+	InteractiveMap string `json:"interactive_map"`
 }
 
 func (m *Map) GetType() ItemType {

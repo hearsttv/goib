@@ -190,6 +190,22 @@ func TestClosingsClosed(t *testing.T) {
 	assert.Equal(t, 4, len(closings.ClosedInstitutions), "should have found 4 institutions")
 }
 
+func TestContentAPIShouldParseMapType(t *testing.T) {
+	svr, a := setupServerAndAPI(mapJSON)
+	defer svr.Close()
+
+	response, err := a.Content("someKrazyChannel", 12345, nil)
+	if err != nil {
+		t.Errorf("error getting map: %v", err)
+	}
+
+	m := response.(*Map)
+	assert.Equal(t, 19969494, m.ContentID)
+	assert.Equal(t, expectedStaticMap, m.StaticMap)
+	assert.Equal(t, expectedInteractiveMap, m.InteractiveMap)
+	assert.Equal(t, expectedMapTeaserTitle, m.TeaserTitle)
+}
+
 func setupServerAndAPI(cannedResponse string) (*httptest.Server, API) {
 	testSvr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/xml")

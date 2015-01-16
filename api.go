@@ -219,6 +219,8 @@ func unmarshalReceiver(r Receiver) (Item, error) {
 		return unmarshalImage(r), nil
 	case GalleryType:
 		return unmarshalGallery(r), nil
+	case MapType:
+		return unmarshalMap(r), nil
 	case ExternalType:
 		return unmarshalExternalContent(r), nil
 	case HTMLType:
@@ -318,6 +320,16 @@ func unmarshalGallery(r Receiver) (g *Gallery) {
 	}
 
 	return g
+}
+
+func unmarshalMap(r Receiver) (m *Map) {
+	m = &Map{}
+	m.ContentID = r.ContentID
+	m.TeaserTitle = getTeaserTitle(&r)
+	m.StaticMap = r.StaticMap
+	m.InteractiveMap = r.InteractiveMap
+
+	return m
 }
 
 func unmarshalCollection(r Receiver) (c *Collection) {
