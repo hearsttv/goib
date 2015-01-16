@@ -75,6 +75,7 @@ type Receiver struct {
 	ExternalContent  string              `json:"external_content"`
 	Code             string              `json:"code"`
 	CanonicalURL     string              `json:"canonical_url"`
+	URL              string              `json:"url"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -135,6 +136,7 @@ type Article struct {
 	Authors         []Author `json:"author_objects"`
 	Media           []Item   `json:"media"`
 	CanonicalURL    string   `json:"canonical_url"`
+	URL             string   `json:"url"`
 }
 
 func (a *Article) GetType() ItemType {
@@ -168,6 +170,7 @@ type Video struct {
 	Subheadline     string        `json:"subheadline"`
 	Flavors         []VideoFlavor `json:"flavors"`
 	CanonicalURL    string        `json:"canonical_url"`
+	URL             string        `json:"url"`
 }
 
 func (v *Video) GetType() ItemType {
@@ -262,6 +265,7 @@ type Gallery struct {
 	Media           []Item `json:"media"`
 	Items           []Item `json:"items"`
 	CanonicalURL    string `json:"canonical_url"`
+	URL             string `json:"url"`
 }
 
 func (g *Gallery) GetType() ItemType {
@@ -296,6 +300,7 @@ type Audio struct {
 	ContentID    int    `json:"content_id"`
 	TeaserTitle  string `json:"teaser_title"`
 	CanonicalURL string `json:"canonical_url"`
+	URL          string `json:"url"`
 }
 
 func (a *Audio) GetType() ItemType {
@@ -324,6 +329,7 @@ type Livestream struct {
 	ContentID    int    `json:"content_id"`
 	TeaserTitle  string `json:"teaser_title"`
 	CanonicalURL string `json:"canonical_url"`
+	URL          string `json:"url"`
 }
 
 func (l *Livestream) GetType() ItemType {
