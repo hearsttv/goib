@@ -1,6 +1,10 @@
 package goib
 
-import "strconv"
+import (
+	"strconv"
+
+	l5g "github.com/neocortical/log5go"
+)
 
 // ExtractMedia recursively scans the supplied object for simple (displayable) media types
 // A simple media item will produce a list containing that item. Collections and SearchResults
@@ -36,7 +40,7 @@ func extractMediaRecursive(input Item, media *[]Item) {
 			extractMediaRecursive(item, media)
 		}
 	default:
-		Log.Warn("unexpected type: %s", input.GetType())
+		log.Warn("unexpected type: %s", input.GetType())
 		break
 	}
 
@@ -88,7 +92,7 @@ func iterateMediaRecursive(node Item, parent *Collection, ch chan *MediaNode) {
 		}
 
 	default:
-		Log.Warn("unexpected type found during iteration: %s", node.GetType())
+		log.Warn("unexpected type found during iteration: %s", node.GetType())
 		break
 	}
 
@@ -179,4 +183,9 @@ func GetIntSetting(settings map[string]string, key string, dflt int) int {
 		return dflt
 	}
 	return result
+}
+
+// SetLog sets the package-level logger
+func SetLog(newLog l5g.Log5Go) {
+	log = newLog
 }
