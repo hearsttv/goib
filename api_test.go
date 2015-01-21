@@ -206,6 +206,33 @@ func TestContentAPIShouldParseMapType(t *testing.T) {
 	assert.Equal(t, expectedMapTeaserTitle, m.TeaserTitle)
 }
 
+func TestContentAPIShouldParsePersonType(t *testing.T) {
+	svr, a := setupServerAndAPI(personJSON)
+	defer svr.Close()
+
+	response, err := a.Content("someKrazyChannel", 12345, nil)
+	assert.Nil(t, err, "error getting person")
+
+	p := response.(*Person)
+	assert.Equal(t, 24416014, p.ContentID)
+	assert.Equal(t, expectedPersonFullName, p.FullName)
+	assert.Equal(t, expectedPersonEmail, p.Email)
+	assert.Equal(t, expectedPersonBlurb, p.Blurb)
+}
+
+func TestExternalContentStructPopulates(t *testing.T) {
+	svr, a := setupServerAndAPI(externalContentJSON)
+	defer svr.Close()
+
+	response, err := a.Entry("someKrazyChannel", "sumpin", nil)
+	assert.Nil(t, err, "error getting external content")
+
+	e := response.(*ExternalContent)
+	assert.NotNil(t, e.Struct)
+	assert.Equal(t, 1, len(e.Struct))
+	assert.NotNil(t, e.Struct["authors"])
+}
+
 func setupServerAndAPI(cannedResponse string) (*httptest.Server, API) {
 	testSvr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/xml")

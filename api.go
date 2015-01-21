@@ -225,6 +225,8 @@ func unmarshalReceiver(r Receiver) (Item, error) {
 		return unmarshalExternalContent(r), nil
 	case HTMLType:
 		return unmarshalHTMLContent(r), nil
+	case PersonType:
+		return unmarshalPerson(r), nil
 	case SettingsType:
 		return unmarshalSettings(r), nil
 	default:
@@ -264,6 +266,7 @@ func unmarshalVideo(r Receiver) (v *Video) {
 	v.TeaserText = r.TeaserText
 	v.TeaserImage = r.TeaserImage
 	v.PublicationDate = r.PublicationDate
+	v.Authors = r.AuthorObjects
 	v.Title = r.Title
 	v.Subheadline = r.Subheadline
 	v.Flavors = r.Flavors
@@ -280,6 +283,7 @@ func unmarshalImage(r Receiver) (i *Image) {
 	i.TeaserText = r.TeaserText
 	i.TeaserImage = r.TeaserImage
 	i.PublicationDate = r.PublicationDate
+	i.Authors = r.AuthorObjects
 	i.Title = r.Title
 	i.Caption = r.Caption
 	i.Author = r.Author
@@ -298,6 +302,7 @@ func unmarshalGallery(r Receiver) (g *Gallery) {
 	g.TeaserText = r.TeaserText
 	g.TeaserImage = r.TeaserImage
 	g.PublicationDate = r.PublicationDate
+	g.Authors = r.AuthorObjects
 	g.Title = r.Title
 	g.Subheadline = r.Subheadline
 	g.CanonicalURL = r.CanonicalURL
@@ -377,6 +382,9 @@ func unmarshalExternalContent(r Receiver) (e *ExternalContent) {
 	e.ContentID = r.ContentID
 	e.TeaserTitle = getTeaserTitle(&r)
 	e.ExternalContent = r.ExternalContent
+	if r.Struct != nil && len(r.Struct) > 0 {
+		e.Struct = r.Struct[0]
+	}
 	return e
 }
 
@@ -403,4 +411,20 @@ func unmarshalSettings(r Receiver) (s *Settings) {
 	}
 
 	return s
+}
+
+func unmarshalPerson(r Receiver) (p *Person) {
+	p = &Person{}
+	p.ContentID = r.ContentID
+	p.FullName = r.FullName
+	p.Blurb = r.TeaserText
+	p.TeaserImage = r.TeaserImage
+	p.PublicationDate = r.PublicationDate
+	p.Bio = r.Bio
+	p.Email = r.Email
+	p.CanonicalURL = r.CanonicalURL
+	p.URL = r.URL
+	p.Photo = r.Photo
+
+	return p
 }

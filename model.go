@@ -28,6 +28,8 @@ const (
 	ClosingsType = "CLOSINGS"
 	// HTMLType HTML item type
 	HTMLType = "HTML"
+	// PersonType Perosn (AKA Author) item type
+	PersonType = "PERSON"
 	// SettingsType is someone's idiot idea of a joke
 	SettingsType = ""
 )
@@ -47,37 +49,42 @@ const (
 // This object should not be used outside of the IB API classes. It is exposed
 // only to facilitate JSON unmarshalling.
 type Receiver struct {
-	Type             ItemType            `json:"type"`
-	ContentID        int                 `json:"content_id"`
-	ContentName      string              `json:"content_name"`
-	CollectionName   string              `json:"collection_name"`
-	Items            []Receiver          `json:"items"`
-	TeaserTitle      string              `json:"teaser_title"`
-	TeaserText       string              `json:"teaser_text"`
-	TeaserImage      string              `json:"teaser_image"`
-	PublicationDate  int64               `json:"publication_date"`
-	Title            string              `json:"title"`
-	Subheadline      string              `json:"subheadline"`
-	Text             string              `json:"article_text"`
-	Author           string              `json:"author"`
-	Flavors          []VideoFlavor       `json:"flavors"`
-	StartIndex       int                 `json:"start_index"`
-	TotalCount       int                 `json:"total_count"`
-	Keywords         string              `json:"keywords"`
-	AltText          string              `json:"alt_text"`
-	Caption          string              `json:"caption"`
-	URLs             []ImageURL          `json:"urls"`
-	Media            []Receiver          `json:"media"`
-	AuthorObjects    []Author            `json:"author_objects"`
-	Settings         []map[string]string `json:"settings"`
-	Copyright        string              `json:"copyright"`
-	CopyrightObjects []CopyrightObject   `json:"copyright_objects"`
-	ExternalContent  string              `json:"external_content"`
-	Code             string              `json:"code"`
-	CanonicalURL     string              `json:"canonical_url"`
-	URL              string              `json:"url"`
-	StaticMap        string              `json:"static_map"`
-	InteractiveMap   string              `json:"interactive_map"`
+	Type             ItemType                 `json:"type"`
+	ContentID        int                      `json:"content_id"`
+	ContentName      string                   `json:"content_name"`
+	CollectionName   string                   `json:"collection_name"`
+	Items            []Receiver               `json:"items"`
+	TeaserTitle      string                   `json:"teaser_title"`
+	TeaserText       string                   `json:"teaser_text"`
+	TeaserImage      string                   `json:"teaser_image"`
+	PublicationDate  int64                    `json:"publication_date"`
+	Title            string                   `json:"title"`
+	Subheadline      string                   `json:"subheadline"`
+	Text             string                   `json:"article_text"`
+	Author           string                   `json:"author"`
+	Flavors          []VideoFlavor            `json:"flavors"`
+	StartIndex       int                      `json:"start_index"`
+	TotalCount       int                      `json:"total_count"`
+	Keywords         string                   `json:"keywords"`
+	AltText          string                   `json:"alt_text"`
+	Caption          string                   `json:"caption"`
+	URLs             []ImageURL               `json:"urls"`
+	Media            []Receiver               `json:"media"`
+	AuthorObjects    []Person                 `json:"author_objects"`
+	Settings         []map[string]string      `json:"settings"`
+	Copyright        string                   `json:"copyright"`
+	CopyrightObjects []CopyrightObject        `json:"copyright_objects"`
+	ExternalContent  string                   `json:"external_content"`
+	Code             string                   `json:"code"`
+	CanonicalURL     string                   `json:"canonical_url"`
+	URL              string                   `json:"url"`
+	StaticMap        string                   `json:"static_map"`
+	InteractiveMap   string                   `json:"interactive_map"`
+	Email            string                   `json:"email"`
+	Bio              string                   `json:"biography"`
+	FullName         string                   `json:"full_name"`
+	Struct           []map[string]interface{} `json:"struct"`
+	Photo            *Image                   `json:"photo"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -135,7 +142,7 @@ type Article struct {
 	Title           string   `json:"title"`
 	Subheadline     string   `json:"subheadline"`
 	Text            string   `json:"article_text"`
-	Authors         []Author `json:"author_objects"`
+	Authors         []Person `json:"author_objects"`
 	Media           []Item   `json:"media"`
 	CanonicalURL    string   `json:"canonical_url"`
 	URL             string   `json:"url"`
@@ -168,6 +175,7 @@ type Video struct {
 	TeaserText      string        `json:"teaser_text"`
 	TeaserImage     string        `json:"teaser_image"`
 	PublicationDate int64         `json:"publication_date"`
+	Authors         []Person      `json:"author_objects"`
 	Title           string        `json:"title"`
 	Subheadline     string        `json:"subheadline"`
 	Flavors         []VideoFlavor `json:"flavors"`
@@ -217,6 +225,7 @@ type Image struct {
 	AltText          string            `json:"alt_text"`
 	Caption          string            `json:"caption"`
 	Author           string            `json:"author"`
+	Authors          []Person          `json:"author_objects"`
 	Title            string            `json:"title"`
 	Keywords         string            `json:"keywords"`
 	URLs             []ImageURL        `json:"urls"`
@@ -256,18 +265,19 @@ type ImageURL struct {
 
 // Gallery represents an image gallery
 type Gallery struct {
-	ContentID       int    `json:"content_id"`
-	TeaserTitle     string `json:"teaser_title"`
-	TeaserText      string `json:"teaser_text"`
-	TeaserImage     string `json:"teaser_image"`
-	PublicationDate int64  `json:"publication_date"`
-	Keywords        string `json:"keywords"`
-	Title           string `json:"title"`
-	Subheadline     string `json:"subheadline"`
-	Media           []Item `json:"media"`
-	Items           []Item `json:"items"`
-	CanonicalURL    string `json:"canonical_url"`
-	URL             string `json:"url"`
+	ContentID       int      `json:"content_id"`
+	TeaserTitle     string   `json:"teaser_title"`
+	TeaserText      string   `json:"teaser_text"`
+	TeaserImage     string   `json:"teaser_image"`
+	PublicationDate int64    `json:"publication_date"`
+	Authors         []Person `json:"author_objects"`
+	Keywords        string   `json:"keywords"`
+	Title           string   `json:"title"`
+	Subheadline     string   `json:"subheadline"`
+	Media           []Item   `json:"media"`
+	Items           []Item   `json:"items"`
+	CanonicalURL    string   `json:"canonical_url"`
+	URL             string   `json:"url"`
 }
 
 func (g *Gallery) GetType() ItemType {
@@ -290,19 +300,14 @@ func (g *Gallery) GetPublicationDate() int64 {
 	return g.PublicationDate
 }
 
-type Author struct {
-	FullName string `json:"full_name"`
-	Title    string `json:"title"`
-	Email    string `json:"email"`
-}
-
 // Audio represents an audio clip
 // TODO: no idea what this looks like ATM
 type Audio struct {
-	ContentID    int    `json:"content_id"`
-	TeaserTitle  string `json:"teaser_title"`
-	CanonicalURL string `json:"canonical_url"`
-	URL          string `json:"url"`
+	ContentID    int      `json:"content_id"`
+	TeaserTitle  string   `json:"teaser_title"`
+	Authors      []Person `json:"author_objects"`
+	CanonicalURL string   `json:"canonical_url"`
+	URL          string   `json:"url"`
 }
 
 func (a *Audio) GetType() ItemType {
@@ -328,10 +333,11 @@ func (a *Audio) GetPublicationDate() int64 {
 // Livestream represents a live stream
 // TODO: no idea what this looks like ATM
 type Livestream struct {
-	ContentID    int    `json:"content_id"`
-	TeaserTitle  string `json:"teaser_title"`
-	CanonicalURL string `json:"canonical_url"`
-	URL          string `json:"url"`
+	ContentID    int      `json:"content_id"`
+	TeaserTitle  string   `json:"teaser_title"`
+	Authors      []Person `json:"author_objects"`
+	CanonicalURL string   `json:"canonical_url"`
+	URL          string   `json:"url"`
 }
 
 func (l *Livestream) GetType() ItemType {
@@ -384,9 +390,10 @@ func (m *Map) GetPublicationDate() int64 {
 
 // ExternalContent represents an external content object
 type ExternalContent struct {
-	ContentID       int    `json:"content_id"`
-	TeaserTitle     string `json:"teaser_title"`
-	ExternalContent string `json:"external_content"`
+	ContentID       int                    `json:"content_id"`
+	TeaserTitle     string                 `json:"teaser_title"`
+	ExternalContent string                 `json:"external_content"`
+	Struct          map[string]interface{} `json:"struct"`
 }
 
 func (e *ExternalContent) GetType() ItemType {
@@ -433,6 +440,44 @@ func (h *HTMLContent) GetTeaserText() string {
 
 func (h *HTMLContent) GetPublicationDate() int64 {
 	return 0
+}
+
+// Person represents an IB person
+type Person struct {
+	ContentID        int    `json:"content_id"`
+	Blurb            string `json:"teaser_text"`
+	FullName         string `json:"full_name"`
+	TeaserImage      string `json:"teaser_image"`
+	PublicationDate  int64  `json:"publication_date"`
+	Bio              string `json:"biography"`
+	Photo            *Image `json:"photo,omitempty"`
+	Email            string `json:"email"`
+	FacebookUsername string `json:"facebook_username"`
+	TwitterUsername  string `json:"twitter_username"`
+	GPlusUID         int64  `json:"gplus_uid"`
+	StoriesCOID      int    `json:"recent_stories"`
+	CanonicalURL     string `json:"canonical_url"`
+	URL              string `json:"url"`
+}
+
+func (p *Person) GetType() ItemType {
+	return PersonType
+}
+
+func (p *Person) GetContentID() int {
+	return p.ContentID
+}
+
+func (p *Person) GetTeaserTitle() string {
+	return p.FullName
+}
+
+func (p *Person) GetTeaserText() string {
+	return p.Blurb
+}
+
+func (p *Person) GetPublicationDate() int64 {
+	return p.PublicationDate
 }
 
 type CopyrightObject struct {

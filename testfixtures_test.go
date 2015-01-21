@@ -1360,3 +1360,143 @@ var mapJSON = `
 var expectedMapTeaserTitle = "La Crosse Avenue"
 var expectedStaticMap = `http://www.mapquest.com/embed?icid=mqdist_mb_19969494&c=ejlk&maptype=map&zm=15&cr=28.571309999999993,-81.183589&projection=sm&showScale=false&format=static&width=350&height=310`
 var expectedInteractiveMap = `http://www.mapquest.com/embed?icid=mqdist_mb_19969494&c=ejlk&maptype=map&zm=15&cr=28.571309999999993,-81.183589&projection=sm&showScale=false`
+
+var personJSON = `
+{
+  "type" : "PERSON",
+  "hash" : "31hq4a",
+  "content_id" : 24416014,
+  "content_name" : "Jeff Cousins",
+  "navigation_context" : [ "Hearst Shared Content Parent" ],
+  "analytics_category" : "home",
+  "advertising_category" : "homepage",
+  "title" : "Jeff Cousins",
+  "valid_from" : 2700000,
+  "valid_to" : 4105144800,
+  "editorial_comment" : null,
+  "period" : "",
+  "keywords" : "",
+  "url" : "http://www.wesh.com/Jeff-Cousins/24416014",
+  "canonical_url" : "",
+  "teaser_title" : "Jeff Cousins",
+  "teaser_text" : "<p>Jeff Cousins is a Digital Managing Editor for Hearst Television.</p>",
+  "teaser_image" : "http://www.wesh.com/image/view/-/24415448/highRes/3/-/maxh/225/maxw/300/-/g9o4b8z/-/Jeff-headshot.jpg",
+  "media" : [ {
+    "type" : "IMAGE",
+    "hash" : "31h50p",
+    "content_id" : 24415448,
+    "publication_date" : 1392150701,
+    "teaser_title" : "Jeff Cousins",
+    "teaser_text" : null,
+    "teaser_image" : "http://www.wesh.com/image/view/-/24415448/highRes/3/-/maxh/225/maxw/300/-/g9o4b8z/-/Jeff-headshot.jpg"
+  } ],
+  "author_objects" : [ ],
+  "author" : "",
+  "categories" : [ ],
+  "creation_date" : 1392151947,
+  "copyright_objects" : [ ],
+  "copyright" : "",
+  "publication_date" : 1413748843,
+  "struct" : [ {
+  } ],
+  "full_name" : "Jeff Cousins",
+  "email" : "jjcousins@hearst.com",
+  "photo" : [ {
+    "type" : "IMAGE",
+    "hash" : "31h50p",
+    "content_id" : 24415448,
+    "publication_date" : 1392150701,
+    "teaser_title" : "Jeff Cousins",
+    "teaser_text" : null,
+    "teaser_image" : "http://www.wesh.com/image/view/-/24415448/highRes/3/-/maxh/225/maxw/300/-/g9o4b8z/-/Jeff-headshot.jpg"
+  } ],
+  "biography" : "<p>Jeff Cousins is a Digital Managing Editor for Hearst Television.</p><p>He has more than 20 years of experience in broadcast journalism. His career began while he attended Daytona Beach Community College and obtained an internship at WESH-TV, the NBC affiliate in Orlando. He was hired by the station in 1989 as a production assistant and tape editor and was promoted to morning news producer in 1994.</p><p>After five years of producing experience, Jeff moved into the growing field of online journalism. He was instrumental in the launch of WESH-TV's Web site, WESH.com, and worked closely with Internet Broadcasting in the content and design of the site. When the site launched on Feb. 16, 2000, Jeff was named senior editor and acted as a liaison between the station staff and Internet Broadcasting.</p><p>In 2001, Jeff was promoted to managing editor of the Web site and grew the Web site and relationship between the station and Internet Broadcasting. The warm relationship with WESH was instrumental in becoming the first site in the network to launch an NBC Weather Plus Web page. The station was also chosen as the test site for inline video and an upgraded platform.</p><p>Although Hurricane Katrina hit many miles from Central Florida in 2005, Jeff played a vital role in the online reporting of the disaster for WDSU-TV in New Orleans. When the storm hit the Gulf Coast, he was chosen to manage online content for WDSU.com when the station was evacuated.</p><p>Jeff was named in the trade publication The Rundown as the Internet Broadcasting \"King of Hurricanes\" after proving himself as a valuable resource for the network during the trio of hurricanes that slammed into Central Florida one year earlier.</p><p>Jeff graduated from the University of Central Florida and Daytona Beach Community College. He lives in Winter Springs with his wife, Paige,  and their 12-year-old son, J.P.</p><p>Jeff also serves as chairman of the Family Advisory Council at Florida Hospital for Children in Orlando.</p><p><a href=\"https://plus.google.com/u/0/102176618193487396843/posts\" target=\"_blank\">Google+</a></p>"
+}
+`
+
+var expectedPersonFullName = "Jeff Cousins"
+var expectedPersonEmail = "jjcousins@hearst.com"
+var expectedPersonBlurb = "<p>Jeff Cousins is a Digital Managing Editor for Hearst Television.</p>"
+
+var externalContentJSON = `
+{
+  "type" : "EXTERNAL_CONTENT",
+  "hash" : "uohq5jz",
+  "content_id" : 30581098,
+  "content_name" : "Author Social Dictionary",
+  "navigation_context" : [ "WESH Home" ],
+  "analytics_category" : "home",
+  "advertising_category" : "homepage",
+  "title" : null,
+  "valid_from" : 2700000,
+  "valid_to" : 4105144800,
+  "editorial_comment" : null,
+  "period" : "",
+  "keywords" : "",
+  "url" : "",
+  "canonical_url" : "",
+  "teaser_title" : "",
+  "teaser_text" : null,
+  "teaser_image" : null,
+  "media" : [ ],
+  "author_objects" : [ ],
+  "author" : "",
+  "categories" : [ ],
+  "creation_date" : 1420668129,
+  "copyright_objects" : [ ],
+  "copyright" : "",
+  "publication_date" : 1420729872,
+  "struct" : [ {
+    "authors" : [ {
+      "13467816" : {
+        "twitter" : "amandaoberwesh",
+        "facebook-username" : "AmandaOberWESH",
+        "featuredplatform" : "twitter",
+        "query" : "30593474",
+        "facebook-id" : "428187603992359",
+        "googleplus" : "113290314755025840568"
+      }
+      }, {
+        "13467452" : {
+          "twitter" : "amandaoberwesh",
+          "facebook-username" : "AmandaOberWESH",
+          "featuredplatform" : "twitter",
+          "query" : "30593474",
+          "facebook-id" : "428187603992359",
+          "googleplus" : "113290314755025840568"
+        }
+        }, {
+          "13468382" : {
+            "twitter" : "amandaoberwesh",
+            "facebook-username" : "AmandaOberWESH",
+            "featuredplatform" : "twitter",
+            "query" : "30593474",
+            "facebook-id" : "428187603992359",
+            "googleplus" : "113290314755025840568"
+          }
+          }, {
+            "13467274" : {
+              "twitter" : "amandaoberwesh",
+              "facebook-username" : "AmandaOberWESH",
+              "featuredplatform" : "twitter",
+              "query" : "30593474",
+              "facebook-id" : "428187603992359",
+              "googleplus" : "113290314755025840568"
+            }
+            }, {
+              "13466630" : {
+                "twitter" : "amandaoberwesh",
+                "facebook-username" : "AmandaOberWESH",
+                "featuredplatform" : "twitter",
+                "query" : "30593474",
+                "facebook-id" : "428187603992359",
+                "googleplus" : "113290314755025840568"
+              }
+              } ]
+              } ],
+              "external_content" : null,
+              "link_text" : "",
+              "transformer_type" : null,
+              "transformed_external_content" : null
+            }
+            `
