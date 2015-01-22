@@ -211,6 +211,9 @@ func TestContentAPIShouldParsePersonType(t *testing.T) {
 	defer svr.Close()
 
 	response, err := a.Content("someKrazyChannel", 12345, nil)
+	if err != nil {
+		panic(err)
+	}
 	assert.Nil(t, err, "error getting person")
 
 	p := response.(*Person)
@@ -230,7 +233,9 @@ func TestExternalContentStructPopulates(t *testing.T) {
 	e := response.(*ExternalContent)
 	assert.NotNil(t, e.Struct)
 	assert.Equal(t, 1, len(e.Struct))
-	assert.NotNil(t, e.Struct["authors"])
+	innerObj := e.Struct[0]
+	innerMap := innerObj.(map[string]interface{})
+	assert.NotNil(t, innerMap["authors"])
 }
 
 func setupServerAndAPI(cannedResponse string) (*httptest.Server, API) {

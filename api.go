@@ -382,9 +382,7 @@ func unmarshalExternalContent(r Receiver) (e *ExternalContent) {
 	e.ContentID = r.ContentID
 	e.TeaserTitle = getTeaserTitle(&r)
 	e.ExternalContent = r.ExternalContent
-	if r.Struct != nil && len(r.Struct) > 0 {
-		e.Struct = r.Struct[0]
-	}
+	e.Struct = r.Struct
 	return e
 }
 
@@ -417,6 +415,7 @@ func unmarshalPerson(r Receiver) (p *Person) {
 	p = &Person{}
 	p.ContentID = r.ContentID
 	p.FullName = r.FullName
+	p.Title = r.Title
 	p.Blurb = r.TeaserText
 	p.TeaserImage = r.TeaserImage
 	p.PublicationDate = r.PublicationDate
@@ -424,7 +423,10 @@ func unmarshalPerson(r Receiver) (p *Person) {
 	p.Email = r.Email
 	p.CanonicalURL = r.CanonicalURL
 	p.URL = r.URL
-	p.Photo = r.Photo
+	if len(r.Photo) > 0 {
+		photo := r.Photo[0]
+		p.Photo = &photo
+	}
 
 	return p
 }

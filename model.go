@@ -49,42 +49,42 @@ const (
 // This object should not be used outside of the IB API classes. It is exposed
 // only to facilitate JSON unmarshalling.
 type Receiver struct {
-	Type             ItemType                 `json:"type"`
-	ContentID        int                      `json:"content_id"`
-	ContentName      string                   `json:"content_name"`
-	CollectionName   string                   `json:"collection_name"`
-	Items            []Receiver               `json:"items"`
-	TeaserTitle      string                   `json:"teaser_title"`
-	TeaserText       string                   `json:"teaser_text"`
-	TeaserImage      string                   `json:"teaser_image"`
-	PublicationDate  int64                    `json:"publication_date"`
-	Title            string                   `json:"title"`
-	Subheadline      string                   `json:"subheadline"`
-	Text             string                   `json:"article_text"`
-	Author           string                   `json:"author"`
-	Flavors          []VideoFlavor            `json:"flavors"`
-	StartIndex       int                      `json:"start_index"`
-	TotalCount       int                      `json:"total_count"`
-	Keywords         string                   `json:"keywords"`
-	AltText          string                   `json:"alt_text"`
-	Caption          string                   `json:"caption"`
-	URLs             []ImageURL               `json:"urls"`
-	Media            []Receiver               `json:"media"`
-	AuthorObjects    []Person                 `json:"author_objects"`
-	Settings         []map[string]string      `json:"settings"`
-	Copyright        string                   `json:"copyright"`
-	CopyrightObjects []CopyrightObject        `json:"copyright_objects"`
-	ExternalContent  string                   `json:"external_content"`
-	Code             string                   `json:"code"`
-	CanonicalURL     string                   `json:"canonical_url"`
-	URL              string                   `json:"url"`
-	StaticMap        string                   `json:"static_map"`
-	InteractiveMap   string                   `json:"interactive_map"`
-	Email            string                   `json:"email"`
-	Bio              string                   `json:"biography"`
-	FullName         string                   `json:"full_name"`
-	Struct           []map[string]interface{} `json:"struct"`
-	Photo            *Image                   `json:"photo"`
+	Type             ItemType            `json:"type"`
+	ContentID        int                 `json:"content_id"`
+	ContentName      string              `json:"content_name"`
+	CollectionName   string              `json:"collection_name"`
+	Items            []Receiver          `json:"items"`
+	TeaserTitle      string              `json:"teaser_title"`
+	TeaserText       string              `json:"teaser_text"`
+	TeaserImage      string              `json:"teaser_image"`
+	PublicationDate  int64               `json:"publication_date"`
+	Title            string              `json:"title"`
+	Subheadline      string              `json:"subheadline"`
+	Text             string              `json:"article_text"`
+	Author           string              `json:"author"`
+	Flavors          []VideoFlavor       `json:"flavors"`
+	StartIndex       int                 `json:"start_index"`
+	TotalCount       int                 `json:"total_count"`
+	Keywords         string              `json:"keywords"`
+	AltText          string              `json:"alt_text"`
+	Caption          string              `json:"caption"`
+	URLs             []ImageURL          `json:"urls"`
+	Media            []Receiver          `json:"media"`
+	AuthorObjects    []Person            `json:"author_objects"`
+	Settings         []map[string]string `json:"settings"`
+	Copyright        string              `json:"copyright"`
+	CopyrightObjects []CopyrightObject   `json:"copyright_objects"`
+	ExternalContent  string              `json:"external_content"`
+	Code             string              `json:"code"`
+	CanonicalURL     string              `json:"canonical_url"`
+	URL              string              `json:"url"`
+	StaticMap        string              `json:"static_map"`
+	InteractiveMap   string              `json:"interactive_map"`
+	Email            string              `json:"email"`
+	Bio              string              `json:"biography"`
+	FullName         string              `json:"full_name"`
+	Struct           []interface{}       `json:"struct"`
+	Photo            []Image             `json:"photo"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -390,10 +390,10 @@ func (m *Map) GetPublicationDate() int64 {
 
 // ExternalContent represents an external content object
 type ExternalContent struct {
-	ContentID       int                    `json:"content_id"`
-	TeaserTitle     string                 `json:"teaser_title"`
-	ExternalContent string                 `json:"external_content"`
-	Struct          map[string]interface{} `json:"struct"`
+	ContentID       int           `json:"content_id"`
+	TeaserTitle     string        `json:"teaser_title"`
+	ExternalContent string        `json:"external_content"`
+	Struct          []interface{} `json:"struct"`
 }
 
 func (e *ExternalContent) GetType() ItemType {
@@ -447,6 +447,7 @@ type Person struct {
 	ContentID        int    `json:"content_id"`
 	Blurb            string `json:"teaser_text"`
 	FullName         string `json:"full_name"`
+	Title            string `json:"title"`
 	TeaserImage      string `json:"teaser_image"`
 	PublicationDate  int64  `json:"publication_date"`
 	Bio              string `json:"biography"`
@@ -454,7 +455,7 @@ type Person struct {
 	Email            string `json:"email"`
 	FacebookUsername string `json:"facebook_username"`
 	TwitterUsername  string `json:"twitter_username"`
-	GPlusUID         int64  `json:"gplus_uid"`
+	GPlusUID         string `json:"gplus_uid"`
 	StoriesCOID      int    `json:"recent_stories"`
 	CanonicalURL     string `json:"canonical_url"`
 	URL              string `json:"url"`
