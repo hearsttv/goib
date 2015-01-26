@@ -1498,5 +1498,52 @@ var externalContentJSON = `
               "link_text" : "",
               "transformer_type" : null,
               "transformed_external_content" : null
-            }
-            `
+}
+`
+
+var livevideoJSON = `
+{
+  "type" : "LIVEVIDEO",
+  "hash" : "m5hfcc",
+  "content_id" : 25837856,
+  "content_name" : "Anvato iFrame Player test",
+  "navigation_context" : [ "KHTV Home", "Local News" ],
+  "analytics_category" : "news",
+  "advertising_category" : "homepage",
+  "title" : "Anvato iFrame Player Test",
+  "valid_from" : 2700000,
+  "valid_to" : 4105144800,
+  "editorial_comment" : null,
+  "period" : "",
+  "keywords" : "",
+  "url" : "http://www.khtvnews.com/news/anvato-iframe-player-test/25837856",
+  "canonical_url" : "",
+  "teaser_title" : "Anvato iFrame Player Test",
+  "teaser_text" : "<p>Teaser text for the iFrame Player test</p>",
+  "teaser_image" : "http://www.khtvnews.com/image/view/-/19206782/highRes/3/-/maxh/225/maxw/300/-/ckdpn2z/-/Polar-Bear-Cub-sample-image.jpg",
+  "media" : [ {
+    "type" : "IMAGE",
+    "hash" : "simwmcz",
+    "content_id" : 19206782,
+    "publication_date" : 1387407730,
+    "teaser_title" : "Baby Polar Bear",
+    "teaser_text" : null,
+    "teaser_image" : "http://www.khtvnews.com/image/view/-/19206782/highRes/3/-/maxh/225/maxw/300/-/ckdpn2z/-/Polar-Bear-Cub-sample-image.jpg"
+    } ],
+    "author_objects" : [ ],
+    "author" : "",
+    "categories" : [ ],
+    "creation_date" : 1399401507,
+    "copyright_objects" : [ ],
+    "copyright" : "",
+    "publication_date" : 1416529877,
+    "struct" : [ {
+      } ],
+      "subheadline" : "A test for the iFrame Player",
+      "show_ads" : false,
+      "external_id" : "anvato:embed:iframe",
+      "m3u8" : "http://cdnapi.kaltura.com/p/557781/sp/55778100/playManifest/entryId/anvato:embed:iframe/format/applehttp/protocol/http/a.m3u8"
+}
+`
+var expectedLivevideoTeaserTitle = "Anvato iFrame Player Test"
+var expectedLivevideoStream = `http://cdnapi.kaltura.com/p/557781/sp/55778100/playManifest/entryId/anvato:embed:iframe/format/applehttp/protocol/http/a.m3u8`

@@ -227,6 +227,8 @@ func unmarshalReceiver(r Receiver) (Item, error) {
 		return unmarshalHTMLContent(r), nil
 	case PersonType:
 		return unmarshalPerson(r), nil
+	case LivevideoType:
+		return unmarshalLivevideo(r), nil
 	case SettingsType:
 		return unmarshalSettings(r), nil
 	default:
@@ -274,6 +276,31 @@ func unmarshalVideo(r Receiver) (v *Video) {
 	v.URL = r.URL
 
 	return v
+}
+
+func unmarshalLivevideo(r Receiver) (l *Livevideo) {
+	l = &Livevideo{}
+	l.ContentID = r.ContentID
+	l.TeaserTitle = getTeaserTitle(&r)
+	l.TeaserText = r.TeaserText
+	l.Title = r.Title
+	l.Subheadline = r.Subheadline
+	l.PublicationDate = r.PublicationDate
+	l.Authors = r.AuthorObjects
+	l.Title = r.Title
+	l.CanonicalURL = r.CanonicalURL
+	l.URL = r.URL
+	l.Stream = r.LivevideoStream
+	for _, rInner := range r.Media {
+		item, err := unmarshalReceiver(rInner)
+		if err != nil {
+			log.Warn("error unmarshalling sub-object: %v", err)
+		} else {
+			l.Media = append(l.Media, item)
+		}
+	}
+
+	return l
 }
 
 func unmarshalImage(r Receiver) (i *Image) {

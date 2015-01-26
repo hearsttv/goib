@@ -238,6 +238,22 @@ func TestExternalContentStructPopulates(t *testing.T) {
 	assert.NotNil(t, innerMap["authors"])
 }
 
+func TestContentAPIShouldParseLivevideoType(t *testing.T) {
+	svr, a := setupServerAndAPI(livevideoJSON)
+	defer svr.Close()
+
+	response, err := a.Content("someKrazyChannel", 12345, nil)
+	if err != nil {
+		panic(err)
+	}
+	assert.Nil(t, err, "error getting livevideo")
+
+	l := response.(*Livevideo)
+	assert.Equal(t, 25837856, l.ContentID)
+	assert.Equal(t, expectedLivevideoTeaserTitle, l.TeaserTitle)
+	assert.Equal(t, expectedLivevideoStream, l.Stream)
+}
+
 func setupServerAndAPI(cannedResponse string) (*httptest.Server, API) {
 	testSvr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/xml")

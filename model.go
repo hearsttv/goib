@@ -18,8 +18,8 @@ const (
 	GalleryType ItemType = "GALLERY"
 	// MapType item type
 	MapType ItemType = "MAP"
-	// LivestreamType item type
-	LivestreamType = "LIVESTREAM"
+	// LivevideoType item type
+	LivevideoType = "LIVEVIDEO"
 	// AudioType item type
 	AudioType = "AUDIO"
 	// ExternalType external content item type
@@ -85,6 +85,7 @@ type Receiver struct {
 	FullName         string              `json:"full_name"`
 	Struct           []interface{}       `json:"struct"`
 	Photo            []Image             `json:"photo"`
+	LivevideoStream  string              `json:"m3u8"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -330,34 +331,39 @@ func (a *Audio) GetPublicationDate() int64 {
 	return 0
 }
 
-// Livestream represents a live stream
-// TODO: no idea what this looks like ATM
-type Livestream struct {
-	ContentID    int      `json:"content_id"`
-	TeaserTitle  string   `json:"teaser_title"`
-	Authors      []Person `json:"author_objects"`
-	CanonicalURL string   `json:"canonical_url"`
-	URL          string   `json:"url"`
+// Livevideo represents a live stream
+type Livevideo struct {
+	ContentID       int      `json:"content_id"`
+	Title           string   `json:"title"`
+	Subheadline     string   `json:"subheadline"`
+	TeaserTitle     string   `json:"teaser_title"`
+	TeaserText      string   `json:"teaser_text"`
+	PublicationDate int64    `json:"publication_date"`
+	Authors         []Person `json:"author_objects"`
+	CanonicalURL    string   `json:"canonical_url"`
+	URL             string   `json:"url"`
+	Media           []Item   `json:"media"`
+	Stream          string   `json:"stream"`
 }
 
-func (l *Livestream) GetType() ItemType {
-	return AudioType
+func (l *Livevideo) GetType() ItemType {
+	return LivevideoType
 }
 
-func (l *Livestream) GetContentID() int {
+func (l *Livevideo) GetContentID() int {
 	return l.ContentID
 }
 
-func (l *Livestream) GetTeaserTitle() string {
+func (l *Livevideo) GetTeaserTitle() string {
 	return l.TeaserTitle
 }
 
-func (l *Livestream) GetTeaserText() string {
-	return ""
+func (l *Livevideo) GetTeaserText() string {
+	return l.TeaserText
 }
 
-func (l *Livestream) GetPublicationDate() int64 {
-	return 0
+func (l *Livevideo) GetPublicationDate() int64 {
+	return l.PublicationDate
 }
 
 // Map represents a map
