@@ -249,6 +249,7 @@ func unmarshalArticle(r Receiver) (a *Article) {
 	a.Authors = r.AuthorObjects
 	a.CanonicalURL = r.CanonicalURL
 	a.URL = r.URL
+	a.NavContext = r.NavContext
 	for _, rInner := range r.Media {
 		item, err := unmarshalReceiver(rInner)
 		if err != nil {
@@ -274,6 +275,7 @@ func unmarshalVideo(r Receiver) (v *Video) {
 	v.Flavors = r.Flavors
 	v.CanonicalURL = r.CanonicalURL
 	v.URL = r.URL
+	v.NavContext = r.NavContext
 
 	return v
 }
@@ -291,6 +293,7 @@ func unmarshalLivevideo(r Receiver) (l *Livevideo) {
 	l.CanonicalURL = r.CanonicalURL
 	l.URL = r.URL
 	l.Stream = r.LivevideoStream
+	l.NavContext = r.NavContext
 	for _, rInner := range r.Media {
 		item, err := unmarshalReceiver(rInner)
 		if err != nil {
@@ -334,6 +337,7 @@ func unmarshalGallery(r Receiver) (g *Gallery) {
 	g.Subheadline = r.Subheadline
 	g.CanonicalURL = r.CanonicalURL
 	g.URL = r.URL
+	g.NavContext = r.NavContext
 	for _, rInner := range r.Media {
 		item, err := unmarshalReceiver(rInner)
 		if err != nil {

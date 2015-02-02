@@ -86,6 +86,7 @@ type Receiver struct {
 	Struct           []interface{}       `json:"struct"`
 	Photo            []Image             `json:"photo"`
 	LivevideoStream  string              `json:"m3u8"`
+	NavContext       []string            `json:"navigation_context"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -147,6 +148,7 @@ type Article struct {
 	Media           []Item   `json:"media"`
 	CanonicalURL    string   `json:"canonical_url"`
 	URL             string   `json:"url"`
+	NavContext      []string `json:"navigation_context"`
 }
 
 func (a *Article) GetType() ItemType {
@@ -182,6 +184,7 @@ type Video struct {
 	Flavors         []VideoFlavor `json:"flavors"`
 	CanonicalURL    string        `json:"canonical_url"`
 	URL             string        `json:"url"`
+	NavContext      []string      `json:"navigation_context"`
 }
 
 func (v *Video) GetType() ItemType {
@@ -279,6 +282,7 @@ type Gallery struct {
 	Items           []Item   `json:"items"`
 	CanonicalURL    string   `json:"canonical_url"`
 	URL             string   `json:"url"`
+	NavContext      []string `json:"navigation_context"`
 }
 
 func (g *Gallery) GetType() ItemType {
@@ -309,6 +313,7 @@ type Audio struct {
 	Authors      []Person `json:"author_objects"`
 	CanonicalURL string   `json:"canonical_url"`
 	URL          string   `json:"url"`
+	NavContext   []string `json:"navigation_context"`
 }
 
 func (a *Audio) GetType() ItemType {
@@ -344,6 +349,7 @@ type Livevideo struct {
 	URL             string   `json:"url"`
 	Media           []Item   `json:"media"`
 	Stream          string   `json:"stream"`
+	NavContext      []string `json:"navigation_context"`
 }
 
 func (l *Livevideo) GetType() ItemType {
