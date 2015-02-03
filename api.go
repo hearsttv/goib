@@ -250,6 +250,8 @@ func unmarshalArticle(r Receiver) (a *Article) {
 	a.CanonicalURL = r.CanonicalURL
 	a.URL = r.URL
 	a.NavContext = r.NavContext
+	a.AnalyticsCategory = r.AnalyticsCategory
+	a.AdvertisingCategory = r.AdvertisingCategory
 	for _, rInner := range r.Media {
 		item, err := unmarshalReceiver(rInner)
 		if err != nil {
@@ -276,6 +278,8 @@ func unmarshalVideo(r Receiver) (v *Video) {
 	v.CanonicalURL = r.CanonicalURL
 	v.URL = r.URL
 	v.NavContext = r.NavContext
+	v.AnalyticsCategory = r.AnalyticsCategory
+	v.AdvertisingCategory = r.AdvertisingCategory
 
 	return v
 }
@@ -294,6 +298,8 @@ func unmarshalLivevideo(r Receiver) (l *Livevideo) {
 	l.URL = r.URL
 	l.Stream = r.LivevideoStream
 	l.NavContext = r.NavContext
+	l.AnalyticsCategory = r.AnalyticsCategory
+	l.AdvertisingCategory = r.AdvertisingCategory
 	for _, rInner := range r.Media {
 		item, err := unmarshalReceiver(rInner)
 		if err != nil {
@@ -321,6 +327,9 @@ func unmarshalImage(r Receiver) (i *Image) {
 	i.Copyright = r.Copyright
 	i.CopyrightObjects = r.CopyrightObjects
 	i.CanonicalURL = r.CanonicalURL
+	i.NavContext = r.NavContext
+	i.AnalyticsCategory = r.AnalyticsCategory
+	i.AdvertisingCategory = r.AdvertisingCategory
 
 	return i
 }
@@ -338,6 +347,8 @@ func unmarshalGallery(r Receiver) (g *Gallery) {
 	g.CanonicalURL = r.CanonicalURL
 	g.URL = r.URL
 	g.NavContext = r.NavContext
+	g.AnalyticsCategory = r.AnalyticsCategory
+	g.AdvertisingCategory = r.AdvertisingCategory
 	for _, rInner := range r.Media {
 		item, err := unmarshalReceiver(rInner)
 		if err != nil {
@@ -364,6 +375,9 @@ func unmarshalMap(r Receiver) (m *Map) {
 	m.TeaserTitle = getTeaserTitle(&r)
 	m.StaticMap = r.StaticMap
 	m.InteractiveMap = r.InteractiveMap
+	m.NavContext = r.NavContext
+	m.AnalyticsCategory = r.AnalyticsCategory
+	m.AdvertisingCategory = r.AdvertisingCategory
 
 	return m
 }
@@ -387,6 +401,10 @@ func unmarshalCollection(r Receiver) (c *Collection) {
 	if len(r.Settings) > 0 {
 		c.Settings = r.Settings[0]
 	}
+
+	c.NavContext = r.NavContext
+	c.AnalyticsCategory = r.AnalyticsCategory
+	c.AdvertisingCategory = r.AdvertisingCategory
 
 	return c
 }
@@ -458,6 +476,9 @@ func unmarshalPerson(r Receiver) (p *Person) {
 		photo := r.Photo[0]
 		p.Photo = &photo
 	}
+	p.NavContext = r.NavContext
+	p.AnalyticsCategory = r.AnalyticsCategory
+	p.AdvertisingCategory = r.AdvertisingCategory
 
 	return p
 }
