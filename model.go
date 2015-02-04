@@ -322,6 +322,8 @@ func (g *Gallery) GetPublicationDate() int64 {
 // Audio represents an audio clip
 type Audio struct {
 	ContentID           int      `json:"content_id"`
+	Title               string   `json:"title"`
+	Subheadline         string   `json:"subheadline"`
 	TeaserTitle         string   `json:"teaser_title"`
 	TeaserText          string   `json:"teaser_text"`
 	Authors             []Person `json:"author_objects"`

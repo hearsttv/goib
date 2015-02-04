@@ -488,6 +488,8 @@ func unmarshalPerson(r Receiver) (p *Person) {
 func unmarshalAudio(r Receiver) (a *Audio) {
 	a = &Audio{}
 	a.ContentID = r.ContentID
+	a.Title = r.Title
+	a.Subheadline = r.Subheadline
 	a.TeaserTitle = getTeaserTitle(&r)
 	a.TeaserText = r.TeaserText
 	a.PublicationDate = r.PublicationDate
