@@ -240,6 +240,7 @@ type Image struct {
 	Author              string            `json:"author"`
 	Authors             []Person          `json:"author_objects"`
 	Title               string            `json:"title"`
+	Subheadline         string            `json:"subheadline"`
 	Keywords            string            `json:"keywords"`
 	URLs                []ImageURL        `json:"urls"`
 	Copyright           string            `json:"copyright"`
@@ -399,6 +400,9 @@ func (l *Livevideo) GetPublicationDate() int64 {
 type Map struct {
 	ContentID           int      `json:"content_id"`
 	TeaserTitle         string   `json:"teaser_title"`
+	TeaserText          string   `json:"teaser_text"`
+	Title               string   `json:"title"`
+	Subheadline         string   `json:"subheadline"`
 	StaticMap           string   `json:"static_map"`
 	InteractiveMap      string   `json:"interactive_map"`
 	NavContext          []string `json:"navigation_context"`

@@ -271,11 +271,11 @@ func unmarshalVideo(r Receiver) (v *Video) {
 	v.ContentID = r.ContentID
 	v.TeaserTitle = getTeaserTitle(&r)
 	v.TeaserText = r.TeaserText
+	v.Title = r.Title
+	v.Subheadline = r.Subheadline
 	v.TeaserImage = r.TeaserImage
 	v.PublicationDate = r.PublicationDate
 	v.Authors = r.AuthorObjects
-	v.Title = r.Title
-	v.Subheadline = r.Subheadline
 	v.Flavors = r.Flavors
 	v.CanonicalURL = r.CanonicalURL
 	v.URL = r.URL
@@ -317,12 +317,13 @@ func unmarshalLivevideo(r Receiver) (l *Livevideo) {
 func unmarshalImage(r Receiver) (i *Image) {
 	i = &Image{}
 	i.ContentID = r.ContentID
+	i.Title = r.Title
+	i.Subheadline = r.Subheadline
 	i.TeaserTitle = getTeaserTitle(&r)
 	i.TeaserText = r.TeaserText
 	i.TeaserImage = r.TeaserImage
 	i.PublicationDate = r.PublicationDate
 	i.Authors = r.AuthorObjects
-	i.Title = r.Title
 	i.Caption = r.Caption
 	i.Author = r.Author
 	i.URLs = r.URLs
@@ -374,7 +375,10 @@ func unmarshalGallery(r Receiver) (g *Gallery) {
 func unmarshalMap(r Receiver) (m *Map) {
 	m = &Map{}
 	m.ContentID = r.ContentID
+	m.Title = r.Title
+	m.Subheadline = r.Subheadline
 	m.TeaserTitle = getTeaserTitle(&r)
+	m.TeaserText = r.TeaserText
 	m.StaticMap = r.StaticMap
 	m.InteractiveMap = r.InteractiveMap
 	m.NavContext = r.NavContext
