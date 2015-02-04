@@ -248,6 +248,7 @@ func unmarshalArticle(r Receiver) (a *Article) {
 	a.Title = r.Title
 	a.Subheadline = r.Subheadline
 	a.Text = r.Text
+	log.Info("Article Text: %v", a.Text)
 	a.Authors = r.AuthorObjects
 	a.CanonicalURL = r.CanonicalURL
 	a.URL = r.URL
@@ -255,6 +256,7 @@ func unmarshalArticle(r Receiver) (a *Article) {
 	a.AnalyticsCategory = r.AnalyticsCategory
 	a.AdvertisingCategory = r.AdvertisingCategory
 	for _, rInner := range r.Media {
+		log.Info("rInner: %v", rInner)
 		item, err := unmarshalReceiver(rInner)
 		if err != nil {
 			log.Warn("error unmarshalling sub-object: %v", err)
@@ -440,6 +442,7 @@ func unmarshalExternalContent(r Receiver) (e *ExternalContent) {
 func unmarshalHTMLContent(r Receiver) (h *HTMLContent) {
 	h = &HTMLContent{}
 	h.ContentID = r.ContentID
+	log.Info("got code: %v", r.Code)
 	h.Code = r.Code
 	return h
 }
