@@ -231,6 +231,8 @@ func unmarshalReceiver(r Receiver) (Item, error) {
 		return unmarshalLivevideo(r), nil
 	case SettingsType:
 		return unmarshalSettings(r), nil
+	case AudioType:
+		return unmarshalAudio(r), nil
 	default:
 		return nil, fmt.Errorf("unknonwn response type: %s", r.Type)
 	}
@@ -296,7 +298,7 @@ func unmarshalLivevideo(r Receiver) (l *Livevideo) {
 	l.Title = r.Title
 	l.CanonicalURL = r.CanonicalURL
 	l.URL = r.URL
-	l.Stream = r.LivevideoStream
+	l.Stream = r.Stream
 	l.NavContext = r.NavContext
 	l.AnalyticsCategory = r.AnalyticsCategory
 	l.AdvertisingCategory = r.AdvertisingCategory
@@ -481,4 +483,29 @@ func unmarshalPerson(r Receiver) (p *Person) {
 	p.AdvertisingCategory = r.AdvertisingCategory
 
 	return p
+}
+
+func unmarshalAudio(r Receiver) (a *Audio) {
+	a = &Audio{}
+	a.ContentID = r.ContentID
+	a.TeaserTitle = getTeaserTitle(&r)
+	a.TeaserText = r.TeaserText
+	a.PublicationDate = r.PublicationDate
+	a.Authors = r.AuthorObjects
+	a.CanonicalURL = r.CanonicalURL
+	a.URL = r.URL
+	a.Stream = r.Stream
+	a.NavContext = r.NavContext
+	a.AnalyticsCategory = r.AnalyticsCategory
+	a.AdvertisingCategory = r.AdvertisingCategory
+	for _, rInner := range r.Media {
+		item, err := unmarshalReceiver(rInner)
+		if err != nil {
+			log.Warn("error unmarshalling sub-object: %v", err)
+		} else {
+			a.Media = append(a.Media, item)
+		}
+	}
+
+	return a
 }

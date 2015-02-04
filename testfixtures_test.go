@@ -1546,4 +1546,4 @@ var livevideoJSON = `
 }
 `
 var expectedLivevideoTeaserTitle = "Anvato iFrame Player Test"
-var expectedLivevideoStream = `http://cdnapi.kaltura.com/p/557781/sp/55778100/playManifest/entryId/anvato:embed:iframe/format/applehttp/protocol/http/a.m3u8`
+var expectedStream = `http://cdnapi.kaltura.com/p/557781/sp/55778100/playManifest/entryId/anvato:embed:iframe/format/applehttp/protocol/http/a.m3u8`

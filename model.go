@@ -85,7 +85,7 @@ type Receiver struct {
 	FullName            string              `json:"full_name"`
 	Struct              []interface{}       `json:"struct"`
 	Photo               []Image             `json:"photo"`
-	LivevideoStream     string              `json:"m3u8"`
+	Stream              string              `json:"m3u8"`
 	NavContext          []string            `json:"navigation_context"`
 	AnalyticsCategory   string              `json:"analytics_category"`
 	AdvertisingCategory string              `json:"advertising_category"`
@@ -320,13 +320,16 @@ func (g *Gallery) GetPublicationDate() int64 {
 }
 
 // Audio represents an audio clip
-// TODO: no idea what this looks like ATM
 type Audio struct {
 	ContentID           int      `json:"content_id"`
 	TeaserTitle         string   `json:"teaser_title"`
+	TeaserText          string   `json:"teaser_text"`
 	Authors             []Person `json:"author_objects"`
 	CanonicalURL        string   `json:"canonical_url"`
 	URL                 string   `json:"url"`
+	Media               []Item   `json:"media"`
+	Stream              string   `json:"stream"`
+	PublicationDate     int64    `json:"publication_date"`
 	NavContext          []string `json:"navigation_context"`
 	AnalyticsCategory   string   `json:"analytics_category"`
 	AdvertisingCategory string   `json:"advertising_category"`

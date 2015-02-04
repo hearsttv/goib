@@ -251,7 +251,7 @@ func TestContentAPIShouldParseLivevideoType(t *testing.T) {
 	l := response.(*Livevideo)
 	assert.Equal(t, 25837856, l.ContentID)
 	assert.Equal(t, expectedLivevideoTeaserTitle, l.TeaserTitle)
-	assert.Equal(t, expectedLivevideoStream, l.Stream)
+	assert.Equal(t, expectedStream, l.Stream)
 }
 
 func setupServerAndAPI(cannedResponse string) (*httptest.Server, API) {
