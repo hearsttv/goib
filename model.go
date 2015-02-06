@@ -28,8 +28,10 @@ const (
 	ClosingsType = "CLOSINGS"
 	// HTMLType HTML item type
 	HTMLType = "HTML"
-	// PersonType Perosn (AKA Author) item type
+	// PersonType Person (AKA Author) item type
 	PersonType = "PERSON"
+	// TeaserType teasy teasy tease.
+	TeaserType = "TEASER"
 	// SettingsType is someone's idiot idea of a joke
 	SettingsType = ""
 )
@@ -575,4 +577,37 @@ func (c *Settings) GetTeaserText() string {
 
 func (c *Settings) GetPublicationDate() int64 {
 	return 0 // collections do not have pub dates
+}
+
+// Teaser represents ... something
+type Teaser struct {
+	ContentID           int      `json:"content_id"`
+	Title               string   `json:"title"`
+	TeaserTitle         string   `json:"teaser_title"`
+	TeaserText          string   `json:"teaser_text"`
+	PublicationDate     int64    `json:"publication_date"`
+	Media               []Item   `json:"media"`
+	NavContext          []string `json:"navigation_context"`
+	AnalyticsCategory   string   `json:"analytics_category"`
+	AdvertisingCategory string   `json:"advertising_category"`
+}
+
+func (t *Teaser) GetType() ItemType {
+	return TeaserType
+}
+
+func (t *Teaser) GetContentID() int {
+	return t.ContentID
+}
+
+func (t *Teaser) GetTeaserTitle() string {
+	return t.TeaserTitle
+}
+
+func (t *Teaser) GetTeaserText() string {
+	return t.TeaserText
+}
+
+func (t *Teaser) GetPublicationDate() int64 {
+	return t.PublicationDate
 }

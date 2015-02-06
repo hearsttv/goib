@@ -233,6 +233,8 @@ func unmarshalReceiver(r Receiver) (Item, error) {
 		return unmarshalSettings(r), nil
 	case AudioType:
 		return unmarshalAudio(r), nil
+	case TeaserType:
+		return unmarshalTeaser(r), nil
 	default:
 		return nil, fmt.Errorf("unknonwn response type: %s", r.Type)
 	}
@@ -514,4 +516,26 @@ func unmarshalAudio(r Receiver) (a *Audio) {
 	}
 
 	return a
+}
+
+func unmarshalTeaser(r Receiver) (t *Teaser) {
+	t = &Teaser{}
+	t.ContentID = r.ContentID
+	t.Title = r.Title
+	t.TeaserTitle = getTeaserTitle(&r)
+	t.TeaserText = r.TeaserText
+	t.PublicationDate = r.PublicationDate
+	t.NavContext = r.NavContext
+	t.AnalyticsCategory = r.AnalyticsCategory
+	t.AdvertisingCategory = r.AdvertisingCategory
+	for _, rInner := range r.Media {
+		item, err := unmarshalReceiver(rInner)
+		if err != nil {
+			log.Warn("error unmarshalling sub-object: %v", err)
+		} else {
+			t.Media = append(t.Media, item)
+		}
+	}
+
+	return t
 }

@@ -1547,3 +1547,52 @@ var livevideoJSON = `
 `
 var expectedLivevideoTeaserTitle = "Anvato iFrame Player Test"
 var expectedStream = `http://cdnapi.kaltura.com/p/557781/sp/55778100/playManifest/entryId/anvato:embed:iframe/format/applehttp/protocol/http/a.m3u8`
+
+var teaserJSON = `
+{
+  "type" : "TEASER",
+  "hash" : "u5vmofz",
+  "content_id" : 30678220,
+  "content_name" : "Irad promo",
+  "navigation_context" : [ "WESH Home" ],
+  "analytics_category" : "home",
+  "advertising_category" : "homepage",
+  "title" : null,
+  "valid_from" : 2700000,
+  "valid_to" : 4105144800,
+  "editorial_comment" : null,
+  "period" : "",
+  "keywords" : "",
+  "url" : "http://www.wesh.com/30678220",
+  "canonical_url" : "",
+  "teaser_title" : "Orlando and Central Florida Weather Radar",
+  "teaser_text" : null,
+  "teaser_image" : "http://www.wesh.com/image/transient/image/orl/1c7335e4-b641-4dbb-8092-2226b5ece00e/blob?maxh=225&maxw=300",
+  "media" : [ {
+    "type" : "IMAGE",
+    "hash" : "v50no4z",
+    "content_id" : 14263358,
+    "publication_date" : 1423229836,
+    "teaser_title" : "Radar: Central Florida",
+    "teaser_text" : null,
+    "teaser_image" : "http://www.wesh.com/image/transient/image/orl/1c7335e4-b641-4dbb-8092-2226b5ece00e/blob?maxh=225&maxw=300"
+  } ],
+  "author_objects" : [ ],
+  "author" : "",
+  "categories" : [ ],
+  "creation_date" : 1421165409,
+  "copyright_objects" : [ ],
+  "copyright" : "",
+  "publication_date" : 1421165409,
+  "struct" : [ { } ],
+  "external_id" : "",
+  "target" : {
+    "type" : "UNSUPPORTED",
+    "hash" : "2ok3ds",
+    "content_id" : 11789656
+  }
+}
+`
+
+var expectedTeaserCOID = 30678220
+var expectedTeaserTeaserTitle = "Orlando and Central Florida Weather Radar"

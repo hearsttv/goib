@@ -254,6 +254,22 @@ func TestContentAPIShouldParseLivevideoType(t *testing.T) {
 	assert.Equal(t, expectedStream, l.Stream)
 }
 
+func TestContentAPIShouldParseTeaserType(t *testing.T) {
+	svr, a := setupServerAndAPI(teaserJSON)
+	defer svr.Close()
+
+	response, err := a.Content("someKrazyChannel", 12345, nil)
+	if err != nil {
+		panic(err)
+	}
+	assert.Nil(t, err, "error getting teaser")
+
+	tease := response.(*Teaser)
+	assert.Equal(t, 30678220, tease.ContentID)
+	assert.Equal(t, expectedTeaserTeaserTitle, tease.TeaserTitle)
+	assert.Equal(t, 1, len(tease.Media))
+}
+
 func setupServerAndAPI(cannedResponse string) (*httptest.Server, API) {
 	testSvr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/xml")
