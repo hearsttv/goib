@@ -71,29 +71,19 @@ func iterateMediaRecursive(node Item, parent *Collection, ch chan *MediaNode) {
 		return
 	}
 
-	switch node.GetType() {
-	case ArticleType:
-		ch <- &MediaNode{node.(*Article), parent}
-	case VideoType:
-		ch <- &MediaNode{node.(*Video), parent}
-	case ImageType:
-		ch <- &MediaNode{node.(*Image), parent}
-	case GalleryType:
-		ch <- &MediaNode{node.(*Gallery), parent}
-	case ExternalType:
-		ch <- &MediaNode{node.(*ExternalContent), parent}
-	case CollectionType:
-		c := node.(*Collection)
-		if c.Items == nil || len(c.Items) == 0 {
+	switch t := node.(type) {
+	case *Article, *Video, *Livevideo, *Image, *Gallery, *Map, *Audio, *ExternalContent, *HTMLContent, *Person, *Teaser:
+		ch <- &MediaNode{node, parent}
+	case *Collection:
+		if t.Items == nil || len(t.Items) == 0 {
 			return
 		}
-		for _, item := range c.Items {
-			iterateMediaRecursive(item, c, ch)
+		for _, item := range t.Items {
+			iterateMediaRecursive(item, t, ch)
 		}
-
 	default:
 		log.Warn("unexpected type found during iteration: %s", node.GetType())
-		break
+
 	}
 
 	return
