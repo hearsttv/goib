@@ -6,6 +6,9 @@ import (
 	l5g "github.com/neocortical/log5go"
 )
 
+// maxMediaRecursionDepth is a safety valve to prevent infinite recursion when iterating over collection media
+const maxMediaRecursionDepth = 5
+
 // ExtractMedia recursively scans the supplied object for simple (displayable) media types
 // A simple media item will produce a list containing that item. Collections and SearchResults
 // are recursively scanned for inner media
@@ -62,12 +65,12 @@ func MediaIterator(root Item) chan *MediaNode {
 }
 
 func iterateMedia(root Item, ch chan *MediaNode) {
-	iterateMediaRecursive(root, nil, ch)
+	iterateMediaRecursive(root, nil, ch, 1)
 	close(ch)
 }
 
-func iterateMediaRecursive(node Item, parent *Collection, ch chan *MediaNode) {
-	if node == nil {
+func iterateMediaRecursive(node Item, parent *Collection, ch chan *MediaNode, depth int) {
+	if node == nil || depth > maxMediaRecursionDepth {
 		return
 	}
 
@@ -79,7 +82,7 @@ func iterateMediaRecursive(node Item, parent *Collection, ch chan *MediaNode) {
 			return
 		}
 		for _, item := range t.Items {
-			iterateMediaRecursive(item, t, ch)
+			iterateMediaRecursive(item, t, ch, depth+1)
 		}
 	default:
 		log.Warn("unexpected type found during iteration: %s", node.GetType())

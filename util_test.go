@@ -121,3 +121,17 @@ func TestIteratorShouldReturnOnceIfRootIsMedia(t *testing.T) {
 		i++
 	}
 }
+
+func Test_MediaIteratorRecursion(t *testing.T) {
+	coll1 := &Collection{}
+	coll2 := &Collection{}
+	article := &Article{}
+
+	coll1.Items = []Item{article, coll2}
+	coll2.Items = []Item{coll1}
+	var i = 0
+	for _ = range MediaIterator(coll1) {
+		i++
+	}
+	assert.True(t, i < maxMediaRecursionDepth)
+}
