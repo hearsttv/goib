@@ -284,6 +284,14 @@ func unmarshalVideo(r Receiver) (v *Video) {
 	v.NavContext = r.NavContext
 	v.AnalyticsCategory = r.AnalyticsCategory
 	v.AdvertisingCategory = r.AdvertisingCategory
+	for _, rInner := range r.Media {
+		item, err := unmarshalReceiver(rInner)
+		if err != nil {
+			log.Warn("error unmarshalling sub-object: %v", err)
+		} else {
+			v.Media = append(v.Media, item)
+		}
+	}
 
 	return v
 }

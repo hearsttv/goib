@@ -191,6 +191,7 @@ type Video struct {
 	Title               string        `json:"title"`
 	Subheadline         string        `json:"subheadline"`
 	Flavors             []VideoFlavor `json:"flavors"`
+	Media               []Item        `json:"media"`
 	CanonicalURL        string        `json:"canonical_url"`
 	URL                 string        `json:"url"`
 	NavContext          []string      `json:"navigation_context"`
