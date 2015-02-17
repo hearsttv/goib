@@ -499,6 +499,7 @@ type Person struct {
 	Photo               *Image   `json:"photo,omitempty"`
 	Email               string   `json:"email"`
 	FacebookUsername    string   `json:"facebook_username"`
+	FacebookUID         string   `json:"facebook_uid"`
 	TwitterUsername     string   `json:"twitter_username"`
 	GPlusUID            string   `json:"gplus_uid"`
 	StoriesCOID         int      `json:"recent_stories"`
