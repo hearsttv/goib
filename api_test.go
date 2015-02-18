@@ -177,7 +177,8 @@ func TestClosingsAll(t *testing.T) {
 	closings, err := a.Closings("someKrazyChannel", ClosingsAll)
 
 	assert.Nil(t, err, "err should be nil")
-	assert.Equal(t, 4, len(closings.Institutions), "should have found 4 institutions")
+	assert.Equal(t, 2, len(closings.Institutions), "should have found 2 institution letter groups")
+	assert.Equal(t, 3, len(closings.Institutions["a"]))
 }
 
 func TestClosingsClosed(t *testing.T) {
@@ -187,7 +188,8 @@ func TestClosingsClosed(t *testing.T) {
 	closings, err := a.Closings("someKrazyChannel", ClosingsClosed)
 
 	assert.Nil(t, err, "err should be nil")
-	assert.Equal(t, 4, len(closings.ClosedInstitutions), "should have found 4 institutions")
+	assert.Equal(t, 2, len(closings.ClosedInstitutions), "should have found 2 institution letter groups")
+	assert.Equal(t, 3, len(closings.ClosedInstitutions["a"]))
 }
 
 func TestContentAPIShouldParseMapType(t *testing.T) {

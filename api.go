@@ -143,9 +143,6 @@ func (api *api) Closings(channel string, filter ClosingsFilter) (ClosingsRespons
 	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "closings", 1)
 	uri += "/" + string(filter)
-	if filter == ClosingsAll || filter == ClosingsClosed {
-		uri += "/ungrouped"
-	}
 
 	bytes, err := doGet(uri)
 	if err != nil {

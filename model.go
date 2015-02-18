@@ -536,9 +536,9 @@ type CopyrightObject struct {
 }
 
 type ClosingsResponse struct {
-	Count              ClsCount         `json:"count"`
-	Institutions       []ClsInstitution `json:"institutions"`
-	ClosedInstitutions []ClsInstitution `json:"closed_institutions"`
+	Count              ClsCount                    `json:"count"`
+	Institutions       map[string][]ClsInstitution `json:"institutions,omitempty"`
+	ClosedInstitutions map[string][]ClsInstitution `json:"closed_institutions,omitempty"`
 }
 
 type ClsCount struct {
