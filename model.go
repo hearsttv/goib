@@ -553,6 +553,7 @@ type ClsInstitution struct {
 	County          string `json:"county"`
 	State           string `json:"state"`
 	ProviderID      string `json:"provider_id"`
+	Status          string `json:"status"`
 }
 
 // Settings represents a collection of settings
