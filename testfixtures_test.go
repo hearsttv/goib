@@ -1610,3 +1610,18 @@ var teaserJSON = `
 
 var expectedTeaserCOID = 30678220
 var expectedTeaserTeaserTitle = "Orlando and Central Florida Weather Radar"
+
+var closingInstJSON = `
+{
+  "institution" : {
+    "name" : "Anne Arundel County Schools",
+    "status" : "Friday: 2 Hour Delay; No AM half-day PreK/ECI",
+    "publication_date" : 1424385395,
+    "city" : "Annapolis",
+    "county" : "Anne Arundel",
+    "state" : "MD",
+    "provider_id" : "urn:ibsys:institution:bal:ibstandard:31"
+  },
+  "type" : "CLOSINGS"
+}
+`

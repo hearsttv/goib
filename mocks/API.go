@@ -49,8 +49,8 @@ func (m *API) ContentItems(channel string, contentID int, params url.Values) ([]
 
 	return r0, r1
 }
-func (m *API) Closings(channel string, filter goib.ClosingsFilter) (goib.ClosingsResponse, error) {
-	ret := m.Called(channel, filter)
+func (m *API) Closings(channel string, filter goib.ClosingsFilter, providerID ...string) (goib.ClosingsResponse, error) {
+	ret := m.Called(channel, filter, providerID)
 
 	r0 := ret.Get(0).(goib.ClosingsResponse)
 	r1 := ret.Error(1)

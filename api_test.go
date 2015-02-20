@@ -192,6 +192,22 @@ func TestClosingsClosed(t *testing.T) {
 	assert.Equal(t, 3, len(closings.ClosedInstitutions["a"]))
 }
 
+func Test_Closing(t *testing.T) {
+	svr, a := setupServerAndAPI(closingInstJSON)
+	defer svr.Close()
+
+	inst, err := a.Closings("someKrazyChannel", ClosingsInst, "provider_id")
+
+	assert.Nil(t, err, "err should be nil")
+	assert.Equal(t, "Anne Arundel County Schools", inst.Institution.Name)
+	assert.Equal(t, 1424385395, inst.Institution.PublicationDate)
+	assert.Equal(t, "Annapolis", inst.Institution.City)
+	assert.Equal(t, "Anne Arundel", inst.Institution.County)
+	assert.Equal(t, "MD", inst.Institution.State)
+	assert.Equal(t, "urn:ibsys:institution:bal:ibstandard:31", inst.Institution.ProviderID)
+	assert.Equal(t, "Friday: 2 Hour Delay; No AM half-day PreK/ECI", inst.Institution.Status)
+}
+
 func TestContentAPIShouldParseMapType(t *testing.T) {
 	svr, a := setupServerAndAPI(mapJSON)
 	defer svr.Close()

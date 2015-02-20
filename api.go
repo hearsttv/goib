@@ -2,7 +2,6 @@ package goib
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -26,7 +25,7 @@ type API interface {
 	Content(channel string, contentID int, params url.Values) (Item, error)
 	ContentMedia(channel string, contentID int, params url.Values) ([]Item, error)
 	ContentItems(channel string, contentID int, params url.Values) ([]Item, error)
-	Closings(channel string, filter ClosingsFilter) (ClosingsResponse, error)
+	Closings(channel string, filter ClosingsFilter, providerID ...string) (ClosingsResponse, error)
 }
 
 // NewAPI constructs an API object for the given channel
@@ -135,14 +134,13 @@ func (api *api) ContentItems(channel string, contentID int, params url.Values) (
 	return unmarshalArrayResponse(bytes)
 }
 
-func (api *api) Closings(channel string, filter ClosingsFilter) (ClosingsResponse, error) {
-	if filter == ClosingsInst {
-		return ClosingsResponse{}, errors.New("institution filter not yet supported")
-	}
-
+func (api *api) Closings(channel string, filter ClosingsFilter, providerID ...string) (ClosingsResponse, error) {
 	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
 	uri = strings.Replace(uri, "{service}", "closings", 1)
 	uri += "/" + string(filter)
+	if filter == ClosingsInst && len(providerID) > 0 {
+		uri += "/id/" + providerID[0]
+	}
 
 	bytes, err := doGet(uri)
 	if err != nil {
@@ -198,6 +196,11 @@ func unmarshalArrayResponse(bytes []byte) (result []Item, err error) {
 }
 
 func unmarshalClosingsResponse(bytes []byte) (result ClosingsResponse, err error) {
+	err = json.Unmarshal(bytes, &result)
+	return result, err
+}
+
+func unmarshalClsInstitution(bytes []byte) (result ClsInstitution, err error) {
 	err = json.Unmarshal(bytes, &result)
 	return result, err
 }

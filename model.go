@@ -539,6 +539,7 @@ type ClosingsResponse struct {
 	Count              ClsCount                    `json:"count"`
 	Institutions       map[string][]ClsInstitution `json:"institutions,omitempty"`
 	ClosedInstitutions map[string][]ClsInstitution `json:"closed_institutions,omitempty"`
+	Institution        ClsInstitution              `json:"institution"`
 }
 
 type ClsCount struct {
