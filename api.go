@@ -265,6 +265,15 @@ func unmarshalArticle(r Receiver) (a *Article) {
 		}
 	}
 
+	for _, rInner := range r.RelatedMedia {
+		item, err := unmarshalReceiver(rInner)
+		if err != nil {
+			log.Warn("error unmarshalling related media sub-object: %v", err)
+		} else {
+			a.RelatedMedia = append(a.RelatedMedia, item)
+		}
+	}
+
 	return a
 }
 

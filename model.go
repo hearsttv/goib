@@ -72,6 +72,7 @@ type Receiver struct {
 	Caption             string              `json:"caption"`
 	URLs                []ImageURL          `json:"urls"`
 	Media               []Receiver          `json:"media"`
+	RelatedMedia        []Receiver          `json:"related_media"`
 	AuthorObjects       []Person            `json:"author_objects"`
 	Settings            []map[string]string `json:"settings"`
 	Copyright           string              `json:"copyright"`
@@ -153,6 +154,7 @@ type Article struct {
 	Text                string   `json:"article_text"`
 	Authors             []Person `json:"author_objects"`
 	Media               []Item   `json:"media"`
+	RelatedMedia        []Item   `json:"related_media"`
 	CanonicalURL        string   `json:"canonical_url"`
 	URL                 string   `json:"url"`
 	NavContext          []string `json:"navigation_context"`
