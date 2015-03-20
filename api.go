@@ -256,6 +256,7 @@ func unmarshalArticle(r Receiver) (a *Article) {
 	a.NavContext = r.NavContext
 	a.AnalyticsCategory = r.AnalyticsCategory
 	a.AdvertisingCategory = r.AdvertisingCategory
+	a.Dateline = r.Dateline
 	for _, rInner := range r.Media {
 		item, err := unmarshalReceiver(rInner)
 		if err != nil {
