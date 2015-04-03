@@ -252,6 +252,7 @@ type Image struct {
 	URLs                []ImageURL        `json:"urls"`
 	Copyright           string            `json:"copyright"`
 	CopyrightObjects    []CopyrightObject `json:"copyright_objects"`
+	URL                 string            `json:"url"`
 	CanonicalURL        string            `json:"canonical_url"`
 	NavContext          []string          `json:"navigation_context"`
 	AnalyticsCategory   string            `json:"analytics_category"`
