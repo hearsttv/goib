@@ -93,6 +93,7 @@ type Receiver struct {
 	AnalyticsCategory   string              `json:"analytics_category"`
 	AdvertisingCategory string              `json:"advertising_category"`
 	Dateline            string              `json:"author_location"`
+	ExternalID          string              `json:"external_id"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -379,6 +380,7 @@ type Livevideo struct {
 	URL                 string   `json:"url"`
 	Media               []Item   `json:"media"`
 	Stream              string   `json:"stream"`
+	ExternalID          string   `json:"external_id"`
 	NavContext          []string `json:"navigation_context"`
 	AnalyticsCategory   string   `json:"analytics_category"`
 	AdvertisingCategory string   `json:"advertising_category"`

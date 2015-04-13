@@ -319,6 +319,7 @@ func unmarshalLivevideo(r Receiver) (l *Livevideo) {
 	l.CanonicalURL = r.CanonicalURL
 	l.URL = r.URL
 	l.Stream = r.Stream
+	l.ExternalID = r.ExternalID
 	l.NavContext = r.NavContext
 	l.AnalyticsCategory = r.AnalyticsCategory
 	l.AdvertisingCategory = r.AdvertisingCategory
