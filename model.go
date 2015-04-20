@@ -470,8 +470,11 @@ func (e *ExternalContent) GetPublicationDate() int64 {
 
 // HTMLContent represents a content object that contains a raw HTML payload
 type HTMLContent struct {
-	ContentID int    `json:"content_id"`
-	Code      string `json:"code"`
+	ContentID           int      `json:"content_id"`
+	Code                string   `json:"code"`
+	NavContext          []string `json:"navigation_context"`
+	AnalyticsCategory   string   `json:"analytics_category"`
+	AdvertisingCategory string   `json:"advertising_category"`
 }
 
 func (h *HTMLContent) GetType() ItemType {
