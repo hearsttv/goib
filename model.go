@@ -415,6 +415,8 @@ type Map struct {
 	Subheadline         string   `json:"subheadline"`
 	StaticMap           string   `json:"static_map"`
 	InteractiveMap      string   `json:"interactive_map"`
+	CanonicalURL        string   `json:"canonical_url"`
+	URL                 string   `json:"url"`
 	NavContext          []string `json:"navigation_context"`
 	AnalyticsCategory   string   `json:"analytics_category"`
 	AdvertisingCategory string   `json:"advertising_category"`

@@ -402,6 +402,8 @@ func unmarshalMap(r Receiver) (m *Map) {
 	m.TeaserText = r.TeaserText
 	m.StaticMap = r.StaticMap
 	m.InteractiveMap = r.InteractiveMap
+	m.CanonicalURL = r.CanonicalURL
+	m.URL = r.URL
 	m.NavContext = r.NavContext
 	m.AnalyticsCategory = r.AnalyticsCategory
 	m.AdvertisingCategory = r.AdvertisingCategory
