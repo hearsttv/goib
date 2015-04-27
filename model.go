@@ -22,8 +22,10 @@ const (
 	LivevideoType = "LIVEVIDEO"
 	// AudioType item type
 	AudioType = "AUDIO"
-	// ExternalType external content item type
-	ExternalType = "EXTERNAL_CONTENT"
+	// ExternalContentType external content item type
+	ExternalContentType = "EXTERNAL_CONTENT"
+	// ExternalLinkType external content item type
+	ExternalLinkType = "EXTERNAL_LINK"
 	// ClosingsType item type
 	ClosingsType = "CLOSINGS"
 	// HTMLType HTML item type
@@ -451,7 +453,7 @@ type ExternalContent struct {
 }
 
 func (e *ExternalContent) GetType() ItemType {
-	return ExternalType
+	return ExternalContentType
 }
 
 func (e *ExternalContent) GetContentID() int {
@@ -467,6 +469,36 @@ func (e *ExternalContent) GetTeaserText() string {
 }
 
 func (e *ExternalContent) GetPublicationDate() int64 {
+	return 0
+}
+
+// ExternalLink represents an external link object
+type ExternalLink struct {
+	ContentID    int    `json:"content_id"`
+	TeaserTitle  string `json:"teaser_title"`
+	TeaserText   string `json:"teaser_text"`
+	CanonicalURL string `json:"canonical_url"`
+	URL          string `json:"url"`
+	Media        []Item `json:"media"`
+}
+
+func (e *ExternalLink) GetType() ItemType {
+	return ExternalLinkType
+}
+
+func (e *ExternalLink) GetContentID() int {
+	return e.ContentID
+}
+
+func (e *ExternalLink) GetTeaserTitle() string {
+	return e.TeaserTitle
+}
+
+func (e *ExternalLink) GetTeaserText() string {
+	return e.TeaserText
+}
+
+func (e *ExternalLink) GetPublicationDate() int64 {
 	return 0
 }
 

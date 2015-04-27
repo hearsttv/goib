@@ -221,8 +221,10 @@ func unmarshalReceiver(r Receiver) (Item, error) {
 		return unmarshalGallery(r), nil
 	case MapType:
 		return unmarshalMap(r), nil
-	case ExternalType:
+	case ExternalContentType:
 		return unmarshalExternalContent(r), nil
+	case ExternalLinkType:
+		return unmarshalExternalLink(r), nil
 	case HTMLType:
 		return unmarshalHTMLContent(r), nil
 	case PersonType:
@@ -461,6 +463,25 @@ func unmarshalExternalContent(r Receiver) (e *ExternalContent) {
 	e.TeaserTitle = getTeaserTitle(&r)
 	e.ExternalContent = r.ExternalContent
 	e.Struct = r.Struct
+	return e
+}
+
+func unmarshalExternalLink(r Receiver) (e *ExternalLink) {
+	e = &ExternalLink{}
+	e.ContentID = r.ContentID
+	e.TeaserTitle = getTeaserTitle(&r)
+	e.TeaserText = r.TeaserText
+	e.CanonicalURL = r.CanonicalURL
+	e.URL = r.URL
+	for _, rInner := range r.Media {
+		item, err := unmarshalReceiver(rInner)
+		if err != nil {
+			log.Warn("error unmarshalling sub-object: %v", err)
+		} else {
+			e.Media = append(e.Media, item)
+		}
+	}
+
 	return e
 }
 

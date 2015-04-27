@@ -75,7 +75,7 @@ func iterateMediaRecursive(node Item, parent *Collection, ch chan *MediaNode, de
 	}
 
 	switch t := node.(type) {
-	case *Article, *Video, *Livevideo, *Image, *Gallery, *Map, *Audio, *ExternalContent, *HTMLContent, *Person, *Teaser:
+	case *Article, *Video, *Livevideo, *Image, *Gallery, *Map, *Audio, *ExternalContent, *ExternalLink, *HTMLContent, *Person, *Teaser:
 		ch <- &MediaNode{node, parent}
 	case *Collection:
 		if t.Items == nil || len(t.Items) == 0 {
