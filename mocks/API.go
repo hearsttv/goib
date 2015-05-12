@@ -20,7 +20,10 @@ func (m *API) Entry(channel string, entrytype string, params url.Values) (goib.I
 func (m *API) Search(channel string, query string, params url.Values) (*goib.Collection, error) {
 	ret := m.Called(channel, query, params)
 
-	r0 := ret.Get(0).(*goib.Collection)
+	var r0 *goib.Collection
+	if ret.Get(0) != nil {
+		r0 = ret.Get(0).(*goib.Collection)
+	}
 	r1 := ret.Error(1)
 
 	return r0, r1
@@ -36,7 +39,10 @@ func (m *API) Content(channel string, contentID int, params url.Values) (goib.It
 func (m *API) ContentMedia(channel string, contentID int, params url.Values) ([]goib.Item, error) {
 	ret := m.Called(channel, contentID, params)
 
-	r0 := ret.Get(0).([]goib.Item)
+	var r0 []goib.Item
+	if ret.Get(0) != nil {
+		r0 = ret.Get(0).([]goib.Item)
+	}
 	r1 := ret.Error(1)
 
 	return r0, r1
@@ -44,7 +50,10 @@ func (m *API) ContentMedia(channel string, contentID int, params url.Values) ([]
 func (m *API) ContentItems(channel string, contentID int, params url.Values) ([]goib.Item, error) {
 	ret := m.Called(channel, contentID, params)
 
-	r0 := ret.Get(0).([]goib.Item)
+	var r0 []goib.Item
+	if ret.Get(0) != nil {
+		r0 = ret.Get(0).([]goib.Item)
+	}
 	r1 := ret.Error(1)
 
 	return r0, r1

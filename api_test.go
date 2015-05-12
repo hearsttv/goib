@@ -1,6 +1,7 @@
 package goib
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -200,7 +201,7 @@ func Test_Closing(t *testing.T) {
 
 	assert.Nil(t, err, "err should be nil")
 	assert.Equal(t, "Anne Arundel County Schools", inst.Institution.Name)
-	assert.Equal(t, 1424385395, inst.Institution.PublicationDate)
+	assert.Equal(t, int64(1424385395), inst.Institution.PublicationDate)
 	assert.Equal(t, "Annapolis", inst.Institution.City)
 	assert.Equal(t, "Anne Arundel", inst.Institution.County)
 	assert.Equal(t, "MD", inst.Institution.State)
@@ -287,6 +288,21 @@ func TestContentAPIShouldParseTeaserType(t *testing.T) {
 	assert.Equal(t, expectedTeaserTeaserTitle, tease.TeaserTitle)
 	assert.Equal(t, 1, len(tease.Media))
 }
+
+func Test_unmarshalGalleryCaptions(t *testing.T) {
+	var r Receiver
+
+	err := json.Unmarshal([]byte(galleryJSON), &r)
+	assert.Nil(t, err)
+
+	captions := unmarshalGalleryCaptions(r)
+	assert.Equal(t, 3, len(captions))
+	caption, ok := captions[29283346]
+	assert.True(t, ok)
+	assert.Equal(t, "Foo bar", caption)
+}
+
+//-------------------------
 
 func setupServerAndAPI(cannedResponse string) (*httptest.Server, API) {
 	testSvr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

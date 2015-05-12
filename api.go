@@ -14,6 +14,8 @@ import (
 
 const deliveryURL = "http://ibsys-api.ib-prod.com/v2.0/delivery/{channel}/json/{service}"
 
+//const deliveryURL = "http://api-delivery-htv.ib-prod.com/v2.0/delivery/{channel}/json/{service}"
+
 var log = l5g.Logger(l5g.LogAll)
 
 type httpClient func(url string) ([]byte, error)
@@ -392,6 +394,8 @@ func unmarshalGallery(r Receiver) (g *Gallery) {
 		}
 	}
 
+	g.Captions = unmarshalGalleryCaptions(r)
+
 	return g
 }
 
@@ -583,4 +587,42 @@ func unmarshalTeaser(r Receiver) (t *Teaser) {
 	}
 
 	return t
+}
+
+func unmarshalGalleryCaptions(r Receiver) map[int]string {
+	result := make(map[int]string)
+
+	strct := r.Struct
+	if strct == nil || len(strct) < 1 {
+		return result
+	}
+	dataMap, ok := strct[0].(map[string]interface{})
+	if !ok {
+		return result
+	}
+	items, ok := dataMap["items"]
+	if !ok {
+		return result
+	}
+	captionMap, ok := items.(map[string]interface{})
+	if !ok {
+		return result
+	}
+	for k, v := range captionMap {
+		coid, err := strconv.Atoi(k)
+		if err != nil {
+			continue
+		}
+		capmap, ok := v.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		caption, ok := capmap["caption"].(string)
+		if !ok {
+			continue
+		}
+		result[coid] = caption
+	}
+
+	return result
 }

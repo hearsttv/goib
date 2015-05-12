@@ -293,22 +293,23 @@ type ImageURL struct {
 
 // Gallery represents an image gallery
 type Gallery struct {
-	ContentID           int      `json:"content_id"`
-	TeaserTitle         string   `json:"teaser_title"`
-	TeaserText          string   `json:"teaser_text"`
-	TeaserImage         string   `json:"teaser_image"`
-	PublicationDate     int64    `json:"publication_date"`
-	Authors             []Person `json:"author_objects"`
-	Keywords            string   `json:"keywords"`
-	Title               string   `json:"title"`
-	Subheadline         string   `json:"subheadline"`
-	Media               []Item   `json:"media"`
-	Items               []Item   `json:"items"`
-	CanonicalURL        string   `json:"canonical_url"`
-	URL                 string   `json:"url"`
-	NavContext          []string `json:"navigation_context"`
-	AnalyticsCategory   string   `json:"analytics_category"`
-	AdvertisingCategory string   `json:"advertising_category"`
+	ContentID           int            `json:"content_id"`
+	TeaserTitle         string         `json:"teaser_title"`
+	TeaserText          string         `json:"teaser_text"`
+	TeaserImage         string         `json:"teaser_image"`
+	PublicationDate     int64          `json:"publication_date"`
+	Authors             []Person       `json:"author_objects"`
+	Keywords            string         `json:"keywords"`
+	Title               string         `json:"title"`
+	Subheadline         string         `json:"subheadline"`
+	Media               []Item         `json:"media"`
+	Items               []Item         `json:"items"`
+	Captions            map[int]string `json:"captions"`
+	CanonicalURL        string         `json:"canonical_url"`
+	URL                 string         `json:"url"`
+	NavContext          []string       `json:"navigation_context"`
+	AnalyticsCategory   string         `json:"analytics_category"`
+	AdvertisingCategory string         `json:"advertising_category"`
 }
 
 func (g *Gallery) GetType() ItemType {

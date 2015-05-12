@@ -669,6 +669,20 @@ var galleryJSON = `
   "copyright" : "",
   "publication_date" : 1414009612,
   "struct" : [ {
+    "items" : {
+      "29283346" : {
+        "caption" : "Foo bar"
+      },
+      "29283342" : {
+        "caption" : "Baz qux"
+      },
+      "29283238" : {
+        "caption" : "May 10: Performance artist Chris Burden, referenced in David Bowie's song \"Joe the Lion,\" best known for the 1971 performance piece \"Shoot,\" in which an assistant shot him with a rifle."
+      }, 
+      "dingle" : {
+        "fingle" : "horp dorp"
+      }
+    }
   } ],
   "subheadline" : "",
   "items" : [ {
