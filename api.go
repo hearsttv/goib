@@ -28,6 +28,7 @@ type API interface {
 	ContentMedia(channel string, contentID int, params url.Values) ([]Item, error)
 	ContentItems(channel string, contentID int, params url.Values) ([]Item, error)
 	Closings(channel string, filter ClosingsFilter, providerID ...string) (ClosingsResponse, error)
+	UnmarshalReceiver(r Receiver) (Item, error)
 }
 
 // NewAPI constructs an API object for the given channel
@@ -55,7 +56,7 @@ func (api *api) Entry(channel string, entrytype string, params url.Values) (entr
 		return entry, err
 	}
 
-	return unmarshalResponse(bytes)
+	return api.unmarshalResponse(bytes)
 }
 
 func (api *api) Search(channel string, query string, params url.Values) (s *Collection, err error) {
@@ -73,7 +74,7 @@ func (api *api) Search(channel string, query string, params url.Values) (s *Coll
 		return s, err
 	}
 
-	r, err := unmarshalResponse(bytes)
+	r, err := api.unmarshalResponse(bytes)
 	if err != nil {
 		return s, err
 	}
@@ -99,7 +100,7 @@ func (api *api) Content(channel string, contentID int, params url.Values) (Item,
 		return nil, err
 	}
 
-	return unmarshalResponse(bytes)
+	return api.unmarshalResponse(bytes)
 }
 
 func (api *api) ContentMedia(channel string, contentID int, params url.Values) ([]Item, error) {
@@ -116,7 +117,7 @@ func (api *api) ContentMedia(channel string, contentID int, params url.Values) (
 		return nil, err
 	}
 
-	return unmarshalArrayResponse(bytes)
+	return api.unmarshalArrayResponse(bytes)
 }
 
 func (api *api) ContentItems(channel string, contentID int, params url.Values) ([]Item, error) {
@@ -133,7 +134,7 @@ func (api *api) ContentItems(channel string, contentID int, params url.Values) (
 		return nil, err
 	}
 
-	return unmarshalArrayResponse(bytes)
+	return api.unmarshalArrayResponse(bytes)
 }
 
 func (api *api) Closings(channel string, filter ClosingsFilter, providerID ...string) (ClosingsResponse, error) {
@@ -164,7 +165,7 @@ func doGet(url string) (result []byte, err error) {
 	return result, err
 }
 
-func unmarshalResponse(bytes []byte) (Item, error) {
+func (api *api) unmarshalResponse(bytes []byte) (Item, error) {
 	var r Receiver
 
 	err := json.Unmarshal(bytes, &r)
@@ -172,12 +173,12 @@ func unmarshalResponse(bytes []byte) (Item, error) {
 		return nil, err
 	}
 
-	response, err := unmarshalReceiver(r)
+	response, err := api.UnmarshalReceiver(r)
 
 	return response, err
 }
 
-func unmarshalArrayResponse(bytes []byte) (result []Item, err error) {
+func (api *api) unmarshalArrayResponse(bytes []byte) (result []Item, err error) {
 	var ra []Receiver
 
 	err = json.Unmarshal(bytes, &ra)
@@ -186,7 +187,7 @@ func unmarshalArrayResponse(bytes []byte) (result []Item, err error) {
 	}
 
 	for _, r := range ra {
-		item, err := unmarshalReceiver(r)
+		item, err := api.UnmarshalReceiver(r)
 		if err != nil {
 			log.Warn("error unmarshalling item from array: %v", err)
 		} else {
@@ -202,49 +203,49 @@ func unmarshalClosingsResponse(bytes []byte) (result ClosingsResponse, err error
 	return result, err
 }
 
-func unmarshalClsInstitution(bytes []byte) (result ClsInstitution, err error) {
+func (api *api) unmarshalClsInstitution(bytes []byte) (result ClsInstitution, err error) {
 	err = json.Unmarshal(bytes, &result)
 	return result, err
 }
 
-func unmarshalReceiver(r Receiver) (Item, error) {
+func (api *api) UnmarshalReceiver(r Receiver) (Item, error) {
 	switch r.Type {
 	case ArticleType:
-		return unmarshalArticle(r), nil
+		return api.unmarshalArticle(r), nil
 	case VideoType:
-		return unmarshalVideo(r), nil
+		return api.unmarshalVideo(r), nil
 	case CollectionType:
-		return unmarshalCollection(r), nil
+		return api.unmarshalCollection(r), nil
 	case SearchType:
-		return unmarshalSearch(r), nil
+		return api.unmarshalSearch(r), nil
 	case ImageType:
 		return unmarshalImage(r), nil
 	case GalleryType:
-		return unmarshalGallery(r), nil
+		return api.unmarshalGallery(r), nil
 	case MapType:
 		return unmarshalMap(r), nil
 	case ExternalContentType:
 		return unmarshalExternalContent(r), nil
 	case ExternalLinkType:
-		return unmarshalExternalLink(r), nil
+		return api.unmarshalExternalLink(r), nil
 	case HTMLType:
 		return unmarshalHTMLContent(r), nil
 	case PersonType:
 		return unmarshalPerson(r), nil
 	case LivevideoType:
-		return unmarshalLivevideo(r), nil
+		return api.unmarshalLivevideo(r), nil
 	case SettingsType:
 		return unmarshalSettings(r), nil
 	case AudioType:
-		return unmarshalAudio(r), nil
+		return api.unmarshalAudio(r), nil
 	case TeaserType:
-		return unmarshalTeaser(r), nil
+		return api.unmarshalTeaser(r), nil
 	default:
 		return nil, fmt.Errorf("unknonwn response type: %s", r.Type)
 	}
 }
 
-func unmarshalArticle(r Receiver) (a *Article) {
+func (api *api) unmarshalArticle(r Receiver) (a *Article) {
 	a = &Article{}
 	a.ContentID = r.ContentID
 	a.TeaserTitle = getTeaserTitle(&r)
@@ -262,7 +263,7 @@ func unmarshalArticle(r Receiver) (a *Article) {
 	a.AdvertisingCategory = r.AdvertisingCategory
 	a.Dateline = r.Dateline
 	for _, rInner := range r.Media {
-		item, err := unmarshalReceiver(rInner)
+		item, err := api.UnmarshalReceiver(rInner)
 		if err != nil {
 			log.Warn("error unmarshalling sub-object: %v", err)
 		} else {
@@ -271,7 +272,7 @@ func unmarshalArticle(r Receiver) (a *Article) {
 	}
 
 	for _, rInner := range r.RelatedMedia {
-		item, err := unmarshalReceiver(rInner)
+		item, err := api.UnmarshalReceiver(rInner)
 		if err != nil {
 			log.Warn("error unmarshalling related media sub-object: %v", err)
 		} else {
@@ -282,7 +283,7 @@ func unmarshalArticle(r Receiver) (a *Article) {
 	return a
 }
 
-func unmarshalVideo(r Receiver) (v *Video) {
+func (api *api) unmarshalVideo(r Receiver) (v *Video) {
 	v = &Video{}
 	v.ContentID = r.ContentID
 	v.TeaserTitle = getTeaserTitle(&r)
@@ -299,7 +300,7 @@ func unmarshalVideo(r Receiver) (v *Video) {
 	v.AnalyticsCategory = r.AnalyticsCategory
 	v.AdvertisingCategory = r.AdvertisingCategory
 	for _, rInner := range r.Media {
-		item, err := unmarshalReceiver(rInner)
+		item, err := api.UnmarshalReceiver(rInner)
 		if err != nil {
 			log.Warn("error unmarshalling sub-object: %v", err)
 		} else {
@@ -310,7 +311,7 @@ func unmarshalVideo(r Receiver) (v *Video) {
 	return v
 }
 
-func unmarshalLivevideo(r Receiver) (l *Livevideo) {
+func (api *api) unmarshalLivevideo(r Receiver) (l *Livevideo) {
 	l = &Livevideo{}
 	l.ContentID = r.ContentID
 	l.TeaserTitle = getTeaserTitle(&r)
@@ -328,7 +329,7 @@ func unmarshalLivevideo(r Receiver) (l *Livevideo) {
 	l.AnalyticsCategory = r.AnalyticsCategory
 	l.AdvertisingCategory = r.AdvertisingCategory
 	for _, rInner := range r.Media {
-		item, err := unmarshalReceiver(rInner)
+		item, err := api.UnmarshalReceiver(rInner)
 		if err != nil {
 			log.Warn("error unmarshalling sub-object: %v", err)
 		} else {
@@ -362,7 +363,7 @@ func unmarshalImage(r Receiver) (i *Image) {
 	return i
 }
 
-func unmarshalGallery(r Receiver) (g *Gallery) {
+func (api *api) unmarshalGallery(r Receiver) (g *Gallery) {
 	g = &Gallery{}
 	g.ContentID = r.ContentID
 	g.TeaserTitle = getTeaserTitle(&r)
@@ -378,7 +379,7 @@ func unmarshalGallery(r Receiver) (g *Gallery) {
 	g.AnalyticsCategory = r.AnalyticsCategory
 	g.AdvertisingCategory = r.AdvertisingCategory
 	for _, rInner := range r.Media {
-		item, err := unmarshalReceiver(rInner)
+		item, err := api.UnmarshalReceiver(rInner)
 		if err != nil {
 			log.Warn("error unmarshalling sub-object: %v", err)
 		} else {
@@ -386,7 +387,7 @@ func unmarshalGallery(r Receiver) (g *Gallery) {
 		}
 	}
 	for _, rInner := range r.Items {
-		item, err := unmarshalReceiver(rInner)
+		item, err := api.UnmarshalReceiver(rInner)
 		if err != nil {
 			log.Warn("error unmarshalling sub-object: %v", err)
 		} else {
@@ -417,7 +418,7 @@ func unmarshalMap(r Receiver) (m *Map) {
 	return m
 }
 
-func unmarshalCollection(r Receiver) (c *Collection) {
+func (api *api) unmarshalCollection(r Receiver) (c *Collection) {
 	c = &Collection{}
 	c.ContentID = r.ContentID
 	c.TeaserTitle = getTeaserTitle(&r)
@@ -426,7 +427,7 @@ func unmarshalCollection(r Receiver) (c *Collection) {
 	c.TotalCount = r.TotalCount
 	c.StartIndex = r.StartIndex
 	for _, rInner := range r.Items {
-		item, err := unmarshalReceiver(rInner)
+		item, err := api.UnmarshalReceiver(rInner)
 		if err != nil {
 			log.Warn("error unmarshalling sub-object: %v", err)
 		} else {
@@ -444,13 +445,13 @@ func unmarshalCollection(r Receiver) (c *Collection) {
 	return c
 }
 
-func unmarshalSearch(r Receiver) (s *Collection) {
+func (api *api) unmarshalSearch(r Receiver) (s *Collection) {
 	s = &Collection{}
 	s.Keywords = r.Keywords
 	s.TotalCount = r.TotalCount
 	s.StartIndex = r.StartIndex
 	for _, rInner := range r.Items {
-		item, err := unmarshalReceiver(rInner)
+		item, err := api.UnmarshalReceiver(rInner)
 		if err != nil {
 			log.Warn("error unmarshalling sub-object: %v", err)
 		} else {
@@ -470,7 +471,7 @@ func unmarshalExternalContent(r Receiver) (e *ExternalContent) {
 	return e
 }
 
-func unmarshalExternalLink(r Receiver) (e *ExternalLink) {
+func (api *api) unmarshalExternalLink(r Receiver) (e *ExternalLink) {
 	e = &ExternalLink{}
 	e.ContentID = r.ContentID
 	e.TeaserTitle = getTeaserTitle(&r)
@@ -478,7 +479,7 @@ func unmarshalExternalLink(r Receiver) (e *ExternalLink) {
 	e.CanonicalURL = r.CanonicalURL
 	e.URL = r.URL
 	for _, rInner := range r.Media {
-		item, err := unmarshalReceiver(rInner)
+		item, err := api.UnmarshalReceiver(rInner)
 		if err != nil {
 			log.Warn("error unmarshalling sub-object: %v", err)
 		} else {
@@ -540,7 +541,7 @@ func unmarshalPerson(r Receiver) (p *Person) {
 	return p
 }
 
-func unmarshalAudio(r Receiver) (a *Audio) {
+func (api *api) unmarshalAudio(r Receiver) (a *Audio) {
 	a = &Audio{}
 	a.ContentID = r.ContentID
 	a.Title = r.Title
@@ -556,7 +557,7 @@ func unmarshalAudio(r Receiver) (a *Audio) {
 	a.AnalyticsCategory = r.AnalyticsCategory
 	a.AdvertisingCategory = r.AdvertisingCategory
 	for _, rInner := range r.Media {
-		item, err := unmarshalReceiver(rInner)
+		item, err := api.UnmarshalReceiver(rInner)
 		if err != nil {
 			log.Warn("error unmarshalling sub-object: %v", err)
 		} else {
@@ -567,7 +568,7 @@ func unmarshalAudio(r Receiver) (a *Audio) {
 	return a
 }
 
-func unmarshalTeaser(r Receiver) (t *Teaser) {
+func (api *api) unmarshalTeaser(r Receiver) (t *Teaser) {
 	t = &Teaser{}
 	t.ContentID = r.ContentID
 	t.Title = r.Title
@@ -578,7 +579,7 @@ func unmarshalTeaser(r Receiver) (t *Teaser) {
 	t.AnalyticsCategory = r.AnalyticsCategory
 	t.AdvertisingCategory = r.AdvertisingCategory
 	for _, rInner := range r.Media {
-		item, err := unmarshalReceiver(rInner)
+		item, err := api.UnmarshalReceiver(rInner)
 		if err != nil {
 			log.Warn("error unmarshalling sub-object: %v", err)
 		} else {
