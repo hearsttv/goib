@@ -247,6 +247,7 @@ func (api *api) UnmarshalReceiver(r Receiver) (Item, error) {
 
 func (api *api) unmarshalArticle(r Receiver) (a *Article) {
 	a = &Article{}
+	a.Type = r.Type
 	a.ContentID = r.ContentID
 	a.TeaserTitle = getTeaserTitle(&r)
 	a.TeaserText = r.TeaserText
@@ -285,6 +286,7 @@ func (api *api) unmarshalArticle(r Receiver) (a *Article) {
 
 func (api *api) unmarshalVideo(r Receiver) (v *Video) {
 	v = &Video{}
+	v.Type = r.Type
 	v.ContentID = r.ContentID
 	v.TeaserTitle = getTeaserTitle(&r)
 	v.TeaserText = r.TeaserText
@@ -313,6 +315,7 @@ func (api *api) unmarshalVideo(r Receiver) (v *Video) {
 
 func (api *api) unmarshalLivevideo(r Receiver) (l *Livevideo) {
 	l = &Livevideo{}
+	l.Type = r.Type
 	l.ContentID = r.ContentID
 	l.TeaserTitle = getTeaserTitle(&r)
 	l.TeaserText = r.TeaserText
@@ -342,6 +345,7 @@ func (api *api) unmarshalLivevideo(r Receiver) (l *Livevideo) {
 
 func unmarshalImage(r Receiver) (i *Image) {
 	i = &Image{}
+	i.Type = r.Type
 	i.ContentID = r.ContentID
 	i.Title = r.Title
 	i.Subheadline = r.Subheadline
@@ -365,6 +369,7 @@ func unmarshalImage(r Receiver) (i *Image) {
 
 func (api *api) unmarshalGallery(r Receiver) (g *Gallery) {
 	g = &Gallery{}
+	g.Type = r.Type
 	g.ContentID = r.ContentID
 	g.TeaserTitle = getTeaserTitle(&r)
 	g.TeaserText = r.TeaserText
@@ -402,6 +407,7 @@ func (api *api) unmarshalGallery(r Receiver) (g *Gallery) {
 
 func unmarshalMap(r Receiver) (m *Map) {
 	m = &Map{}
+	m.Type = r.Type
 	m.ContentID = r.ContentID
 	m.Title = r.Title
 	m.Subheadline = r.Subheadline
@@ -420,6 +426,7 @@ func unmarshalMap(r Receiver) (m *Map) {
 
 func (api *api) unmarshalCollection(r Receiver) (c *Collection) {
 	c = &Collection{}
+	c.Type = r.Type
 	c.ContentID = r.ContentID
 	c.TeaserTitle = getTeaserTitle(&r)
 	c.CollectionName = r.CollectionName
@@ -447,6 +454,7 @@ func (api *api) unmarshalCollection(r Receiver) (c *Collection) {
 
 func (api *api) unmarshalSearch(r Receiver) (s *Collection) {
 	s = &Collection{}
+	s.Type = s.GetType()
 	s.Keywords = r.Keywords
 	s.TotalCount = r.TotalCount
 	s.StartIndex = r.StartIndex
@@ -464,6 +472,7 @@ func (api *api) unmarshalSearch(r Receiver) (s *Collection) {
 
 func unmarshalExternalContent(r Receiver) (e *ExternalContent) {
 	e = &ExternalContent{}
+	e.Type = r.Type
 	e.ContentID = r.ContentID
 	e.TeaserTitle = getTeaserTitle(&r)
 	e.ExternalContent = r.ExternalContent
@@ -473,6 +482,7 @@ func unmarshalExternalContent(r Receiver) (e *ExternalContent) {
 
 func (api *api) unmarshalExternalLink(r Receiver) (e *ExternalLink) {
 	e = &ExternalLink{}
+	e.Type = r.Type
 	e.ContentID = r.ContentID
 	e.TeaserTitle = getTeaserTitle(&r)
 	e.TeaserText = r.TeaserText
@@ -492,6 +502,7 @@ func (api *api) unmarshalExternalLink(r Receiver) (e *ExternalLink) {
 
 func unmarshalHTMLContent(r Receiver) (h *HTMLContent) {
 	h = &HTMLContent{}
+	h.Type = r.Type
 	h.ContentID = r.ContentID
 	h.Code = r.Code
 	h.NavContext = r.NavContext
@@ -520,6 +531,7 @@ func unmarshalSettings(r Receiver) (s *Settings) {
 
 func unmarshalPerson(r Receiver) (p *Person) {
 	p = &Person{}
+	p.Type = r.Type
 	p.ContentID = r.ContentID
 	p.FullName = r.FullName
 	p.Title = r.Title
@@ -543,6 +555,7 @@ func unmarshalPerson(r Receiver) (p *Person) {
 
 func (api *api) unmarshalAudio(r Receiver) (a *Audio) {
 	a = &Audio{}
+	a.Type = r.Type
 	a.ContentID = r.ContentID
 	a.Title = r.Title
 	a.Subheadline = r.Subheadline
@@ -570,6 +583,7 @@ func (api *api) unmarshalAudio(r Receiver) (a *Audio) {
 
 func (api *api) unmarshalTeaser(r Receiver) (t *Teaser) {
 	t = &Teaser{}
+	t.Type = r.Type
 	t.ContentID = r.ContentID
 	t.Title = r.Title
 	t.TeaserTitle = getTeaserTitle(&r)

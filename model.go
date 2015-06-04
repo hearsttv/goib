@@ -110,6 +110,7 @@ type Item interface {
 
 // Collection represents a collection of IB Items and metadata about those items
 type Collection struct {
+	Type                ItemType          `json:"type"`
 	ContentID           int               `json:"content_id"`
 	TeaserTitle         string            `json:"teaser_title"`
 	TeaserText          string            `json:"teaser_text"`
@@ -148,6 +149,7 @@ func (c *Collection) GetPublicationDate() int64 {
 
 // Article represents an IB article
 type Article struct {
+	Type                ItemType `json:"type"`
 	ContentID           int      `json:"content_id"`
 	TeaserTitle         string   `json:"teaser_title"`
 	TeaserText          string   `json:"teaser_text"`
@@ -189,6 +191,7 @@ func (a *Article) GetPublicationDate() int64 {
 
 // Video represents an IB video
 type Video struct {
+	Type                ItemType      `json:"type"`
 	ContentID           int           `json:"content_id"`
 	TeaserTitle         string        `json:"teaser_title"`
 	TeaserText          string        `json:"teaser_text"`
@@ -240,6 +243,7 @@ type VideoFlavor struct {
 
 // Image represents an IB image content piece
 type Image struct {
+	Type                ItemType          `json:"type"`
 	ContentID           int               `json:"content_id"`
 	TeaserTitle         string            `json:"teaser_title"`
 	TeaserText          string            `json:"teaser_text"`
@@ -293,6 +297,7 @@ type ImageURL struct {
 
 // Gallery represents an image gallery
 type Gallery struct {
+	Type                ItemType       `json:"type"`
 	ContentID           int            `json:"content_id"`
 	TeaserTitle         string         `json:"teaser_title"`
 	TeaserText          string         `json:"teaser_text"`
@@ -334,6 +339,7 @@ func (g *Gallery) GetPublicationDate() int64 {
 
 // Audio represents an audio clip
 type Audio struct {
+	Type                ItemType `json:"type"`
 	ContentID           int      `json:"content_id"`
 	Title               string   `json:"title"`
 	Subheadline         string   `json:"subheadline"`
@@ -372,6 +378,7 @@ func (a *Audio) GetPublicationDate() int64 {
 
 // Livevideo represents a live stream
 type Livevideo struct {
+	Type                ItemType `json:"type"`
 	ContentID           int      `json:"content_id"`
 	Title               string   `json:"title"`
 	Subheadline         string   `json:"subheadline"`
@@ -411,6 +418,7 @@ func (l *Livevideo) GetPublicationDate() int64 {
 
 // Map represents a map
 type Map struct {
+	Type                ItemType `json:"type"`
 	ContentID           int      `json:"content_id"`
 	TeaserTitle         string   `json:"teaser_title"`
 	TeaserText          string   `json:"teaser_text"`
@@ -447,6 +455,7 @@ func (m *Map) GetPublicationDate() int64 {
 
 // ExternalContent represents an external content object
 type ExternalContent struct {
+	Type            ItemType      `json:"type"`
 	ContentID       int           `json:"content_id"`
 	TeaserTitle     string        `json:"teaser_title"`
 	ExternalContent string        `json:"external_content"`
@@ -475,12 +484,13 @@ func (e *ExternalContent) GetPublicationDate() int64 {
 
 // ExternalLink represents an external link object
 type ExternalLink struct {
-	ContentID    int    `json:"content_id"`
-	TeaserTitle  string `json:"teaser_title"`
-	TeaserText   string `json:"teaser_text"`
-	CanonicalURL string `json:"canonical_url"`
-	URL          string `json:"url"`
-	Media        []Item `json:"media"`
+	Type         ItemType `json:"type"`
+	ContentID    int      `json:"content_id"`
+	TeaserTitle  string   `json:"teaser_title"`
+	TeaserText   string   `json:"teaser_text"`
+	CanonicalURL string   `json:"canonical_url"`
+	URL          string   `json:"url"`
+	Media        []Item   `json:"media"`
 }
 
 func (e *ExternalLink) GetType() ItemType {
@@ -505,6 +515,7 @@ func (e *ExternalLink) GetPublicationDate() int64 {
 
 // HTMLContent represents a content object that contains a raw HTML payload
 type HTMLContent struct {
+	Type                ItemType `json:"type"`
 	ContentID           int      `json:"content_id"`
 	Code                string   `json:"code"`
 	NavContext          []string `json:"navigation_context"`
@@ -534,6 +545,7 @@ func (h *HTMLContent) GetPublicationDate() int64 {
 
 // Person represents an IB person
 type Person struct {
+	Type                ItemType `json:"type"`
 	ContentID           int      `json:"content_id"`
 	Blurb               string   `json:"teaser_text"`
 	FullName            string   `json:"full_name"`
@@ -630,6 +642,7 @@ func (c *Settings) GetPublicationDate() int64 {
 
 // Teaser represents ... something
 type Teaser struct {
+	Type                ItemType `json:"type"`
 	ContentID           int      `json:"content_id"`
 	Title               string   `json:"title"`
 	TeaserTitle         string   `json:"teaser_title"`
