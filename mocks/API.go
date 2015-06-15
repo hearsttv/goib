@@ -66,3 +66,11 @@ func (m *API) Closings(channel string, filter goib.ClosingsFilter, providerID ..
 
 	return r0, r1
 }
+func (m *API) UnmarshalReceiver(r goib.Receiver) (goib.Item, error) {
+	ret := m.Called(r)
+
+	r0 := ret.Get(0).(goib.Item)
+	r1 := ret.Error(1)
+
+	return r0, r1
+}
