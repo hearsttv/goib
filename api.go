@@ -156,6 +156,7 @@ func (api *api) Closings(channel string, filter ClosingsFilter, providerID ...st
 func doGet(url string) (result []byte, err error) {
 	resp, err := http.Get(url)
 	if err != nil {
+		log.Debug("got error response for URL %s: %v", url, err)
 		return nil, err
 	}
 	defer resp.Body.Close()
@@ -256,7 +257,7 @@ func (api *api) unmarshalArticle(r Receiver) (a *Article) {
 	a.Title = r.Title
 	a.Subheadline = r.Subheadline
 	a.Text = r.Text
-	a.Authors = r.AuthorObjects
+	a.Authors = r.Authors
 	a.CanonicalURL = r.CanonicalURL
 	a.URL = r.URL
 	a.NavContext = r.NavContext
@@ -294,7 +295,7 @@ func (api *api) unmarshalVideo(r Receiver) (v *Video) {
 	v.Subheadline = r.Subheadline
 	v.TeaserImage = r.TeaserImage
 	v.PublicationDate = r.PublicationDate
-	v.Authors = r.AuthorObjects
+	v.Authors = r.Authors
 	v.Flavors = r.Flavors
 	v.CanonicalURL = r.CanonicalURL
 	v.URL = r.URL
@@ -322,7 +323,7 @@ func (api *api) unmarshalLivevideo(r Receiver) (l *Livevideo) {
 	l.Title = r.Title
 	l.Subheadline = r.Subheadline
 	l.PublicationDate = r.PublicationDate
-	l.Authors = r.AuthorObjects
+	l.Authors = r.Authors
 	l.Title = r.Title
 	l.CanonicalURL = r.CanonicalURL
 	l.URL = r.URL
@@ -353,7 +354,7 @@ func unmarshalImage(r Receiver) (i *Image) {
 	i.TeaserText = r.TeaserText
 	i.TeaserImage = r.TeaserImage
 	i.PublicationDate = r.PublicationDate
-	i.Authors = r.AuthorObjects
+	i.Authors = r.Authors
 	i.Caption = r.Caption
 	i.Author = r.Author
 	i.URLs = r.URLs
@@ -375,7 +376,7 @@ func (api *api) unmarshalGallery(r Receiver) (g *Gallery) {
 	g.TeaserText = r.TeaserText
 	g.TeaserImage = r.TeaserImage
 	g.PublicationDate = r.PublicationDate
-	g.Authors = r.AuthorObjects
+	g.Authors = r.Authors
 	g.Title = r.Title
 	g.Subheadline = r.Subheadline
 	g.CanonicalURL = r.CanonicalURL
@@ -562,7 +563,7 @@ func (api *api) unmarshalAudio(r Receiver) (a *Audio) {
 	a.TeaserTitle = getTeaserTitle(&r)
 	a.TeaserText = r.TeaserText
 	a.PublicationDate = r.PublicationDate
-	a.Authors = r.AuthorObjects
+	a.Authors = r.Authors
 	a.CanonicalURL = r.CanonicalURL
 	a.URL = r.URL
 	a.Stream = r.Stream

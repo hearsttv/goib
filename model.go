@@ -75,7 +75,7 @@ type Receiver struct {
 	URLs                []ImageURL          `json:"urls"`
 	Media               []Receiver          `json:"media"`
 	RelatedMedia        []Receiver          `json:"related_media"`
-	AuthorObjects       []Person            `json:"author_objects"`
+	Authors             []Person            `json:"author_objects"`
 	Settings            []map[string]string `json:"settings"`
 	Copyright           string              `json:"copyright"`
 	CopyrightObjects    []CopyrightObject   `json:"copyright_objects"`
