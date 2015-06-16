@@ -302,6 +302,7 @@ func (api *api) unmarshalVideo(r Receiver) (v *Video) {
 	v.NavContext = r.NavContext
 	v.AnalyticsCategory = r.AnalyticsCategory
 	v.AdvertisingCategory = r.AdvertisingCategory
+	v.ShowAds = r.ShowAds
 	for _, rInner := range r.Media {
 		item, err := api.UnmarshalReceiver(rInner)
 		if err != nil {
@@ -332,6 +333,7 @@ func (api *api) unmarshalLivevideo(r Receiver) (l *Livevideo) {
 	l.NavContext = r.NavContext
 	l.AnalyticsCategory = r.AnalyticsCategory
 	l.AdvertisingCategory = r.AdvertisingCategory
+	l.ShowAds = r.ShowAds
 	for _, rInner := range r.Media {
 		item, err := api.UnmarshalReceiver(rInner)
 		if err != nil {

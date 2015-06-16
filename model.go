@@ -96,6 +96,7 @@ type Receiver struct {
 	AdvertisingCategory string              `json:"advertising_category"`
 	Dateline            string              `json:"author_location"`
 	ExternalID          string              `json:"external_id"`
+	ShowAds             bool                `json:"show_ads"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -207,6 +208,7 @@ type Video struct {
 	NavContext          []string      `json:"navigation_context"`
 	AnalyticsCategory   string        `json:"analytics_category"`
 	AdvertisingCategory string        `json:"advertising_category"`
+	ShowAds             bool          `json:"show_ads"`
 }
 
 func (v *Video) GetType() ItemType {
@@ -394,6 +396,7 @@ type Livevideo struct {
 	NavContext          []string `json:"navigation_context"`
 	AnalyticsCategory   string   `json:"analytics_category"`
 	AdvertisingCategory string   `json:"advertising_category"`
+	ShowAds             bool     `json:"show_ads"`
 }
 
 func (l *Livevideo) GetType() ItemType {
