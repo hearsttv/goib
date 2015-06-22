@@ -240,7 +240,7 @@ func (api *api) UnmarshalReceiver(r Receiver) (Item, error) {
 	case AudioType:
 		return api.unmarshalAudio(r), nil
 	case TeaserType:
-		return api.unmarshalTeaser(r), nil
+		return api.unmarshalTeaser(r)
 	default:
 		return nil, fmt.Errorf("unknonwn response type: %s", r.Type)
 	}
@@ -584,7 +584,7 @@ func (api *api) unmarshalAudio(r Receiver) (a *Audio) {
 	return a
 }
 
-func (api *api) unmarshalTeaser(r Receiver) (t *Teaser) {
+func (api *api) unmarshalTeaser(r Receiver) (t *Teaser, err error) {
 	t = &Teaser{}
 	t.Type = r.Type
 	t.ContentID = r.ContentID
@@ -592,6 +592,7 @@ func (api *api) unmarshalTeaser(r Receiver) (t *Teaser) {
 	t.TeaserTitle = getTeaserTitle(&r)
 	t.TeaserText = r.TeaserText
 	t.PublicationDate = r.PublicationDate
+	t.Authors = r.Authors
 	t.NavContext = r.NavContext
 	t.AnalyticsCategory = r.AnalyticsCategory
 	t.AdvertisingCategory = r.AdvertisingCategory
@@ -604,7 +605,17 @@ func (api *api) unmarshalTeaser(r Receiver) (t *Teaser) {
 		}
 	}
 
-	return t
+	if r.Target == nil {
+		return t, fmt.Errorf("teaser object missing target %d", t.ContentID)
+	}
+
+	target, err := api.UnmarshalReceiver(*r.Target)
+	if err != nil {
+		return t, err
+	}
+	t.Target = target
+
+	return t, nil
 }
 
 func unmarshalGalleryCaptions(r Receiver) map[int]string {
