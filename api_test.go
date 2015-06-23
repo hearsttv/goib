@@ -137,6 +137,9 @@ func TestContentAPIShouldParseHTMLContentType(t *testing.T) {
 }
 
 func TestShouldUnmarshallArticleMedia(t *testing.T) {
+	svr, a := setupServerAndAPI(htmlContent)
+	defer svr.Close()
+
 	r := Receiver{
 		Type: ArticleType,
 		Media: []Receiver{
@@ -145,8 +148,8 @@ func TestShouldUnmarshallArticleMedia(t *testing.T) {
 		},
 	}
 
-	a := unmarshalArticle(r)
-	assert.Equal(t, 2, len(a.Media), "media should have two elements")
+	art := a.(*api).unmarshalArticle(r)
+	assert.Equal(t, 2, len(art.Media), "media should have two elements")
 }
 
 func TestShouldUnmarshallSettingsForCollection(t *testing.T) {

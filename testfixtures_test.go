@@ -1615,9 +1615,13 @@ var teaserJSON = `
   "struct" : [ { } ],
   "external_id" : "",
   "target" : {
-    "type" : "UNSUPPORTED",
-    "hash" : "2ok3ds",
-    "content_id" : 11789656
+    "type" : "ARTICLE",
+        "hash" : "k1j1d1",
+        "content_id" : 17336930,
+        "publication_date" : 1414990800,
+        "teaser_title" : "Honor your hero this Veterans Day on u local",
+        "teaser_text" : "<p><a href=\"http://www.wesh.com/ulocal/17336928\" target=\"_blank\">Using the App? Upload your photos to using the u local tab on the home screen.</a></p>",
+        "teaser_image" : null
   }
 }
 `
