@@ -376,7 +376,7 @@ func (a *Audio) GetTeaserText() string {
 }
 
 func (a *Audio) GetPublicationDate() int64 {
-	return 0
+	return a.PublicationDate
 }
 
 // Livevideo represents a live stream
@@ -424,6 +424,7 @@ func (l *Livevideo) GetPublicationDate() int64 {
 type Map struct {
 	Type                ItemType `json:"type"`
 	ContentID           int      `json:"content_id"`
+	PublicationDate     int64    `json:"publication_date"`
 	TeaserTitle         string   `json:"teaser_title"`
 	TeaserText          string   `json:"teaser_text"`
 	Title               string   `json:"title"`
@@ -454,13 +455,14 @@ func (m *Map) GetTeaserText() string {
 }
 
 func (m *Map) GetPublicationDate() int64 {
-	return 0
+	return m.PublicationDate
 }
 
 // ExternalContent represents an external content object
 type ExternalContent struct {
 	Type            ItemType      `json:"type"`
 	ContentID       int           `json:"content_id"`
+	PublicationDate int64         `json:"publication_date"`
 	TeaserTitle     string        `json:"teaser_title"`
 	ExternalContent string        `json:"external_content"`
 	Struct          []interface{} `json:"struct"`
@@ -483,18 +485,19 @@ func (e *ExternalContent) GetTeaserText() string {
 }
 
 func (e *ExternalContent) GetPublicationDate() int64 {
-	return 0
+	return e.PublicationDate
 }
 
 // ExternalLink represents an external link object
 type ExternalLink struct {
-	Type         ItemType `json:"type"`
-	ContentID    int      `json:"content_id"`
-	TeaserTitle  string   `json:"teaser_title"`
-	TeaserText   string   `json:"teaser_text"`
-	CanonicalURL string   `json:"canonical_url"`
-	URL          string   `json:"url"`
-	Media        []Item   `json:"media"`
+	Type            ItemType `json:"type"`
+	ContentID       int      `json:"content_id"`
+	PublicationDate int64    `json:"publication_date"`
+	TeaserTitle     string   `json:"teaser_title"`
+	TeaserText      string   `json:"teaser_text"`
+	CanonicalURL    string   `json:"canonical_url"`
+	URL             string   `json:"url"`
+	Media           []Item   `json:"media"`
 }
 
 func (e *ExternalLink) GetType() ItemType {
@@ -514,13 +517,14 @@ func (e *ExternalLink) GetTeaserText() string {
 }
 
 func (e *ExternalLink) GetPublicationDate() int64 {
-	return 0
+	return e.PublicationDate
 }
 
 // HTMLContent represents a content object that contains a raw HTML payload
 type HTMLContent struct {
 	Type                ItemType `json:"type"`
 	ContentID           int      `json:"content_id"`
+	PublicationDate     int64    `json:"publication_date"`
 	Code                string   `json:"code"`
 	NavContext          []string `json:"navigation_context"`
 	AnalyticsCategory   string   `json:"analytics_category"`
@@ -544,7 +548,7 @@ func (h *HTMLContent) GetTeaserText() string {
 }
 
 func (h *HTMLContent) GetPublicationDate() int64 {
-	return 0
+	return h.PublicationDate
 }
 
 // Person represents an IB person

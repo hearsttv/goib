@@ -242,7 +242,7 @@ func (api *api) UnmarshalReceiver(r Receiver) (Item, error) {
 	case TeaserType:
 		return api.unmarshalTeaser(r)
 	default:
-		return nil, fmt.Errorf("unknonwn response type: %s", r.Type)
+		return nil, fmt.Errorf("unknonwn response type for obj %d: %s", r.ContentID, r.Type)
 	}
 }
 
@@ -412,6 +412,7 @@ func unmarshalMap(r Receiver) (m *Map) {
 	m = &Map{}
 	m.Type = r.Type
 	m.ContentID = r.ContentID
+	m.PublicationDate = r.PublicationDate
 	m.Title = r.Title
 	m.Subheadline = r.Subheadline
 	m.TeaserTitle = getTeaserTitle(&r)
@@ -477,6 +478,7 @@ func unmarshalExternalContent(r Receiver) (e *ExternalContent) {
 	e = &ExternalContent{}
 	e.Type = r.Type
 	e.ContentID = r.ContentID
+	e.PublicationDate = r.PublicationDate
 	e.TeaserTitle = getTeaserTitle(&r)
 	e.ExternalContent = r.ExternalContent
 	e.Struct = r.Struct
@@ -487,6 +489,7 @@ func (api *api) unmarshalExternalLink(r Receiver) (e *ExternalLink) {
 	e = &ExternalLink{}
 	e.Type = r.Type
 	e.ContentID = r.ContentID
+	e.PublicationDate = r.PublicationDate
 	e.TeaserTitle = getTeaserTitle(&r)
 	e.TeaserText = r.TeaserText
 	e.CanonicalURL = r.CanonicalURL
@@ -507,6 +510,7 @@ func unmarshalHTMLContent(r Receiver) (h *HTMLContent) {
 	h = &HTMLContent{}
 	h.Type = r.Type
 	h.ContentID = r.ContentID
+	h.PublicationDate = r.PublicationDate
 	h.Code = r.Code
 	h.NavContext = r.NavContext
 	h.AnalyticsCategory = r.AnalyticsCategory
