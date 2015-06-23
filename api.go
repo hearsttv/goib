@@ -12,9 +12,9 @@ import (
 	l5g "github.com/neocortical/log5go"
 )
 
-//const deliveryURL = "http://ibsys-api.ib-prod.com/v2.0/delivery/{channel}/json/{service}"
+const deliveryURL = "http://ibsys-api.ib-prod.com/v2.0/delivery/{channel}/json/{service}"
 
-const deliveryURL = "http://api-delivery-htv.ib-prod.com/v2.0/delivery/{channel}/json/{service}"
+//const deliveryURL = "http://api-delivery-htv.ib-prod.com/v2.0/delivery/{channel}/json/{service}"
 
 var log = l5g.Logger(l5g.LogAll)
 
