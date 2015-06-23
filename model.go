@@ -97,6 +97,7 @@ type Receiver struct {
 	Dateline            string              `json:"author_location"`
 	ExternalID          string              `json:"external_id"`
 	ShowAds             bool                `json:"show_ads"`
+	Target              *Receiver           `json:"target"`
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -651,10 +652,12 @@ type Teaser struct {
 	TeaserTitle         string   `json:"teaser_title"`
 	TeaserText          string   `json:"teaser_text"`
 	PublicationDate     int64    `json:"publication_date"`
+	Authors             []Person `json:"author_objects"`
 	Media               []Item   `json:"media"`
 	NavContext          []string `json:"navigation_context"`
 	AnalyticsCategory   string   `json:"analytics_category"`
 	AdvertisingCategory string   `json:"advertising_category"`
+	Target              Item     `json:"target"`
 }
 
 func (t *Teaser) GetType() ItemType {
