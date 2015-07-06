@@ -14,8 +14,6 @@ import (
 
 const deliveryURL = "http://ibsys-api.ib-prod.com/v2.0/delivery/{channel}/json/{service}"
 
-//const deliveryURL = "http://api-delivery-htv.ib-prod.com/v2.0/delivery/{channel}/json/{service}"
-
 var log = l5g.Logger(l5g.LogAll)
 
 type httpClient func(url string) ([]byte, error)
@@ -35,6 +33,12 @@ type API interface {
 func NewAPI() API {
 	return &api{
 		deliveryURL: deliveryURL,
+	}
+}
+
+func NewAPIWithDeliveryURL(url string) API {
+	return &api{
+		deliveryURL: url,
 	}
 }
 
