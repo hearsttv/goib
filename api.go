@@ -449,9 +449,7 @@ func (api *api) unmarshalCollection(r Receiver) (c *Collection) {
 			c.Items = append(c.Items, item)
 		}
 	}
-	if len(r.Settings) > 0 {
-		c.Settings = r.Settings[0]
-	}
+	c.Settings = r.Settings
 
 	c.NavContext = r.NavContext
 	c.AnalyticsCategory = r.AnalyticsCategory
@@ -553,10 +551,7 @@ func unmarshalPerson(r Receiver) (p *Person) {
 	p.Email = r.Email
 	p.CanonicalURL = r.CanonicalURL
 	p.URL = r.URL
-	if len(r.Photo) > 0 {
-		photo := r.Photo[0]
-		p.Photo = &photo
-	}
+	p.Photo = r.Photo
 	p.NavContext = r.NavContext
 	p.AnalyticsCategory = r.AnalyticsCategory
 	p.AdvertisingCategory = r.AdvertisingCategory

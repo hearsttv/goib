@@ -112,21 +112,21 @@ type Item interface {
 
 // Collection represents a collection of IB Items and metadata about those items
 type Collection struct {
-	Type                ItemType          `json:"type"`
-	ContentID           int               `json:"content_id"`
-	TeaserTitle         string            `json:"teaser_title"`
-	TeaserText          string            `json:"teaser_text"`
-	TeaserImage         string            `json:"teaser_image"`
-	CollectionName      string            `json:"collection_name"`
-	ContentName         string            `json:"content_name"`
-	TotalCount          int               `json:"total_count"`
-	StartIndex          int               `json:"start_index"`
-	Keywords            string            `json:"keywords"` // populated only in search results
-	Items               []Item            `json:"items"`
-	Settings            map[string]string `json:"settings"`
-	NavContext          []string          `json:"navigation_context"`
-	AnalyticsCategory   string            `json:"analytics_category"`
-	AdvertisingCategory string            `json:"advertising_category"`
+	Type                ItemType            `json:"type"`
+	ContentID           int                 `json:"content_id"`
+	TeaserTitle         string              `json:"teaser_title"`
+	TeaserText          string              `json:"teaser_text"`
+	TeaserImage         string              `json:"teaser_image"`
+	CollectionName      string              `json:"collection_name"`
+	ContentName         string              `json:"content_name"`
+	TotalCount          int                 `json:"total_count"`
+	StartIndex          int                 `json:"start_index"`
+	Keywords            string              `json:"keywords"` // populated only in search results
+	Items               []Item              `json:"items"`
+	Settings            []map[string]string `json:"settings"`
+	NavContext          []string            `json:"navigation_context"`
+	AnalyticsCategory   string              `json:"analytics_category"`
+	AdvertisingCategory string              `json:"advertising_category"`
 }
 
 func (c *Collection) GetType() ItemType {
@@ -561,7 +561,7 @@ type Person struct {
 	TeaserImage         string   `json:"teaser_image"`
 	PublicationDate     int64    `json:"publication_date"`
 	Bio                 string   `json:"biography"`
-	Photo               *Image   `json:"photo,omitempty"`
+	Photo               []Image  `json:"photo,omitempty"`
 	Email               string   `json:"email"`
 	FacebookUsername    string   `json:"facebook_username"`
 	FacebookUID         string   `json:"facebook_uid"`
