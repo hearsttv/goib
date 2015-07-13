@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"strings"
 	"testing"
 
@@ -160,8 +161,8 @@ func TestShouldUnmarshallSettingsForCollection(t *testing.T) {
 	c := response.(*Collection)
 
 	assert.Nil(t, err, "err should be nil")
-	assert.Equal(t, 3, len(c.Settings), "should have found 3 setings")
-	assert.Equal(t, "hourly", c.Settings["collection.WeatherIndicatorType"], "should have 'hourly' for specific setting")
+	assert.Equal(t, 3, len(c.Settings[0]), "should have found 3 setings")
+	assert.Equal(t, "hourly", c.Settings[0]["collection.WeatherIndicatorType"], "should have 'hourly' for specific setting")
 }
 
 func TestClosingsCount(t *testing.T) {
@@ -313,8 +314,13 @@ func setupServerAndAPI(cannedResponse string) (*httptest.Server, API) {
 		fmt.Fprintln(w, cannedResponse)
 	}))
 
+	testURL, err := url.Parse(testSvr.URL)
+	if err != nil {
+		panic(err) // sanity check
+	}
+
 	a := NewAPI().(*api)
-	a.deliveryURL = testSvr.URL
+	a.host = testURL.Host
 
 	return testSvr, a
 }
@@ -326,8 +332,13 @@ func setupServerAndAPIWithHTTPStatus(cannedResponse string, status int) (*httpte
 		fmt.Fprintln(w, cannedResponse)
 	}))
 
+	testURL, err := url.Parse(testSvr.URL)
+	if err != nil {
+		panic(err) // sanity check
+	}
+
 	a := NewAPI().(*api)
-	a.deliveryURL = testSvr.URL
+	a.host = testURL.Host
 
 	return testSvr, a
 }

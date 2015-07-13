@@ -12,7 +12,8 @@ import (
 	l5g "github.com/neocortical/log5go"
 )
 
-const deliveryURL = "http://ibsys-api.ib-prod.com/v2.0/delivery/{channel}/json/{service}"
+const urlTemplate = "http://{host}/v2.0/delivery/{channel}/json/{service}"
+const defaultHost = "ibsys-api.ib-prod.com"
 
 var log = l5g.Logger(l5g.LogAll)
 
@@ -31,31 +32,30 @@ type API interface {
 
 // NewAPI constructs an API object for the given channel
 func NewAPI() API {
-	return &api{
-		deliveryURL: deliveryURL,
-	}
+	return NewAPIWithHost(defaultHost)
 }
 
-func NewAPIWithDeliveryURL(url string) API {
+func NewAPIWithHost(host string) API {
 	return &api{
-		deliveryURL: url,
+		host:   host,
+		client: netClient,
 	}
 }
 
 type api struct {
-	deliveryURL string
+	host   string
+	client *http.Client
 }
 
 func (api *api) Entry(channel string, entrytype string, params url.Values) (entry Item, err error) {
-	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
-	uri = strings.Replace(uri, "{service}", "entry", 1)
+	uri := api.setupURI(channel, "entry")
 	uri += "/" + entrytype
 
 	if len(params) > 0 {
 		uri += "?" + params.Encode()
 	}
 
-	bytes, err := doGet(uri)
+	bytes, err := api.doGet(uri)
 	if err != nil {
 		return entry, err
 	}
@@ -64,8 +64,7 @@ func (api *api) Entry(channel string, entrytype string, params url.Values) (entr
 }
 
 func (api *api) Search(channel string, query string, params url.Values) (s *Collection, err error) {
-	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
-	uri = strings.Replace(uri, "{service}", "search", 1)
+	uri := api.setupURI(channel, "search")
 
 	if params == nil {
 		params = url.Values{}
@@ -73,7 +72,7 @@ func (api *api) Search(channel string, query string, params url.Values) (s *Coll
 	params.Set("q", query)
 	uri += "?" + params.Encode()
 
-	bytes, err := doGet(uri)
+	bytes, err := api.doGet(uri)
 	if err != nil {
 		return s, err
 	}
@@ -91,15 +90,14 @@ func (api *api) Search(channel string, query string, params url.Values) (s *Coll
 }
 
 func (api *api) Content(channel string, contentID int, params url.Values) (Item, error) {
-	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
-	uri = strings.Replace(uri, "{service}", "content", 1)
+	uri := api.setupURI(channel, "content")
 	uri += "/" + strconv.Itoa(contentID)
 
 	if len(params) > 0 {
 		uri += "?" + params.Encode()
 	}
 
-	bytes, err := doGet(uri)
+	bytes, err := api.doGet(uri)
 	if err != nil {
 		return nil, err
 	}
@@ -108,15 +106,14 @@ func (api *api) Content(channel string, contentID int, params url.Values) (Item,
 }
 
 func (api *api) ContentMedia(channel string, contentID int, params url.Values) ([]Item, error) {
-	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
-	uri = strings.Replace(uri, "{service}", "content", 1)
+	uri := api.setupURI(channel, "content")
 	uri += "/" + strconv.Itoa(contentID) + "/media"
 
 	if len(params) > 0 {
 		uri += "?" + params.Encode()
 	}
 
-	bytes, err := doGet(uri)
+	bytes, err := api.doGet(uri)
 	if err != nil {
 		return nil, err
 	}
@@ -125,15 +122,14 @@ func (api *api) ContentMedia(channel string, contentID int, params url.Values) (
 }
 
 func (api *api) ContentItems(channel string, contentID int, params url.Values) ([]Item, error) {
-	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
-	uri = strings.Replace(uri, "{service}", "content", 1)
+	uri := api.setupURI(channel, "content")
 	uri += "/" + strconv.Itoa(contentID) + "/items"
 
 	if len(params) > 0 {
 		uri += "?" + params.Encode()
 	}
 
-	bytes, err := doGet(uri)
+	bytes, err := api.doGet(uri)
 	if err != nil {
 		return nil, err
 	}
@@ -142,14 +138,13 @@ func (api *api) ContentItems(channel string, contentID int, params url.Values) (
 }
 
 func (api *api) Closings(channel string, filter ClosingsFilter, providerID ...string) (ClosingsResponse, error) {
-	uri := strings.Replace(api.deliveryURL, "{channel}", channel, 1)
-	uri = strings.Replace(uri, "{service}", "closings", 1)
+	uri := api.setupURI(channel, "closings")
 	uri += "/" + string(filter)
 	if filter == ClosingsInst && len(providerID) > 0 {
 		uri += "/id/" + providerID[0]
 	}
 
-	bytes, err := doGet(uri)
+	bytes, err := api.doGet(uri)
 	if err != nil {
 		return ClosingsResponse{}, err
 	}
@@ -157,8 +152,15 @@ func (api *api) Closings(channel string, filter ClosingsFilter, providerID ...st
 	return unmarshalClosingsResponse(bytes)
 }
 
-func doGet(url string) (result []byte, err error) {
-	resp, err := http.Get(url)
+func (api *api) setupURI(channel, service string) string {
+	uri := strings.Replace(urlTemplate, "{host}", api.host, 1)
+	uri = strings.Replace(uri, "{channel}", channel, 1)
+	return strings.Replace(uri, "{service}", service, 1)
+}
+
+func (api *api) doGet(url string) (result []byte, err error) {
+	req, err := http.NewRequest("GET", url, nil)
+	resp, err := api.client.Do(req)
 	if err != nil {
 		log.Debug("got error response for URL %s: %v", url, err)
 		return nil, err
