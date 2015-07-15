@@ -3,7 +3,6 @@ package goib
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -156,20 +155,6 @@ func (api *api) setupURI(channel, service string) string {
 	uri := strings.Replace(urlTemplate, "{host}", api.host, 1)
 	uri = strings.Replace(uri, "{channel}", channel, 1)
 	return strings.Replace(uri, "{service}", service, 1)
-}
-
-func (api *api) doGet(url string) (result []byte, err error) {
-	req, err := http.NewRequest("GET", url, nil)
-	resp, err := api.client.Do(req)
-	if err != nil {
-		log.Debug("got error response for URL %s: %v", url, err)
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	result, err = ioutil.ReadAll(resp.Body)
-	log.Debug("IB API: %s : HTTP Status: %s, Success: %t", url, resp.Status, (err == nil))
-	return result, err
 }
 
 func (api *api) unmarshalResponse(bytes []byte) (Item, error) {
