@@ -15,6 +15,7 @@ func Test_doGet_canary(t *testing.T) {
 		w.Header().Set("Content-Type", "application/json")
 		fmt.Fprintln(w, "I leik milk!!1")
 	}))
+	defer testSvr.Close()
 
 	a := NewAPI().(*api)
 
@@ -28,6 +29,7 @@ func Test_doGet_errorResponse(t *testing.T) {
 		w.Header().Set("Content-Type", "application/json")
 		http.Error(w, "I'm a teapot!", http.StatusTeapot)
 	}))
+	defer testSvr.Close()
 
 	a := NewAPI().(*api)
 
@@ -44,6 +46,7 @@ func Test_doGet_timeout(t *testing.T) {
 		time.Sleep(time.Millisecond * 2)
 		fmt.Fprintln(w, "I leik milk!!1")
 	}))
+	defer testSvr.Close()
 
 	a := NewAPI().(*api)
 
