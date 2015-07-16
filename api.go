@@ -394,7 +394,13 @@ func (api *api) unmarshalGallery(r Receiver) (g *Gallery) {
 		}
 	}
 
-	g.Captions = unmarshalGalleryCaptions(r)
+	// if r.Captions exists, our receiver came from somewhere other than IB (i.e. a database)
+	// if r.Captions does not exist, we assume IB and try to get the captions from their looney tunes struct.
+	if len(r.Captions) > 0 {
+		g.Captions = r.Captions
+	} else {
+		g.Captions = unmarshalGalleryCaptions(r)
+	}
 
 	return g
 }

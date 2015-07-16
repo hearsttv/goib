@@ -98,6 +98,7 @@ type Receiver struct {
 	ExternalID          string              `json:"external_id"`
 	ShowAds             bool                `json:"show_ads"`
 	Target              *Receiver           `json:"target"`
+	Captions            map[int]string      `json:"captions"` // not from IB, but needed for UnmarshalReceiver()
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
