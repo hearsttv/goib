@@ -24,6 +24,10 @@ var netClient = &http.Client{
 // doGet is a method on the api object, but it's worth separating out here for clarity
 func (api *api) doGet(url string) (result []byte, err error) {
 	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		log.Error("this shouldn't happen: %v", err)
+		return nil, err
+	}
 	resp, err := api.client.Do(req)
 	if err != nil {
 		log.Debug("got error response for URL %s: %v", url, err)
