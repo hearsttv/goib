@@ -98,7 +98,7 @@ type Receiver struct {
 	ExternalID          string              `json:"external_id"`
 	ShowAds             bool                `json:"show_ads"`
 	Target              *Receiver           `json:"target"`
-	Captions            map[int]string      `json:"captions"` // not from IB, but needed for UnmarshalReceiver()
+	Captions            map[string]string      `json:"captions"` // not from IB, but needed for UnmarshalReceiver()
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -313,7 +313,7 @@ type Gallery struct {
 	Subheadline         string         `json:"subheadline"`
 	Media               []Item         `json:"media"`
 	Items               []Item         `json:"items"`
-	Captions            map[int]string `json:"captions"`
+	Captions            map[string]string `json:"captions"`
 	CanonicalURL        string         `json:"canonical_url"`
 	URL                 string         `json:"url"`
 	NavContext          []string       `json:"navigation_context"`

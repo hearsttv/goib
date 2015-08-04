@@ -614,8 +614,8 @@ func (api *api) unmarshalTeaser(r Receiver) (t *Teaser, err error) {
 	return t, nil
 }
 
-func unmarshalGalleryCaptions(r Receiver) map[int]string {
-	result := make(map[int]string)
+func unmarshalGalleryCaptions(r Receiver) map[string]string {
+	result := make(map[string]string)
 
 	strct := r.Struct
 	if strct == nil || len(strct) < 1 {
@@ -646,7 +646,7 @@ func unmarshalGalleryCaptions(r Receiver) map[int]string {
 		if !ok {
 			continue
 		}
-		result[coid] = caption
+		result[strconv.Itoa(coid)] = caption
 	}
 
 	return result
