@@ -7,6 +7,7 @@ import (
 	"net/http/httptest"
 	"net/url"
 	"strings"
+	"strconv"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -301,7 +302,7 @@ func Test_unmarshalGalleryCaptions(t *testing.T) {
 
 	captions := unmarshalGalleryCaptions(r)
 	assert.Equal(t, 3, len(captions))
-	caption, ok := captions[29283346]
+	caption, ok := captions[strconv.Itoa(29283346)]
 	assert.True(t, ok)
 	assert.Equal(t, "Foo bar", caption)
 }
