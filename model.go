@@ -110,6 +110,7 @@ type Item interface {
 	GetTeaserText() string
 	GetPublicationDate() int64
 	GetStationName() string
+	SetStationName(string)
 }
 
 // Collection represents a collection of IB Items and metadata about those items
@@ -154,6 +155,10 @@ func (c *Collection) GetPublicationDate() int64 {
 
 func (c *Collection) GetStationName() string {
 	return c.StationName
+}
+
+func (c *Collection) SetStationName(name string)  {
+	c.StationName = name
 }
 
 // Article represents an IB article
@@ -203,6 +208,10 @@ func (a *Article) GetStationName() string {
 	return a.StationName
 }
 
+func (a *Article) SetStationName(name string)  {
+	a.StationName = name
+}
+
 // Video represents an IB video
 type Video struct {
 	Type                ItemType      `json:"type"`
@@ -247,6 +256,10 @@ func (v *Video) GetPublicationDate() int64 {
 
 func (v *Video) GetStationName() string {
 	return v.StationName
+}
+
+func (v *Video) SetStationName(name string)  {
+	v.StationName = name
 }
 
 // VideoFlavor represents a flavor (i.e. resolution) of an IB Video
@@ -311,6 +324,10 @@ func (i *Image) GetStationName() string {
 	return i.StationName
 }
 
+func (i *Image) SetStationName(name string)  {
+	i.StationName = name
+}
+
 // ImageURL is a URL flavor for an image
 type ImageURL struct {
 	Version string `json:"version"`
@@ -367,6 +384,10 @@ func (g *Gallery) GetStationName() string {
 	return g.StationName
 }
 
+func (g *Gallery) SetStationName(name string)  {
+	g.StationName = name
+}
+
 // Audio represents an audio clip
 type Audio struct {
 	Type                ItemType `json:"type"`
@@ -409,6 +430,10 @@ func (a *Audio) GetPublicationDate() int64 {
 
 func (a *Audio) GetStationName() string {
 	return a.StationName
+}
+
+func (a *Audio) SetStationName(name string)  {
+	a.StationName = name
 }
 
 // Livevideo represents a live stream
@@ -457,6 +482,10 @@ func (l *Livevideo) GetStationName() string {
 	return l.StationName
 }
 
+func (l *Livevideo) SetStationName(name string)  {
+	l.StationName = name
+}
+
 // Map represents a map
 type Map struct {
 	Type                ItemType `json:"type"`
@@ -500,6 +529,10 @@ func (m *Map) GetStationName() string {
 	return m.StationName
 }
 
+func (m *Map) SetStationName(name string)  {
+	m.StationName = name
+}
+
 // ExternalContent represents an external content object
 type ExternalContent struct {
 	Type            ItemType      `json:"type"`
@@ -533,6 +566,10 @@ func (e *ExternalContent) GetPublicationDate() int64 {
 
 func (e *ExternalContent) GetStationName() string {
 	return e.StationName
+}
+
+func (e *ExternalContent) SetStationName(name string)  {
+	e.StationName = name
 }
 
 // ExternalLink represents an external link object
@@ -572,6 +609,10 @@ func (e *ExternalLink) GetStationName() string {
 	return e.StationName
 }
 
+func (e ExternalLink) SetStationName(name string)  {
+	e.StationName = name
+}
+
 // HTMLContent represents a content object that contains a raw HTML payload
 type HTMLContent struct {
 	Type                ItemType `json:"type"`
@@ -606,6 +647,10 @@ func (h *HTMLContent) GetPublicationDate() int64 {
 
 func (h *HTMLContent) GetStationName() string {
 	return h.StationName
+}
+
+func (h *HTMLContent) SetStationName(name string)  {
+	h.StationName = name
 }
 
 // Person represents an IB person
@@ -655,6 +700,10 @@ func (p *Person) GetPublicationDate() int64 {
 
 func (p *Person) GetStationName() string {
 	return p.StationName
+}
+
+func (p *Person) SetStationName(name string)  {
+	p.StationName = name
 }
 
 type CopyrightObject struct {
@@ -715,6 +764,10 @@ func (c *Settings) GetStationName() string {
 	return c.StationName
 }
 
+func (c *Settings) SetStationName(name string)  {
+	c.StationName = name
+}
+
 // Teaser represents ... something
 type Teaser struct {
 	Type                ItemType `json:"type"`
@@ -754,4 +807,8 @@ func (t *Teaser) GetPublicationDate() int64 {
 
 func (t *Teaser) GetStationName() string {
 	return t.StationName
+}
+
+func (t *Teaser) SetStationName(name string)  {
+	t.StationName = name
 }
