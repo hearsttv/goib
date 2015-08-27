@@ -109,6 +109,7 @@ type Item interface {
 	GetTeaserTitle() string
 	GetTeaserText() string
 	GetPublicationDate() int64
+	GetStationName() string
 }
 
 // Collection represents a collection of IB Items and metadata about those items
@@ -128,6 +129,7 @@ type Collection struct {
 	NavContext          []string            `json:"navigation_context"`
 	AnalyticsCategory   string              `json:"analytics_category"`
 	AdvertisingCategory string              `json:"advertising_category"`
+	StationName         string              `json:"station_name"`
 }
 
 func (c *Collection) GetType() ItemType {
@@ -150,6 +152,10 @@ func (c *Collection) GetPublicationDate() int64 {
 	return 0 // collections do not have pub dates
 }
 
+func (c *Collection) GetStationName() string {
+	return c.StationName
+}
+
 // Article represents an IB article
 type Article struct {
 	Type                ItemType `json:"type"`
@@ -170,6 +176,7 @@ type Article struct {
 	AnalyticsCategory   string   `json:"analytics_category"`
 	AdvertisingCategory string   `json:"advertising_category"`
 	Dateline            string   `json:"author_location"`
+	StationName         string   `json:"station_name"`
 }
 
 func (a *Article) GetType() ItemType {
@@ -192,6 +199,10 @@ func (a *Article) GetPublicationDate() int64 {
 	return a.PublicationDate
 }
 
+func (a *Article) GetStationName() string {
+	return a.StationName
+}
+
 // Video represents an IB video
 type Video struct {
 	Type                ItemType      `json:"type"`
@@ -211,6 +222,7 @@ type Video struct {
 	AnalyticsCategory   string        `json:"analytics_category"`
 	AdvertisingCategory string        `json:"advertising_category"`
 	ShowAds             bool          `json:"show_ads"`
+	StationName         string        `json:"station_name"`
 }
 
 func (v *Video) GetType() ItemType {
@@ -231,6 +243,10 @@ func (v *Video) GetTeaserText() string {
 
 func (v *Video) GetPublicationDate() int64 {
 	return v.PublicationDate
+}
+
+func (v *Video) GetStationName() string {
+	return v.StationName
 }
 
 // VideoFlavor represents a flavor (i.e. resolution) of an IB Video
@@ -268,6 +284,7 @@ type Image struct {
 	NavContext          []string          `json:"navigation_context"`
 	AnalyticsCategory   string            `json:"analytics_category"`
 	AdvertisingCategory string            `json:"advertising_category"`
+	StationName         string            `json:"station_name"`
 }
 
 func (i *Image) GetType() ItemType {
@@ -288,6 +305,10 @@ func (i *Image) GetTeaserText() string {
 
 func (i *Image) GetPublicationDate() int64 {
 	return i.PublicationDate
+}
+
+func (i *Image) GetStationName() string {
+	return i.StationName
 }
 
 // ImageURL is a URL flavor for an image
@@ -319,6 +340,7 @@ type Gallery struct {
 	NavContext          []string       `json:"navigation_context"`
 	AnalyticsCategory   string         `json:"analytics_category"`
 	AdvertisingCategory string         `json:"advertising_category"`
+	StationName         string         `json:"station_name"`
 }
 
 func (g *Gallery) GetType() ItemType {
@@ -341,6 +363,10 @@ func (g *Gallery) GetPublicationDate() int64 {
 	return g.PublicationDate
 }
 
+func (g *Gallery) GetStationName() string {
+	return g.StationName
+}
+
 // Audio represents an audio clip
 type Audio struct {
 	Type                ItemType `json:"type"`
@@ -358,6 +384,7 @@ type Audio struct {
 	NavContext          []string `json:"navigation_context"`
 	AnalyticsCategory   string   `json:"analytics_category"`
 	AdvertisingCategory string   `json:"advertising_category"`
+	StationName         string   `json:"station_name"`
 }
 
 func (a *Audio) GetType() ItemType {
@@ -380,6 +407,10 @@ func (a *Audio) GetPublicationDate() int64 {
 	return a.PublicationDate
 }
 
+func (a *Audio) GetStationName() string {
+	return a.StationName
+}
+
 // Livevideo represents a live stream
 type Livevideo struct {
 	Type                ItemType `json:"type"`
@@ -399,6 +430,7 @@ type Livevideo struct {
 	AnalyticsCategory   string   `json:"analytics_category"`
 	AdvertisingCategory string   `json:"advertising_category"`
 	ShowAds             bool     `json:"show_ads"`
+	StationName         string   `json:"station_name"`
 }
 
 func (l *Livevideo) GetType() ItemType {
@@ -421,6 +453,10 @@ func (l *Livevideo) GetPublicationDate() int64 {
 	return l.PublicationDate
 }
 
+func (l *Livevideo) GetStationName() string {
+	return l.StationName
+}
+
 // Map represents a map
 type Map struct {
 	Type                ItemType `json:"type"`
@@ -437,6 +473,7 @@ type Map struct {
 	NavContext          []string `json:"navigation_context"`
 	AnalyticsCategory   string   `json:"analytics_category"`
 	AdvertisingCategory string   `json:"advertising_category"`
+	StationName         string   `json:"station_name"`
 }
 
 func (m *Map) GetType() ItemType {
@@ -459,6 +496,10 @@ func (m *Map) GetPublicationDate() int64 {
 	return m.PublicationDate
 }
 
+func (m *Map) GetStationName() string {
+	return m.StationName
+}
+
 // ExternalContent represents an external content object
 type ExternalContent struct {
 	Type            ItemType      `json:"type"`
@@ -467,6 +508,7 @@ type ExternalContent struct {
 	TeaserTitle     string        `json:"teaser_title"`
 	ExternalContent string        `json:"external_content"`
 	Struct          []interface{} `json:"struct"`
+	StationName     string        `json:"station_name"`
 }
 
 func (e *ExternalContent) GetType() ItemType {
@@ -489,6 +531,10 @@ func (e *ExternalContent) GetPublicationDate() int64 {
 	return e.PublicationDate
 }
 
+func (e *ExternalContent) GetStationName() string {
+	return e.StationName
+}
+
 // ExternalLink represents an external link object
 type ExternalLink struct {
 	Type            ItemType `json:"type"`
@@ -499,6 +545,7 @@ type ExternalLink struct {
 	CanonicalURL    string   `json:"canonical_url"`
 	URL             string   `json:"url"`
 	Media           []Item   `json:"media"`
+	StationName     string    `json:"station_name"`
 }
 
 func (e *ExternalLink) GetType() ItemType {
@@ -521,6 +568,10 @@ func (e *ExternalLink) GetPublicationDate() int64 {
 	return e.PublicationDate
 }
 
+func (e *ExternalLink) GetStationName() string {
+	return e.StationName
+}
+
 // HTMLContent represents a content object that contains a raw HTML payload
 type HTMLContent struct {
 	Type                ItemType `json:"type"`
@@ -530,6 +581,7 @@ type HTMLContent struct {
 	NavContext          []string `json:"navigation_context"`
 	AnalyticsCategory   string   `json:"analytics_category"`
 	AdvertisingCategory string   `json:"advertising_category"`
+	StationName         string   `json:"station_name"`
 }
 
 func (h *HTMLContent) GetType() ItemType {
@@ -550,6 +602,10 @@ func (h *HTMLContent) GetTeaserText() string {
 
 func (h *HTMLContent) GetPublicationDate() int64 {
 	return h.PublicationDate
+}
+
+func (h *HTMLContent) GetStationName() string {
+	return h.StationName
 }
 
 // Person represents an IB person
@@ -574,6 +630,7 @@ type Person struct {
 	NavContext          []string `json:"navigation_context"`
 	AnalyticsCategory   string   `json:"analytics_category"`
 	AdvertisingCategory string   `json:"advertising_category"`
+	StationName         string   `json:"station_name"`
 }
 
 func (p *Person) GetType() ItemType {
@@ -594,6 +651,10 @@ func (p *Person) GetTeaserText() string {
 
 func (p *Person) GetPublicationDate() int64 {
 	return p.PublicationDate
+}
+
+func (p *Person) GetStationName() string {
+	return p.StationName
 }
 
 type CopyrightObject struct {
@@ -625,8 +686,9 @@ type ClsInstitution struct {
 
 // Settings represents a collection of settings
 type Settings struct {
-	ContentID int               `json:"content_id"`
-	Settings  map[string]string `json:"settings"`
+	ContentID     int               `json:"content_id"`
+	Settings      map[string]string `json:"settings"`
+	StationName   string            `json:"station_name"`
 }
 
 func (c *Settings) GetType() ItemType {
@@ -649,6 +711,10 @@ func (c *Settings) GetPublicationDate() int64 {
 	return 0 // collections do not have pub dates
 }
 
+func (c *Settings) GetStationName() string {
+	return c.StationName
+}
+
 // Teaser represents ... something
 type Teaser struct {
 	Type                ItemType `json:"type"`
@@ -663,6 +729,7 @@ type Teaser struct {
 	AnalyticsCategory   string   `json:"analytics_category"`
 	AdvertisingCategory string   `json:"advertising_category"`
 	Target              Item     `json:"target"`
+	StationName         string   `json:"station_name"`
 }
 
 func (t *Teaser) GetType() ItemType {
@@ -683,4 +750,8 @@ func (t *Teaser) GetTeaserText() string {
 
 func (t *Teaser) GetPublicationDate() int64 {
 	return t.PublicationDate
+}
+
+func (t *Teaser) GetStationName() string {
+	return t.StationName
 }
