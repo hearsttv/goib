@@ -507,6 +507,7 @@ func unmarshalHTMLContent(r Receiver) (h *HTMLContent) {
 	h.ContentID = r.ContentID
 	h.PublicationDate = r.PublicationDate
 	h.Code = r.Code
+	h.TeaserTitle = getTeaserTitle(&r)
 	h.NavContext = r.NavContext
 	h.AnalyticsCategory = r.AnalyticsCategory
 	h.AdvertisingCategory = r.AdvertisingCategory
