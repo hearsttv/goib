@@ -98,7 +98,7 @@ type Receiver struct {
 	ExternalID          string              `json:"external_id"`
 	ShowAds             bool                `json:"show_ads"`
 	Target              *Receiver           `json:"target"`
-	Captions            map[string]string      `json:"captions"` // not from IB, but needed for UnmarshalReceiver()
+	Captions            map[string]string   `json:"captions"` // not from IB, but needed for UnmarshalReceiver()
 }
 
 // Item is the base type of all items. It is not used outside the IB package, as
@@ -157,7 +157,7 @@ func (c *Collection) GetStationName() string {
 	return c.StationName
 }
 
-func (c *Collection) SetStationName(name string)  {
+func (c *Collection) SetStationName(name string) {
 	c.StationName = name
 }
 
@@ -208,7 +208,7 @@ func (a *Article) GetStationName() string {
 	return a.StationName
 }
 
-func (a *Article) SetStationName(name string)  {
+func (a *Article) SetStationName(name string) {
 	a.StationName = name
 }
 
@@ -258,7 +258,7 @@ func (v *Video) GetStationName() string {
 	return v.StationName
 }
 
-func (v *Video) SetStationName(name string)  {
+func (v *Video) SetStationName(name string) {
 	v.StationName = name
 }
 
@@ -324,7 +324,7 @@ func (i *Image) GetStationName() string {
 	return i.StationName
 }
 
-func (i *Image) SetStationName(name string)  {
+func (i *Image) SetStationName(name string) {
 	i.StationName = name
 }
 
@@ -339,25 +339,25 @@ type ImageURL struct {
 
 // Gallery represents an image gallery
 type Gallery struct {
-	Type                ItemType       `json:"type"`
-	ContentID           int            `json:"content_id"`
-	TeaserTitle         string         `json:"teaser_title"`
-	TeaserText          string         `json:"teaser_text"`
-	TeaserImage         string         `json:"teaser_image"`
-	PublicationDate     int64          `json:"publication_date"`
-	Authors             []Person       `json:"author_objects"`
-	Keywords            string         `json:"keywords"`
-	Title               string         `json:"title"`
-	Subheadline         string         `json:"subheadline"`
-	Media               []Item         `json:"media"`
-	Items               []Item         `json:"items"`
+	Type                ItemType          `json:"type"`
+	ContentID           int               `json:"content_id"`
+	TeaserTitle         string            `json:"teaser_title"`
+	TeaserText          string            `json:"teaser_text"`
+	TeaserImage         string            `json:"teaser_image"`
+	PublicationDate     int64             `json:"publication_date"`
+	Authors             []Person          `json:"author_objects"`
+	Keywords            string            `json:"keywords"`
+	Title               string            `json:"title"`
+	Subheadline         string            `json:"subheadline"`
+	Media               []Item            `json:"media"`
+	Items               []Item            `json:"items"`
 	Captions            map[string]string `json:"captions"`
-	CanonicalURL        string         `json:"canonical_url"`
-	URL                 string         `json:"url"`
-	NavContext          []string       `json:"navigation_context"`
-	AnalyticsCategory   string         `json:"analytics_category"`
-	AdvertisingCategory string         `json:"advertising_category"`
-	StationName         string         `json:"station_name"`
+	CanonicalURL        string            `json:"canonical_url"`
+	URL                 string            `json:"url"`
+	NavContext          []string          `json:"navigation_context"`
+	AnalyticsCategory   string            `json:"analytics_category"`
+	AdvertisingCategory string            `json:"advertising_category"`
+	StationName         string            `json:"station_name"`
 }
 
 func (g *Gallery) GetType() ItemType {
@@ -384,7 +384,7 @@ func (g *Gallery) GetStationName() string {
 	return g.StationName
 }
 
-func (g *Gallery) SetStationName(name string)  {
+func (g *Gallery) SetStationName(name string) {
 	g.StationName = name
 }
 
@@ -432,7 +432,7 @@ func (a *Audio) GetStationName() string {
 	return a.StationName
 }
 
-func (a *Audio) SetStationName(name string)  {
+func (a *Audio) SetStationName(name string) {
 	a.StationName = name
 }
 
@@ -482,7 +482,7 @@ func (l *Livevideo) GetStationName() string {
 	return l.StationName
 }
 
-func (l *Livevideo) SetStationName(name string)  {
+func (l *Livevideo) SetStationName(name string) {
 	l.StationName = name
 }
 
@@ -529,7 +529,7 @@ func (m *Map) GetStationName() string {
 	return m.StationName
 }
 
-func (m *Map) SetStationName(name string)  {
+func (m *Map) SetStationName(name string) {
 	m.StationName = name
 }
 
@@ -568,7 +568,7 @@ func (e *ExternalContent) GetStationName() string {
 	return e.StationName
 }
 
-func (e *ExternalContent) SetStationName(name string)  {
+func (e *ExternalContent) SetStationName(name string) {
 	e.StationName = name
 }
 
@@ -582,7 +582,7 @@ type ExternalLink struct {
 	CanonicalURL    string   `json:"canonical_url"`
 	URL             string   `json:"url"`
 	Media           []Item   `json:"media"`
-	StationName     string    `json:"station_name"`
+	StationName     string   `json:"station_name"`
 }
 
 func (e *ExternalLink) GetType() ItemType {
@@ -609,7 +609,7 @@ func (e *ExternalLink) GetStationName() string {
 	return e.StationName
 }
 
-func (e ExternalLink) SetStationName(name string)  {
+func (e ExternalLink) SetStationName(name string) {
 	e.StationName = name
 }
 
@@ -619,6 +619,8 @@ type HTMLContent struct {
 	ContentID           int      `json:"content_id"`
 	PublicationDate     int64    `json:"publication_date"`
 	Code                string   `json:"code"`
+	URL                 string   `json:"url"`
+	TeaserTitle         string   `json:"teaser_title"`
 	NavContext          []string `json:"navigation_context"`
 	AnalyticsCategory   string   `json:"analytics_category"`
 	AdvertisingCategory string   `json:"advertising_category"`
@@ -634,7 +636,7 @@ func (h *HTMLContent) GetContentID() int {
 }
 
 func (h *HTMLContent) GetTeaserTitle() string {
-	return ""
+	return h.TeaserTitle
 }
 
 func (h *HTMLContent) GetTeaserText() string {
@@ -649,7 +651,7 @@ func (h *HTMLContent) GetStationName() string {
 	return h.StationName
 }
 
-func (h *HTMLContent) SetStationName(name string)  {
+func (h *HTMLContent) SetStationName(name string) {
 	h.StationName = name
 }
 
@@ -702,7 +704,7 @@ func (p *Person) GetStationName() string {
 	return p.StationName
 }
 
-func (p *Person) SetStationName(name string)  {
+func (p *Person) SetStationName(name string) {
 	p.StationName = name
 }
 
@@ -735,9 +737,9 @@ type ClsInstitution struct {
 
 // Settings represents a collection of settings
 type Settings struct {
-	ContentID     int               `json:"content_id"`
-	Settings      map[string]string `json:"settings"`
-	StationName   string            `json:"station_name"`
+	ContentID   int               `json:"content_id"`
+	Settings    map[string]string `json:"settings"`
+	StationName string            `json:"station_name"`
 }
 
 func (c *Settings) GetType() ItemType {
@@ -764,7 +766,7 @@ func (c *Settings) GetStationName() string {
 	return c.StationName
 }
 
-func (c *Settings) SetStationName(name string)  {
+func (c *Settings) SetStationName(name string) {
 	c.StationName = name
 }
 
@@ -809,6 +811,6 @@ func (t *Teaser) GetStationName() string {
 	return t.StationName
 }
 
-func (t *Teaser) SetStationName(name string)  {
+func (t *Teaser) SetStationName(name string) {
 	t.StationName = name
 }

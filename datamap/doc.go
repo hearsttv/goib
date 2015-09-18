@@ -10,11 +10,12 @@ package datamap
 	All shared common properties are abstracted in two internal types:
 	- bareBase
 	- fullBase
-	and need to be unmarshal by its respective methods to augment the
-	current struct with the fields. Note that the json tags are used
-	as a documentation reference instead of a decoder hint, since the
-	properties inside the specialized struct may have its name
-	changed by the context. (standard set by someone else thee I followed)
+	and needs to be unmarshal by its respective methods. Note that the json tags
+	are used also as a documentation reference than just a decoder hint,
+	since the properties inside the specialized struct may have its name
+	changed by the context. (standard set by someone else and I followed)
+	So, when navigating around, look at the json field to know exactly
+	what that property means.
 
 	If a struct uses some substruct inside it (namespaced as the main
 	struct), it can be found in the same file of the main struct.
@@ -25,7 +26,8 @@ package datamap
 	backward compatibility's sake, but they're all "marked" with
 	a comment. The idea is to share the same model struct between
 	the migration and the goib api. So it's easy to  just change
-	the endpoint later.
+	the endpoint later. Is that turn out to be true, I'll remove
+	the backward compatibility thing, don't worry.
 
 	There are some structs inside the receiver.go file that the
 	goib API uses but are not present in the migration data
