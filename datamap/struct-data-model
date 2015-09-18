@@ -1,0 +1,129 @@
+	-advertising_category string
+	-analytics_category string
+	-article_text
+	-author string
+	-author_location
+	-author_objects []
+	-backupUrl string
+	-biography string
+	-canonical_url string
+	-caption string
+	-categories []
+	-children
+	-collection_name
+	-commenting_enabled bool
+	-commenting_id //comment_id??
+	-content_id int
+	-content_name string
+	-copyright string
+	-copyright_objects []
+	-creation_date string //date
+	-dynamic
+	-editorial_comment string
+	-email string
+	-external_content
+	-external_id string
+	-facebook_url string
+	-flavors []
+		bitrate int
+		codec string
+		duration int
+		file_size int
+		height int
+		tags string //comma separated
+		url string
+		video_type string //extension?
+		width int
+	-full_name string
+	-google_plus_url string
+	-hash string
+	-identifier
+	-items []
+		content_id
+		creation_date
+		hash
+		publication_date
+		teaser_image
+		teaser_text
+		teaser_title
+		type
+		-urls []
+			height
+			mime
+			url
+			version
+			width
+		valid_from
+		valid_to
+	-keywords string //comma separated
+	-livestream {}
+		-content_id int
+		-creation_date string
+		-hash string
+		-publication_date string
+		-teaser_image string
+		-teaser_text string
+		-teaser_title string
+		-type string
+		-valid_from string
+		-valid_to string
+	-link_text
+	-m3u8 string //url
+	-media []
+		content_id
+		creation_date
+		hash
+		publication_date
+		teaser_image
+		teaser_text
+		teaser_title
+		type
+		urls [] //same as above
+		valid_from
+		valid_to
+	-navigation_context [] string
+	-no_follow bool
+	-not_searchable bool
+	-pasword string
+	-period string
+	-photo []
+		content_id int
+		hash string
+		publication_date int //!!! yep, it's a number
+		teaser_image string
+		teaser_text string
+		teaser_title string
+		type string
+		urls [] //same as above
+	-primaryEncoder string
+	-primaryUrl string
+	-publication_date string
+	-related_media []
+	-secondaryEncoder string
+	-settings
+	-sharing_enabled bool
+	-show_ads bool
+	-start_index
+	-streamName string
+	-streamTranscoded bool
+	-struct []
+		creation_date
+		publication_date
+		valid_from
+		valid_to
+	-subheadline string
+	-teaser_image string
+	-teaser_text string
+	-teaser_title string
+	-text string
+	-title string
+	-twitter_url string
+	-transformed_external_content
+	-transformed_type
+	-total_count
+	-type string
+	-url string
+	-userName string
+	valid_from string //date
+	valid_to string //date
+	view_type
